@@ -14,7 +14,7 @@ h1{
 .Thread_OP_Box{
     display: flex;
     height: 500px;
-    justify-content: right;
+    justify-content: center;
 }
 
 /* testing of flex boxes for the rules. */
@@ -22,12 +22,19 @@ h1{
 .flex-container{
     display:flex;
     border: 2px solid blueviolet;
+    align-items: flex-start;
+    width: 900px;
+    height: 300px;
+    justify-content: center;
+    margin-left: 500px;
 }
 
 .flex-container div {
-    background-color: aqua;
     border: 4px solid yellow;
-    justify-content: space-between;
-    width: 900px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list{
     
 }
