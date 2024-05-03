@@ -2,3 +2,13 @@
     background-color: rgb(0, 0, 0);
     color: azure;
 }
+
+/* Flex Box Used to style the first post on each board. */
+.Thread_OP_Box{
+    /* flex: wrap; */
+    margin-left: 500px;
+    min-height: 100px;
+    max-height: 150px;
+    min-width: none;
+    max-width: none;
+}
