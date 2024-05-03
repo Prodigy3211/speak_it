@@ -3,12 +3,31 @@
     color: azure;
 }
 
+h1{
+    background-color: grey;
+    color: white;
+    border: 2px solid red;
+    text-align: center;
+}
+
 /* Flex Box Used to style the first post on each board. */
 .Thread_OP_Box{
-    /* flex: wrap; */
-    margin-left: 500px;
-    min-height: 100px;
-    max-height: 150px;
-    min-width: none;
-    max-width: none;
+    display: flex;
+    height: 500px;
+    justify-content: right;
+}
+
+/* testing of flex boxes for the rules. */
+
+.flex-container{
+    display:flex;
+    border: 2px solid blueviolet;
+}
+
+.flex-container div {
+    background-color: aqua;
+    border: 4px solid yellow;
+    justify-content: space-between;
+    width: 900px;
+    
 }
