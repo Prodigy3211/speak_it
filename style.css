@@ -18,8 +18,7 @@ h1{
     /* border: 2px solid blueviolet; */
     align-items: center;
     justify-content: space-around;
-    flex-wrap: wrap;
-
+ 
 }
 
 .flex-container div {
@@ -34,4 +33,8 @@ h1{
     flex-direction: column;
     /* border:  2px solid orange; */
     margin-right: 250px;
+}
+
+.images{
+    margin: auto;
 }
