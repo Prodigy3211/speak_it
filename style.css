@@ -11,6 +11,10 @@ h1{
     /* margin: 200px 100px; */
 }
 
+.linktree{
+    font-size: 35px;
+}
+
 /* testing of flex boxes for the rules. */
 
 .flex-container{
