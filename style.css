@@ -20,8 +20,9 @@ h1{
 .flex-container{
     display:flex;
     /* border: 2px solid blueviolet; */
-    align-items: center;
-    justify-content: space-around;
+    /* align-items: center; */
+    justify-content: center;
+    flex: 1;
  
 }
 
