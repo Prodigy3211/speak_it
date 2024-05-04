@@ -8,13 +8,7 @@ h1{
     color: white;
     border: 2px solid red;
     text-align: center;
-}
-
-/* Flex Box Used to style the first post on each board. */
-.Thread_OP_Box{
-    display: flex;
-    height: 500px;
-    justify-content: center;
+    /* margin: 200px 100px; */
 }
 
 /* testing of flex boxes for the rules. */
@@ -23,11 +17,9 @@ h1{
     display:flex;
     /* border: 2px solid blueviolet; */
     align-items: center;
-    width: 900px;
-    height: 300px;
-    margin-left: 500px;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
 }
 
 .flex-container div {
@@ -38,5 +30,8 @@ h1{
     margin: 8px 16px;
 }
 .list{
-    margin: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    /* border:  2px solid orange; */
+    margin-right: 250px;
 }
