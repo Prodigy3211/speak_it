@@ -12,18 +12,27 @@ h1{
 }
 
 .linktree{
+    display:flex;
     font-size: 35px;
+    /* border: 8pt solid orangered; */
+    justify-content: space-evenly;
+    /* background-color: blue; */
+    align-items: center;
+}
+
+.linktree p{
+    font-weight: bold;
 }
 
 /* testing of flex boxes for the rules. */
 
 .flex-container{
     display:flex;
-    /* border: 2px solid blueviolet; */
+    border: 2px solid blueviolet;
     /* align-items: center; */
-    justify-content: center;
-    flex: 1;
- 
+    justify-content: space-around;
+    flex-basis: 15px;
+    flex-wrap: wrap;
 }
 
 .flex-container div {
@@ -36,8 +45,11 @@ h1{
 .list{
     display: flex;
     flex-direction: column;
-    /* border:  2px solid orange; */
+    border:  2px solid orange;
     margin-right: 250px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 1;
 }
 
 .images{
