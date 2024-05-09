@@ -6,7 +6,7 @@
 h1{
     background-color: grey;
     color: white;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     text-align: center;
     /* margin: 200px 100px; */
 }
@@ -28,11 +28,12 @@ h1{
 
 .flex-container{
     display:flex;
-    border: 2px solid blueviolet;
+    /* border: 2px solid blueviolet; */
+     /* flex-wrap: wrap; */
+    /* flex-flow: column wrap; */
     /* align-items: center; */
-    justify-content: space-around;
-    flex-basis: 15px;
-    flex-wrap: wrap;
+    gap:24px;
+
 }
 
 .flex-container div {
@@ -45,13 +46,48 @@ h1{
 .list{
     display: flex;
     flex-direction: column;
-    border:  2px solid orange;
-    margin-right: 250px;
-    align-items: center;
+    border:  2px solid rgb(185, 184, 182);
+        align-items: center;
     justify-content: center;
-    flex-shrink: 1;
+    flex-shrink: 0;
+    width: 400px;
+    box-sizing: border-box;
+    height: 100vh;
+    padding:16px;
+    /* background-color: bisque; */
+    flex-wrap: nowrap;
+    
 }
 
 .images{
-    margin: auto;
+    display: flex;
+    padding: 25px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    
+}
+
+/* container for the images in flexbox */
+.image-container{
+    display: flex;
+    /* border: solid 2px white; */
+    align-items: center;
+    gap: 5px;
+    /* align-self: flex-end; */
+    flex-wrap: wrap;
+    background-color: hsl(60, 2%, 37%);
+
+}
+
+/* adding in footer CSS */
+.footer{
+    /* height:24px; */
+    /* display: flex;
+    flex: 1; */
+}
+
+img{
+    width: 300px;
+    height: 250px;
 }
