@@ -85,6 +85,7 @@ h1{
     /* height:24px; */
     /* display: flex;
     flex: 1; */
+    border: solid 2px yellow;
 }
 
 img{
