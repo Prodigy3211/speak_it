@@ -60,7 +60,14 @@ h1{
 }
 
 .entbackground{
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
     background-image:url(images/entertainmentbackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;
 }
 .images{
     display: flex;
@@ -106,12 +113,30 @@ flex: 1 1 0;
 
 .politics-background{
 background-image: url(images/polbackgroundimg.png);
-}
+background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px}
 
 .relationship-background{
-
+    background-image:url(images/entertainmentbackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;
 }
 
 .war-background{
-
+    background-image: url(images/warbackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;
 }
+.philosophy-background{
+    background-image: url(images/philobackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;}
