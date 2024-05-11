@@ -1,4 +1,4 @@
-*{
+body{
     background-color: rgb(0, 0, 0);
     color: azure;
 }
@@ -102,4 +102,16 @@ justify-content: center;
 align-items: center;
 border: blue solid 2px;
 flex: 1 1 0;
+}
+
+.politics-background{
+
+}
+
+.relationship-background{
+
+}
+
+.war-background{
+
 }
