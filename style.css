@@ -95,3 +95,11 @@ img{
     width: 300px;
     height: 250px;
 }
+
+.threadform{
+display: flex;
+justify-content: center;
+align-items: center;
+border: blue solid 2px;
+flex: 1 1 0;
+}
