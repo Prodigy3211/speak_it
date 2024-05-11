@@ -59,6 +59,9 @@ h1{
     
 }
 
+.entbackground{
+    background-image:url(images/entertainmentbackgroundimg.png);
+}
 .images{
     display: flex;
     padding: 25px;
