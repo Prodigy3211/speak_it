@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Thread | Speak_It</title>
     <link rel="stylesheet" href="../style.css">
+    <script src="index.js"></script>
 </head>
 <body>
     <h1>Create New Thread</h1>
@@ -15,14 +16,18 @@
     <a href="../categories/relationships.html">Relationships</a>
     <a href="../categories/war.html">War</a>
     <div class="threadform">
-    <form>
-        <p>Name<input type="text" placeholder="Name"></p>
-        <p>Thesis<input type="text"></p>
-        <p>Affirmative<input type="checkbox"> Yes</p>
-        <p>Negative <input type="checkbox"> No</p>
-        <p>Your Argument<input></p>
-        <p>Insert Image <button>Image Upload</button></p>
-        <button type="submit">Post</button>
-    </form> </div>
+    <form action="newThreadForm.html" method="post" id="">
+        <p><label for="firstName">First Name: <input type="text" placeholder="Name" id="firstName" name="firstName"></label></p>
+        <p><label for="thesis">Thesis: </label><input type="text" id="thesis" name="thesis"></p>
+        <p><label for="category">Category</label><input id="category" name="category" type="radio"> Philosophy
+        <input type="radio" name="category" id="category"> War <input type="radio" name="category" id="category"> Relationships<input name="category" id="category"
+    type="radio"> Politics <input name="category" id="category" type="radio">Entertainment</p>
+        <p><label for="affirm">Are you Affirmative Or Negative? </label><input type="checkbox" name="affirm" id="affirm"> Affirmative
+        <input type="checkbox" id="affirm" name="affirm"> Negative</p>
+        <p><label for="argue">Your Argument: </label><input type="text" name="argue"
+             id="argue"></p>
+        <p><label>Insert Image: </label><button>Image Upload</button></p>
+        <button type="submit" form="newThreadForm" value="Submit">Post</button>
+            </form> </div>
 </body>
 </html>
