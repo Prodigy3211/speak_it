@@ -91,6 +91,12 @@ h1{
 
 }
 
+.trending-threads{
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+}
+
 /* adding in footer CSS */
 .footer{
     /* height:24px; */
