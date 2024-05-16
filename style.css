@@ -11,16 +11,14 @@ h1{
     /* margin: 200px 100px; */
 }
 
-/* .linktree{
+.linktree{
     display:flex;
     font-size: 35px;
-    /* border: 8pt solid orangered;
+    /* border: 8pt solid orangered; */
     justify-content: space-evenly;
-    /* background-color: blue;
+    /* background-color: blue; */
     align-items: center;
-    flex: 1;
-    padding: 12px;
- } */
+   }
 
 .linktree p{
     font-weight: bold;
@@ -159,6 +157,14 @@ background-position: center;
         .flex-container{
             display:flex;
             flex-flow: row wrap;
+            margin:25px;
+            flex: auto;
+        }
+
+        .linktree{
+            display: flex;
+            flex-flow: row wrap;
+            flex: auto 100%;
         }
         
     }
