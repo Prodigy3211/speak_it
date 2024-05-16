@@ -17,7 +17,7 @@
     <a href="../categories/war.html">War</a>
     <div class="threadform" id="newThreadForm">
     <form action="newThreadForm.html" method="post">
-        <fieldset>
+        <fieldset id="op_post">
         <p><label for="firstName">First Name: <input type="text" placeholder="Name" id="firstName" name="firstName"></label></p>
         <p><label for="thesis">Thesis: </label><input type="text" id="thesis" name="thesis"></p>
         <p><label for="category">Category</label><input id="category" name="category" type="radio"> Philosophy
@@ -29,8 +29,9 @@
              id="argue"></p>
         <p><label>Insert Image: </label><button>Image Upload</button></p>
         </fieldset>
-        <button type="submit" onclick="newThread();" form="newThreadForm" value="submit" id="newThreadForm">Post</button>
+        <button type="submit" onclick="newThread();" form="newThreadForm" value="submit">Post</button>
         <p><span id='newThread'></span></p>
+        <p><span id="thesisDisplay"></span></p>
             </form> </div>
         <!-- <input type="submit" onclick="newThread();">
             <div id="newThread"><p></p></div> -->

@@ -14,4 +14,6 @@ console.log(submitForm)
 function newThread(){
     document.getElementById('newThread').innerHTML =
             document.getElementById("firstName").value;
-} 
+    document.getElementById('thesisDisplay').innerHTML =
+            document.getElementById("thesis").value;
+}
