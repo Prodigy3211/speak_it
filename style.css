@@ -19,6 +19,7 @@ h1{
     /* background-color: blue; */
     align-items: center;
     flex: 1;
+    padding: 12px;
 }
 
 .linktree p{
