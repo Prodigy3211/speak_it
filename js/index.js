@@ -16,4 +16,6 @@ function newThread(){
             document.getElementById("firstName").value;
     document.getElementById('thesisDisplay').innerHTML =
             document.getElementById("thesis").value;
+    document.getElementById("argDisplay").innerHTML =
+            document.getElementById("argue").value;
 }
