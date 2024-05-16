@@ -30,7 +30,7 @@ h1{
     display:flex;
     /* border: 2px solid blueviolet; */
      /* flex-wrap: wrap; */
-    /* flex-flow: column wrap; */
+    flex-flow: column wrap;
     /* align-items: center; */
     flex:1;
     gap:24px;
@@ -51,9 +51,9 @@ h1{
         align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: 400px;
+    width: 100%;
     box-sizing: border-box;
-    height: 100vh;
+    /* height: 100vh; */
     padding:16px;
     /* background-color: bisque; */
     flex-wrap: nowrap;
@@ -95,6 +95,7 @@ h1{
     display: flex;
     flex-direction: column;
     flex: auto;
+    align-items: center;
 }
 
 /* adding in footer CSS */
