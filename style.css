@@ -30,10 +30,11 @@ h1{
 
 .flex-container{
     display:flex;
-    /* border: 2px solid blueviolet; */
+    border: 2px solid blueviolet;
      /* flex-wrap: wrap; */
     /* flex-flow: column wrap; */
     /* align-items: center; */
+    flex:1;
     gap:24px;
 
 }
