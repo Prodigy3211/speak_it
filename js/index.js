@@ -11,4 +11,7 @@ console.log(submitForm)
 
 // Import Form to DOM
 
- 
+function newThread(){
+    document.getElementById('newThread').innerHTML =
+            document.getElementById("firstName").value;
+} 
