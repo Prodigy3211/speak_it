@@ -50,7 +50,7 @@ h1{
     border:  2px solid rgb(185, 184, 182);
         align-items: center;
     justify-content: center;
-    flex-shrink: auto;
+    flex-shrink: 0;
     width: 400px;
     box-sizing: border-box;
     height: 100vh;
