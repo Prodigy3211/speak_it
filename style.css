@@ -30,7 +30,7 @@ h1{
 
 .flex-container{
     display:flex;
-    border: 2px solid blueviolet;
+    /* border: 2px solid blueviolet; */
      /* flex-wrap: wrap; */
     /* flex-flow: column wrap; */
     /* align-items: center; */
@@ -153,4 +153,12 @@ background-position: center;
     #newThread{
         background-color: White;
         color:black;
+    }
+
+    @media screen and (max-width: 600px) {
+        .flex-container{
+            display:flex;
+            flex-flow: row wrap;
+        }
+        
     }
