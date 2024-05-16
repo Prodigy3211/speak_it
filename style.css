@@ -50,13 +50,13 @@ h1{
     border:  2px solid rgb(185, 184, 182);
         align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    flex-shrink: auto;
     width: 400px;
     box-sizing: border-box;
     height: 100vh;
     padding:16px;
     /* background-color: bisque; */
-    /* flex-wrap: nowrap; */
+    flex-wrap: nowrap;
     
 }
 
@@ -156,7 +156,7 @@ background-position: center;
     @media screen and (max-width: 1000px) {
         .flex-container{
             display:flex;
-            flex-flow: row wrap;
+            flex-flow: row-reverse wrap;
             flex: auto;
         }
 
