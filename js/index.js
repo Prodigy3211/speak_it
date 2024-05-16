@@ -18,4 +18,13 @@ function newThread(){
             document.getElementById("thesis").value;
     document.getElementById("argDisplay").innerHTML =
             document.getElementById("argue").value;
+//     document.getElementById('newThreadImage').innerHTML =
+//             document.getElementById('threadImage').value
 }
+
+// function newThreadImage(img){
+//         'use strict';
+//         document.getElementById('newThreadImage').innerHTML = img;
+//         document.getElementById('newThreadImage').innerHTML = '<img src="'+img+'"/>';
+// }
+
