@@ -162,11 +162,20 @@ background-position: center;
         color:black;
     }
 
+    .thread-headings{
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        
+    }
+
     .affirmative-negative-container{
         display: flex;
-        border: 2px red solid;
-        flex-direction: column;
-        align-items: center;
+        /* border: 2px red solid; */
+        flex-direction: row;
+        /* align-items: center; */
+        justify-content: space-between;
+        padding: 8 px;
 
     }
 
@@ -182,7 +191,7 @@ background-position: center;
         background-color: azure;
         border: solid 8px white;
         width: 20%;
-        align-self: flex-start;
+        /* justify-self: flex-start; */
     }
 
     
@@ -190,7 +199,10 @@ background-position: center;
         background-color: rgb(228, 179, 88);
         border: solid 8px white;
         width: 20%;
-        align-self: flex-end;
+        /* justify-self: flex-end; */
+        /* text-align: right; */
+        font-size: 24px;
+        color: black;
     }
 
     .negative-args{

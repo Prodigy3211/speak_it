@@ -54,8 +54,16 @@ reader.readAsDataURL(file);
 }
 
 function pmwThread(){
-        document.getElementById('firstNameDisplay').innerHTML =
+        if (affirmative.checked){
+                document.getElementById('firstNameDisplay').innerHTML =
                 document.getElementById('firstName').value;
         document.getElementById('argumentDisplay').innerHTML =
                 document.getElementById('argument').value;
+        } else{
+                
+                document.getElementById('firstNameDisplayNegative').innerHTML =
+                document.getElementById('firstName').value;
+                document.getElementById('argumentDisplayNegative').innerHTML =
+                document.getElementById('argument').value;
+        }
 }
