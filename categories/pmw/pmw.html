@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../../js/index.js"></script>
     <title>PMW | Board</title>
+    <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
     <h1>Welcome to PMW</h1>
-<div id="pmwThreadForm">
+    <a href="../philosophy/philosophy.html">Philosophy</a>
+    <a href="../politics/politics.html">Politics</a>
+    <a href="../entertainment/entertainment.html">Entertainment</a>
+    <a href="../relationships/relationships.html">Relationships</a>
+    <a href="../war/war.html">War</a>
+    <a href="../../index.html">Back Home</a>
+    
+<div class="threadform" id="pmwThreadForm">
     <form name="pmw-post" id="pmw-post" action="pmw.html" method="post">
         <fieldset id="pmwForm">
         <br><label for="firstName">First Name</label>
             <input id="firstName" type="text">
         <br><label for="argument">Your Argument</label>
-            <input type="text" name="argument" id="argument" placeholder="Real Meat Has no taste...."></textarea>
-        <button type="submit" onclick="pmwThread()" value="submit" form="pmw-post" id="pmwThreadForm">Post</button>
+            <textarea type="text" name="argument" id="argument" placeholder="Real Meat Has no taste...."></textarea>
 <!-- <input type=file onclick="pmwThread()" accept=".jpeg, .png" width="50px" length="50px"> -->
 
 </fieldset>
+        <button type="button" onclick="pmwThread()" form="pmw-post" id="pmwThreadForm" value="submit">Post</button>
+        <!-- <p><span id="firstNameDisplay"></span></p> -->
 </form></div>
 
-<br><span id="firstNameDisplay"></span>
+<br><span class="name" id="firstNameDisplay"></span>
 </span>
-<br><span id="argumentDisplay"></span>
+<br><blockquote><span id="argumentDisplay"></span></body></blockquote>
 </body>
 </html>
