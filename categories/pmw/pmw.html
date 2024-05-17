@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../js/index.js"></script>
     <title>PMW | Board</title>
 </head>
 <body>
     <h1>Welcome to PMW</h1>
-    
+<div id="pmwThreadForm">
+    <form name="pmw-post" id="pmw-post" action="pmw.html" method="post">
+        <fieldset id="pmwForm">
+        <br><label for="firstName">First Name</label>
+            <input id="firstName" type="text">
+        <br><label for="argument">Your Argument</label>
+            <input type="text" name="argument" id="argument" placeholder="Real Meat Has no taste...."></textarea>
+        <button type="submit" onclick="pmwThread()" value="submit" form="pmw-post" id="pmwThreadForm">Post</button>
+<!-- <input type=file onclick="pmwThread()" accept=".jpeg, .png" width="50px" length="50px"> -->
+
+</fieldset>
+</form></div>
+
+<br><span id="firstNameDisplay"></span>
+</span>
+<br><span id="argumentDisplay"></span>
 </body>
 </html>

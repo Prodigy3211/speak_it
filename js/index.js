@@ -18,13 +18,44 @@ function newThread(){
             document.getElementById("thesis").value;
     document.getElementById("argDisplay").innerHTML =
             document.getElementById("argue").value;
-//     document.getElementById('newThreadImage').innerHTML =
+newThreadImage();            //     document.getElementById('newThreadImage').innerHTML =
 //             document.getElementById('threadImage').value
 }
 
-// function newThreadImage(img){
-//         'use strict';
-//         document.getElementById('newThreadImage').innerHTML = img;
-//         document.getElementById('newThreadImage').innerHTML = '<img src="'+img+'"/>';
-// }
+function newThreadImage () {
+//get input image
+const newThreadImage = document.getElementById('newThreadImage');
 
+//add event listener to detect the uploaded file
+
+newThreadImage.addEventListener('change',function() {
+        const file = newThreadImage.files[0];
+
+        //create a file reader object
+        const reader = new FileReader();
+
+        //set up onload event handler
+        reader.onload = function(e) {
+                //get image ur
+                const imageDataUrl = e.target.result;
+
+                //display image
+                const imagePreview = document.getElementById('threadImage');
+                imagePreview.src = imageDataUrl;
+        };
+
+// read the selected file's data url
+reader.readAsDataURL(file);
+
+
+
+});
+
+}
+
+function pmwThread(){
+        document.getElementById('firstNameDisplay').innerHTML =
+                document.getElementById('firstName').value;
+        document.getElementById('argumentDisplay').innerHTML =
+                document.getElementById('argument').value;
+}
