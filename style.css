@@ -149,6 +149,13 @@ background-position: center;
     background-size: contain;
     height: 750px;}
 
+.pmw-background{
+    background-image: url(images/provemewrong.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;}
+
     #newThread{
         background-color: White;
         color:black;
