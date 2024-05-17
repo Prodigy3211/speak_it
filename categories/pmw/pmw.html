@@ -20,6 +20,8 @@
 <div class="threadform" id="pmwThreadForm">
     <form name="pmw-post" id="pmw-post" action="pmw.html" method="post">
         <fieldset id="pmwForm">
+        <br><label for="affirm">Affirmative or Negative?</label>
+            <input id="affirm" type="radio" id="affirmative" name="for-against"> Affirmative <input type="radio" id="negative" name="for-against"> Negative
         <br><label for="firstName">First Name</label>
             <input id="firstName" type="text">
         <br><label for="argument">Your Argument</label>
@@ -30,12 +32,18 @@
         <button type="button" onclick="pmwThread()" form="pmw-post" id="pmwThreadForm" value="submit">Post</button>
         <!-- <p><span id="firstNameDisplay"></span></p> -->
 </form></div>
-<div class="affirmative-args">
+<div class="affirmative-negative-container">
 <div class="post-container">
 <br><p class="post-op">Name: <span class="post-op" id="firstNameDisplay"></span>
 </span>
 <br><blockquote class="post-op">Your Argument: <span class="post-op" id="argumentDisplay"></span></body></blockquote>
 </div>
+
+
+
+   <div class="negativepost-container">
+    <p>Hello</p>
+   </div> 
 </div>
 </body>
 </html>

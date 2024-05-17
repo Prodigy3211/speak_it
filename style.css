@@ -162,8 +162,12 @@ background-position: center;
         color:black;
     }
 
-    .affirmative-args{
+    .affirmative-negative-container{
         display: flex;
+        border: 2px red solid;
+        flex-direction: column;
+        align-items: center;
+
     }
 
     .post-op{
@@ -178,6 +182,20 @@ background-position: center;
         background-color: azure;
         border: solid 8px white;
         width: 20%;
+        align-self: flex-start;
+    }
+
+    
+    .negativepost-container{
+        background-color: rgb(228, 179, 88);
+        border: solid 8px white;
+        width: 20%;
+        align-self: flex-end;
+    }
+
+    .negative-args{
+        display: flex;
+        justify-self: flex-end;
     }
 
     @media screen and (max-width: 1000px) {
