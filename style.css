@@ -222,5 +222,23 @@ background-position: center;
             flex-flow: row wrap;
             flex: auto 100%;
         }
+
+        .affirmative-negative-container{
+            display: flex;
+            flex-flow: column wrap;
+            flex: auto;
+        }
+
+        .negativepost-container{
+            width: auto;
+        }
+
+        .post-container{
+            width:auto;
+        }
+
+        .thread-headings{
+            background-color: black;
+        }
         
     }
