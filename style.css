@@ -240,5 +240,9 @@ background-position: center;
         .thread-headings{
             background-color: black;
         }
+
+        .threadform{
+            background-color: white;
+        }
         
     }
