@@ -1,0 +1,23 @@
+{
+  "name": "speak_it",
+  "version": "1.0.0",
+  "description": "A New Social Website Meant to Act as a Public Square",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prodigy3211/speak_it.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Prodigy3211/speak_it/issues"
+  },
+  "homepage": "https://github.com/Prodigy3211/speak_it#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
