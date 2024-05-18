@@ -1,0 +1,267 @@
+body{
+    background-color: rgb(0, 0, 0);
+    color: azure;
+}
+
+h1{
+    background-color: grey;
+    color: white;
+    /* border: 2px solid red; */
+    text-align: center;
+    /* margin: 200px 100px; */
+}
+
+.griddy{
+    display: grid;
+    grid-template-columns: 5 20%;
+    /* grid-template-rows: auto; */
+}
+
+.grid-table{
+    grid-column: 3;
+    background-color: black;
+}
+
+.grid-affirmative{
+    grid-column: 1;
+}
+
+.grid-negative{
+    grid-column: 5;
+}
+
+.linktree{
+    display:flex;
+    font-size: 24px;
+    /* border: 8pt solid orangered; */
+    justify-content: space-evenly;
+    /* background-color: blue; */
+    align-items: center;
+   }
+
+.linktree p{
+    font-weight: bold;
+}
+
+/* testing of flex boxes for the rules. */
+
+.flex-container{
+    display:flex;
+    /* border: 2px solid blueviolet; */
+     /* flex-wrap: wrap; */
+    flex-flow: column wrap;
+    /* align-items: center; */
+    flex:1;
+    gap:24px;
+
+}
+
+.flex-container div {
+    font-size: 24px;
+}
+
+.OP_Title{
+    margin: 8px 16px;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    border:  2px solid rgb(185, 184, 182);
+        align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+    /* height: 100vh; */
+    padding:16px;
+    /* background-color: bisque; */
+    flex-wrap: nowrap;
+    
+}
+
+.entbackground{
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    background-image:url(images/entertainmentbackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;
+}
+.images{
+    display: flex;
+    padding: 25px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    
+}
+
+/* container for the images in flexbox */
+.image-container{
+    display: flex;
+    /* border: solid 2px white; */
+    align-items: center;
+    gap: 5px;
+    /* align-self: flex-end; */
+    flex-wrap: wrap;
+    background-color: hsl(60, 2%, 37%);
+
+}
+
+.trending-threads{
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    align-items: center;
+}
+
+/* adding in footer CSS */
+.footer{
+    /* height:24px; */
+    /* display: flex;
+    flex: 1; */
+    border: solid 2px yellow;
+}
+
+img{
+    width: 300px;
+    height: 250px;
+}
+
+.threadform{
+display: flex;
+justify-content: center;
+align-items: center;
+/* border: blue solid 2px; */
+flex: 1 1 0;
+color: black;
+}
+
+.politics-background{
+background-image: url(images/polbackgroundimg.png);
+background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px}
+
+.relationship-background{
+    background-image:url(images/relationsbackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;
+}
+
+.war-background{
+    background-image: url(images/warbackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;
+}
+.philosophy-background{
+    background-image: url(images/philobackgroundimg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;}
+
+.pmw-background{
+    background-image: url(images/provemewrong.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 750px;}
+
+    #newThread{
+        background-color: White;
+        color:black;
+    }
+
+    .thread-headings{
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        
+    }
+
+    .affirmative-negative-container{
+        display: flex;
+        /* border: 2px red solid; */
+        flex-direction: row;
+        /* align-items: center; */
+        justify-content: space-between;
+        padding: 8 px;
+
+    }
+
+    .post-op{
+       /* background-color: azure; */
+        /* border: solid 1px azure; */
+        font-size: 24px;
+        color: black;
+        
+    }
+
+    .post-container{
+        background-color: azure;
+        border: solid 8px white;
+        width: 20%;
+        /* justify-self: flex-start; */
+    }
+
+    
+    .negativepost-container{
+        background-color: rgb(228, 179, 88);
+        border: solid 8px white;
+        width: 20%;
+        /* justify-self: flex-end; */
+        /* text-align: right; */
+        font-size: 24px;
+        color: black;
+    }
+
+    .negative-args{
+        display: flex;
+        justify-self: flex-end;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .flex-container{
+            display:flex;
+            flex-flow: row-reverse wrap;
+            flex: auto;
+        }
+
+        .linktree{
+            display: flex;
+            flex-flow: row wrap;
+            flex: auto 100%;
+        }
+
+        .affirmative-negative-container{
+            display: flex;
+            flex-flow: column wrap;
+            flex: auto;
+        }
+
+        .negativepost-container{
+            width: auto;
+        }
+
+        .post-container{
+            width:auto;
+        }
+
+        .thread-headings{
+            background-color: black;
+        }
+
+        .threadform{
+            background-color: white;
+        }
+        
+    }

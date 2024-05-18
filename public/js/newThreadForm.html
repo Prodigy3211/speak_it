@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Thread | Speak_It</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <h1>Create New Thread</h1>
+    <a href="../index.html">Back Home</a>
+    <a href="../categories/philosophy/philosophy.html">Philosophy</a>
+    <a href="../categories/politics/politics.html">Politics</a>
+    <a href="../categories/entertainment/entertainment.html">Entertainment</a>
+    <a href="../categories/relationships/relationships.html">Relationships</a>
+    <a href="../categories/war/war.html">War</a>
+    <div class="threadform" id="newThreadForm">
+    <form action="newThreadForm.html" method="post">
+        <fieldset id="op_post">
+            <p>
+                <label for="firstName">First Name: <input type="text" placeholder="Name" id="firstName" name="firstName"></label>
+            </p>
+            <p>
+                <label for="thesis">Thesis: </label><input type="text" id="thesis" name="thesis">
+            </p>
+            <p>
+                <label for="affirm">Are you Affirmative Or Negative? </label>
+                    <input type="checkbox" name="affirm" id="affirm"> Affirmative
+                    <input type="checkbox" id="negative" name="negative"> Negative
+            </p>
+            <p>
+                <label for="argue">Your Argument: </label><input type="text" name="argue" id="argue">
+            </p>
+            <p>
+                <label for="newThreadImage">Insert Image: </label><input type="file" accept="image/jpeg, image/png" id="newThreadImage" width="50px" height="50px">Image Upload</file>
+            </p>
+
+        </fieldset>
+        <button type="submit" onclick="newThread();" form="newThreadForm" value="submit">Post</button>
+
+        
+        <p><span id='newThread'></span></p>
+        <p><span id="thesisDisplay"></span></p>
+        <p><span id="argDisplay"></span></p>
+        <p>Your image is: <span id="threadImage"></span></p>
+            </form> </div>
+        <!-- <input type="submit" onclick="newThread();">
+            <div id="newThread"><p></p></div> -->
+
+</body>
+</html>
