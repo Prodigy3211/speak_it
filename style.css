@@ -11,6 +11,25 @@ h1{
     /* margin: 200px 100px; */
 }
 
+.griddy{
+    display: grid;
+    grid-template-columns: 5 20%;
+    /* grid-template-rows: auto; */
+}
+
+.grid-table{
+    grid-column: 3;
+    background-color: black;
+}
+
+.grid-affirmative{
+    grid-column: 1;
+}
+
+.grid-negative{
+    grid-column: 5;
+}
+
 .linktree{
     display:flex;
     font-size: 24px;

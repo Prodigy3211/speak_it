@@ -17,32 +17,36 @@
         <a href="../../index.html">Back Home</a>
 
         <div class="griddy">
-            <form>
+            <div class="grid-table"><form>
                 <table>
                     <thead>
                         <th>Create New Thread</th>
                         </thead>
                     <tbody>
                     <tr data-type="name">
-                        <td>Name</td>
+                        <td>Name:</td>
                         <td><input name="name" type="text" tabindex="1" placeholder="Name"></td>
                     </tr>
                     <tr data-type="thesis">
-                        <td>Your thesis</td>
-                        <td><input name ="thesis" type="text" tabindex="1" placeholder="Technology is useless for Philosophy..."></td>
+                        <td>Your thesis:</td>
+                        <td><input name ="thesis" type="text" tabindex="2" placeholder="Technology is useless for Philosophy..."></td>
                     </tr>
                     <tr data-type="your-argument">
-                        <td>Your argument</td>
-                        <td><textarea name ="your-argument" tabindex="1"  colspan="2" placeholder="We've all witnessed how dumb technology can be. It could never replace human reasoning." width = 150px></textarea>
+                        <td>Your argument:</td>
+                        <td><textarea name ="your-argument" tabindex="3"  cols="21" rows="5" placeholder="Tech could never replace human reasoning."></textarea>
                         </td>
+                        <tr data-type="submit">
+                            <td><input type="button" onclick="philoPost()" value="submit"></td>
+                        </tr>
 
                     </tr>
                         
                         </tbody>
                 </table>
 
-            </form>
-            <p>
+            </form></div>
+            <div class="grid-affirmative"><p class="post-container">sadsada</p></div>
+        <div class="grid-negative"><p class="negativepost-container">dsada</p></div>
         </div>
 </body>
 </html>

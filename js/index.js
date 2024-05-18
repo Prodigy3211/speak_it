@@ -1,15 +1,15 @@
-// alert("hey")
-// document.body.innerHTML =  "Hello";
+// // alert("hey")
+// // document.body.innerHTML =  "Hello";
 
-// const inputs = document.getElementsByTagName('input');
+// // const inputs = document.getElementsByTagName('input');
 
-// console.log(inputs);
+// // console.log(inputs);
 
-const submitForm = document.querySelector('button');
+// const submitForm = document.querySelector('button');
 
-console.log(submitForm)
+// console.log(submitForm)
 
-// Import Form to DOM
+// // Import Form to DOM
 
 function newThread(){
     document.getElementById('newThread').innerHTML =
@@ -67,3 +67,14 @@ function pmwThread(){
                 document.getElementById('argument').value;
         }
 }
+
+// const express = require('express');
+// const app = express();
+
+// app.get('/',(req,res) => {
+//         res.send('Hello Wolrd!');
+// })
+
+// app.listen(3000,() => {
+//         console.log('Server is listening on port 3000');
+// })
