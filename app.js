@@ -12,16 +12,29 @@ app.use(express.static(path.join(__dirname,'public')));
 
 //define routes to send to the server
 
+//Home Page Route connection.
 app.get('/',(req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+//Category Thread Page connection
+app.get('/pmw', async (req,res) => {
+    res.sendFile(path.join(__dirname,'public','category','pmw','pmw.html'));
+});
+
+//test rout page taco! Connected to Database.
 app.get('/taco', async (req, res) => {
     const tacos = await client.query("SELECT * FROM tacos");
     res.send(tacos.rows);
    
 
 });
+
+//The Profile Page route
+app.get('/my-profile', async(req, res) => {
+    const myProfile = await client.query("SELECT user91 FROM users");
+    res.send (users.rows);
+})
 
 // Start the server
 
