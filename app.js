@@ -4,6 +4,7 @@ const { read } = require('fs');
 const app = express();
 const path = require('path');
 const { Client } =  require('pg');
+const { traceDeprecation } = require('process');
 const client = new Client({user:'postgres', host:'localhost', database:'speak_it_DB', password:'postgres', port:'5432'});
 
 //Serve static files to public dir
@@ -31,6 +32,23 @@ app.get('/taco', async (req, res) => {
 });
 
 //The Profile Page route
+app.post('/submit-form', async(req,res) =>{
+    const {username,email,password} = req.body;
+
+    try{
+        const query = 'INSERT INTO users (username ,email, password) VALUES ($1, $2, $3)';
+        const values = [username, email, password];
+        
+        await client.query(query, values);
+
+        res.send('User Registered Successfully!');   
+    } catch(error){
+        console.error(error);
+        res.status(500).send('Error Registering User');
+    }
+
+});
+
 app.get('/my-profile', async(req, res) => {
     const myProfile = await client.query("SELECT user91 FROM users");
     res.send (users.rows);
