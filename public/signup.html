@@ -7,14 +7,14 @@
 </head>
 <body>
     <h1>Create and Account</h1>
-    <form id="signup">
-        <br> <Label  for="firstname">First Name: </Label> <input type="text">
-        <br> <Label  for="lastname">Last Name: </Label> <input type="text">
-        <br> <Label  for="username">User Name: </Label> <input type="text">
-        <br> <Label  for="email">Email Address: </Label> <input type="text">
-        <br> <Label  for="password">Password: </Label> <input type="text">
-        <br> <Label  for="confirmpassword">Confirm Password: </Label> <input type="text">
-        <br> <button type="submit">Create Account</button>
+    <form id="signup" action="http://localhost:3000/signup" method="post">
+        <br> <Label  for="firstname">First Name: </Label> <input type="text" id="firstname" name="firstname" required>
+        <br> <Label  for="lastname">Last Name: </Label> <input type="text" id="lastname" name="lastname" required>
+        <br> <Label  for="username">User Name: </Label> <input type="text" id="username" name="username" required>
+        <br> <Label  for="email">Email Address: </Label> <input type="email" id="email" name="email" required>
+        <br> <Label  for="password">Password: </Label> <input type="password" id="password" name="password" required>
+        <!-- <br> <Label  for="confirmpassword">Confirm Password: </Label> <input type="text"> -->
+        <br> <button type="submit" value="Register">Create Account</button>
     </form>
 </body>
 </html>

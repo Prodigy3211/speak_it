@@ -1,11 +1,20 @@
 const exp = require('constants');
+require('dotenv').config();
 const express =require('express');
 const { read } = require('fs');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 const { Client } =  require('pg');
 const { traceDeprecation } = require('process');
-const client = new Client({user:'postgres', host:'localhost', database:'speak_it_DB', password:'postgres', port:'5432'});
+
+const client = new Client({
+    user: process.env.DB_USER, 
+    host:process.env.DB_HOST, 
+    database: process.env.DB_NAME, 
+    password: process.env.DB_PASSWORD, 
+    port: process.env.DB_PORT,
+ });
 
 //Serve static files to public dir
 
@@ -31,19 +40,23 @@ app.get('/taco', async (req, res) => {
 
 });
 
+//middleware
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 //The Profile Page route
-app.post('/submit-form', async(req,res) =>{
-    const {username,email,password} = req.body;
+app.post('/signup', async(req,res) =>{
+    const {username,email,password,firstname,lastname} = req.body;
 
     try{
-        const query = 'INSERT INTO users (username ,email, password) VALUES ($1, $2, $3)';
-        const values = [username, email, password];
+        const query = 'INSERT INTO users (username, email, password, firstname, lastname) VALUES ($1, $2, $3, $4, $5)';
+        const values = [username, email, password, firstname, lastname];
         
         await client.query(query, values);
 
         res.send('User Registered Successfully!');   
     } catch(error){
-        console.error(error);
+        console.error('Error',error);
         res.status(500).send('Error Registering User');
     }
 
