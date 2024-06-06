@@ -129,7 +129,22 @@ img{
     width: 300px;
     height: 250px;
 }
+/* Form styles */
 
+.login-container{
+    display: flex;
+    justify-content: flex-end;
+    font-size: larger;
+    /* border: 2px solid white; */
+    /* background-color: rgb(8, 82, 82); */
+    color: white;
+}
+
+.login-links{
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+}
 .threadform{
 display: flex;
 justify-content: center;
