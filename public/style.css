@@ -87,6 +87,7 @@ h1{
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    background-attachment: fixed;
     height: 750px;
 }
 .images{
@@ -160,6 +161,7 @@ background-position: center;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    background-attachment: fixed;
     height: 750px}
 
 .relationship-background{
@@ -167,6 +169,7 @@ background-position: center;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    background-attachment: fixed;
     height: 750px;
 }
 
@@ -175,6 +178,7 @@ background-position: center;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    background-attachment: fixed;
     height: 750px;
 }
 .philosophy-background{
@@ -182,6 +186,7 @@ background-position: center;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    background-attachment: fixed;
     height: 750px;}
 
 .pmw-background{
@@ -189,6 +194,7 @@ background-position: center;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    background-attachment: fixed;
     height: 750px;}
 
     #newThread{

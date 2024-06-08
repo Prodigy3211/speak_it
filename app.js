@@ -32,6 +32,8 @@ app.get('/pmw', async (req,res) => {
     res.sendFile(path.join(__dirname,'public','category','pmw','pmw.html'));
 });
 
+app.get('/philosophy')
+
 //test rout page taco! Connected to Database.
 app.get('/taco', async (req, res) => {
     const tacos = await client.query("SELECT * FROM tacos");
