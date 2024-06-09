@@ -68,6 +68,25 @@ function pmwThread(){
         }
 }
 
+function philoThread(){
+        if (affirmative.checked){
+                document.getElementById('nameDisplay').innerHTML =
+                document.getElementById('name').value;
+                document.getElementById('thesisDisplay').innerHTML =
+                document.getElementById('thesis').value;
+                document.getElementById('argumentDisplay').innerHTML =
+                document.getElementById('argument').value;
+        } else {
+
+                document.getElementById('nameDisplayNegative').innerHTML =
+                document.getElementById('name').value;
+                document.getElementById('thesisDisplayNegative').innerHTML =
+                document.getElementById('thesis').value;
+                document.getElementById('argumentDisplayNegative').innerHTML =
+                document.getElementById('argument').value;
+        }
+}
+
 // const express = require('express');
 // const app = express();
 

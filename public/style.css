@@ -11,6 +11,21 @@ h1{
     /* margin: 200px 100px; */
 }
 
+.thread-container{
+    display: grid;
+    grid-template-columns:2 50%;
+    border: 3px green solid;
+}
+.all-threads{
+    grid-column: 2;
+    border: solid 1px white;
+}
+.trending-threads{
+    grid-column: 1;
+    border: solid 1px blue;
+}
+
+
 .griddy{
     display: grid;
     grid-template-columns: 5 20%;
@@ -24,6 +39,7 @@ h1{
 
 .grid-affirmative{
     grid-column: 1;
+    /* color:black; */
 }
 
 .grid-negative{
@@ -231,6 +247,8 @@ background-position: center;
         background-color: azure;
         border: solid 8px white;
         width: 20%;
+        font-size: 24px;
+        color: black;
         /* justify-self: flex-start; */
     }
 
