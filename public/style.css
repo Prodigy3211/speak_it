@@ -13,15 +13,20 @@ h1{
 
 .thread-container{
     display: grid;
-    grid-template-columns:2 50%;
-    border: 3px green solid;
+    /* grid-template-columns:50% 50%; */
+    border: 3px rgb(248, 248, 248) solid;
+    grid-auto-flow: row;
+    /* height: 80%; */
+    margin: 8px 16px;
 }
 .all-threads{
-    grid-column: 2;
-    border: solid 1px white;
+    /* grid-column: 2; */
+    border: solid 1px rgb(119, 9, 27);
+    
+
 }
-.trending-threads{
-    grid-column: 1;
+.popular-threads{
+    /* grid-column: 1; */
     border: solid 1px blue;
 }
 
@@ -53,6 +58,7 @@ h1{
     justify-content: space-evenly;
     /* background-color: blue; */
     align-items: center;
+    margin-bottom: 16px;
    }
 
 .linktree p{
