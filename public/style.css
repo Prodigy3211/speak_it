@@ -12,7 +12,7 @@ h1{
 }
 
 a{
-    color: #ECDBBA;
+    color: #C84B31;
 }
 
 .thread-container{
@@ -86,13 +86,14 @@ a{
     font-size: 24px;
     /* border: 8pt solid orangered; */
     justify-content: space-evenly;
-    /* background-color: blue; */
+    background-color: #ECDBBA;
     align-items: center;
     margin-bottom: 16px;
    }
 
 .linktree p{
     font-weight: bold;
+
 }
 
 /* testing of flex boxes for the rules. */
