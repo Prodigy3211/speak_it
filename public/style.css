@@ -13,23 +13,46 @@ h1{
 
 .thread-container{
     display: grid;
-    /* grid-template-columns:50% 50%; */
+    grid-template-columns:50% 50%;
     border: 3px rgb(248, 248, 248) solid;
-    grid-auto-flow: row;
+    /* grid-auto-flow: column; */
     /* height: 80%; */
-    margin: 8px 16px;
+    column-gap: 16px;
+    padding: 16px 16px 16px 16px;
 }
+
+.thread-container h2{
+    text-align: center;
+}
+
+
+
 .all-threads{
     /* grid-column: 2; */
-    border: solid 1px rgb(119, 9, 27);
-    
+    /* border: solid 1px rgb(119, 9, 27); */
+    /* text-align: center; */
+    background-color:grey;
 
 }
+.all-threads ul{
+    /* color: green; */
+    /* border: 2px yellow solid; */
+    display: inline-block;
+    font-size: large;
+    margin: 4px 4px 4px 4px;
+}
+
+
 .popular-threads{
     /* grid-column: 1; */
-    border: solid 1px blue;
+    /* border: solid 1px blue; */
+    background-color: gray;
 }
 
+.popular-threads ol{
+    display: inline-block;
+    font-size: large;
+}
 
 .griddy{
     display: grid;
