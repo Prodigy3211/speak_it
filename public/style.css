@@ -346,19 +346,24 @@ background-position: center;
 
     @media screen and (max-width: 1000px) {
         .homepage-container{
-            padding: 0px;
+            display: flex;
+            flex-flow: column;
+            /* justify-content: center; */
+            flex: auto;
+            width: 100%;
         }
         
         .flex-container{
             display:flex;
             flex-flow: row-reverse wrap;
             flex: auto;
+            justify-items: center;
         }
 
         .linktree{
             display: flex;
             flex-flow: row wrap;
-            flex: auto 100%;
+            flex-shrink: auto;
         }
 
         .affirmative-negative-container{
