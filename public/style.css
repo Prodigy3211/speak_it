@@ -4,12 +4,26 @@ body{
     /* min-width: 750px; */
 }
 
+.homepage-container{
+    padding: 16px 250px;
+    /* border: solid hotpink; */
+}
+
 h1{
     background-color: #2D4263;
     color: white;
-    /* border: 2px solid red; */
+    border: 2px solid #ECDBBA;
     text-align: center;
+    padding: 16px 16px;
     /* margin: 200px 100px; */
+}
+
+h2{
+    background-color: #2D4263;
+    color: #ECDBBA;
+    text-align: center;
+    padding: 16px;
+    border: solid 2px #ECDBBA;
 }
 
 a {
@@ -20,6 +34,15 @@ a {
     color:#2D4263;
     /* background-color: pink; */
 
+}
+
+.welcome-message{
+    background-color: #2D4263;
+    color: #ffffff;
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 24px;
+    border: solid 2px #ECDBBA;
 }
 
 .thread-container{
@@ -115,7 +138,7 @@ a {
     flex-flow: column wrap;
     /* align-items: center; */
     flex:1;
-    gap:24px;
+    gap:16px;
 
 }
 
@@ -137,7 +160,7 @@ a {
     width: 100%;
     box-sizing: border-box;
     /* height: 100vh; */
-    padding:16px;
+    padding:8px;
     /* background-color: bisque; */
     flex-wrap: nowrap;
     
@@ -166,12 +189,13 @@ a {
 /* container for the images in flexbox */
 .image-container{
     display: flex;
-    /* border: solid 2px white; */
+    border: solid 2px #ECDBBA;
     align-items: center;
     gap: 5px;
     /* align-self: flex-end; */
     flex-wrap: wrap;
     background-color:#2D4263;
+
 
 }
 
@@ -180,6 +204,8 @@ a {
     flex-direction: column;
     flex: auto;
     align-items: center;
+    background-color: #2D4263;
+    border: 2px solid #ECDBBA;
 }
 
 /* adding in footer CSS */
@@ -187,7 +213,7 @@ a {
     /* height:24px; */
     /* display: flex;
     flex: 1; */
-    border: solid 2px yellow;
+    border: solid 2px #ECDBBA;
 }
 
 img{
