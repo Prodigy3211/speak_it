@@ -346,10 +346,10 @@ background-position: center;
 
     @media screen and (max-width: 1000px) {
         .homepage-container{
-            display: flex;
-            flex-flow: column;
+            display: block;
+            /* flex-flow: column wrap; */
             /* justify-content: center; */
-            flex: auto;
+            /* flex: auto; */
             width: 100%;
         }
         
