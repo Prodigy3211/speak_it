@@ -345,6 +345,10 @@ background-position: center;
     }
 
     @media screen and (max-width: 1000px) {
+        .homepage-container{
+            padding: 0px;
+        }
+        
         .flex-container{
             display:flex;
             flex-flow: row-reverse wrap;
