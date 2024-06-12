@@ -12,34 +12,42 @@ h1{
     /* margin: 200px 100px; */
 }
 
-a{
-    color: #C84B31;
+a {
+    color: #c84b31;
+}
+
+.philo-links a{
+    color:#2D4263;
+    /* background-color: pink; */
+
 }
 
 .thread-container{
     display: grid;
-    grid-template-columns:50% 50%;
+    /* grid-template-columns:50% 50%; */
     /* border: 3px #C84B31 solid; */
-    /* grid-auto-flow: column; */
+    grid-auto-flow: column;
     /* height: 80%; */
     column-gap: 16px;
     padding: 16px 16px 16px 16px;
+    ;
 }
 
 .thread-container h2{
     text-align: center;
+    background-color: #2D4263;
 }
 
 .newThreadContainer{
     text-align: center;
-    border: solid 2px #ECDBBA;
+    border: solid 2px #2D4263;
 }
 
 .all-threads{
     /* grid-column: 2; */
     /* border: solid 1px rgb(119, 9, 27); */
     /* text-align: center; */
-    background-color:#2D4263;
+    background-color:#ECDBBA;
 
 }
 .all-threads ul{
@@ -54,11 +62,11 @@ a{
 .popular-threads{
     /* grid-column: 1; */
     /* border: solid 1px blue; */
-    background-color: #2D4263;
+    background-color: #ECDBBA;
 }
 
 .popular-threads ol{
-    display: inline-block;
+    /* display: inline-block; */
     font-size: large;
 }
 
@@ -90,6 +98,7 @@ a{
     background-color: #ECDBBA;
     align-items: center;
     margin-bottom: 16px;
+    /* color: #C84B31; */
    }
 
 .linktree p{
