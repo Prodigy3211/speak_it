@@ -5,7 +5,8 @@ body{
 }
 
 .homepage-container{
-    padding: 16px 250px;
+    /* display: grid; */
+    /* padding: 16px 250px; */
     /* border: solid hotpink; */
 }
 
@@ -178,24 +179,31 @@ a {
     height: 750px;
 }
 .images{
-    display: flex;
+    /* display: grid; */
+    /* display: flex;
     padding: 25px;
     flex-wrap: wrap;
     flex-grow: 1;
-    justify-content: space-evenly;
+    justify-content: space-evenly; */
     
 }
 
 /* container for the images in flexbox */
 .image-container{
-    display: flex;
+    /* display: flex;
     border: solid 2px #ECDBBA;
     align-items: center;
     gap: 5px;
-    /* align-self: flex-end; */
+    /* align-self: flex-end; 
     flex-wrap: wrap;
-    background-color:#2D4263;
-
+    background-color:#2D4263; */
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    /* grid-template-rows: 3; */
+    text-align: center;
+    background-color: #2D4263;
+    padding-top: 16px;
+    border: solid #ECDBBA 2px;
 
 }
 
