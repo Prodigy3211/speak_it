@@ -48,11 +48,11 @@ a {
 
 .thread-container{
     display: grid;
-    /* grid-template-columns:50% 50%; */
+    grid-template-columns:50% 50%;
     /* border: 3px #C84B31 solid; */
-    grid-auto-flow: column;
+    /* grid-template-columns: auto; */
     /* height: 80%; */
-    column-gap: 16px;
+    gap: 16px;
     padding: 16px 16px 16px 16px;
     ;
 }
@@ -80,8 +80,38 @@ a {
     display: inline-block;
     font-size: large;
     margin: 4px 4px 4px 4px;
+    /* justify-content: center; */
 }
 
+/* Trying to fix the home page boxes*/
+.categoryHomepageContainer{
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 8px;
+    border: hotpink solid 3px;
+}
+
+.categoryHomepageChildOne{
+    display: grid;
+}
+
+.categoryHomepageChildTwo{
+    display: grid;
+}
+
+.categoryHomepageImageContainer{
+    display: grid;
+    /* grid-auto-flow: row; */
+    /* align-items: center; */
+    border: #ffffff solid 2px;
+}
+
+.categoryHomepageAllThreads{
+    display: grid;
+    border: #ffffff solid 2px;
+    padding: 25px;
+}
 
 .popular-threads{
     /* grid-column: 1; */
@@ -90,8 +120,9 @@ a {
 }
 
 .popular-threads ol{
-    /* display: inline-block; */
+    display:grid;
     font-size: large;
+   justify-content: space-around;
 }
 
 .griddy{
