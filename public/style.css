@@ -25,6 +25,7 @@ h2{
     text-align: center;
     padding: 16px;
     border: solid 2px #ECDBBA;
+    /* margin: 24px; */
 }
 
 a {
@@ -85,34 +86,42 @@ a {
 
 /* Trying to fix the home page boxes*/
 .categoryHomepageContainer{
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: center;
-    gap: 8px;
+    display: flex;
+    flex-flow: column wrap;
     border: hotpink solid 3px;
+    background-color: #ECDBBA;
 }
 
 .categoryHomepageChildOne{
-    display: grid;
+    display: flex;
+    
     border: blue solid 3px
 }
 
 .categoryHomepageChildTwo{
-    display: grid;
+    display: flex;
+    /* grid-area: auto; */
     border: yellow solid 3px;
 }
 
 .categoryHomepageImageContainer{
     display: grid;
-    /* grid-auto-flow: row; */
-    /* align-items: center; */
+    /* grid-template-rows: 33% 33% 33%; */
+    justify-content: center;
     border: #ffffff solid 2px;
+}
+
+.categoryImages{
+    display: grid;
+    grid-template-columns: 33%;
 }
 
 .categoryHomepageAllThreads{
     display: grid;
+    justify-content: center;
+    /* grid-auto-flow: column; */
     border: #ffffff solid 2px;
-    padding: 25px;
+    /* padding: 25px; */
 }
 
 .popular-threads{
