@@ -367,7 +367,15 @@ background-position: center;
         /* justify-self: flex-start; */
     }
 
-    
+   .profile-container{
+    border: #ffffff solid 2px;
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    text-align: center;
+    background-color: #2D4263;
+    max-width:850px;
+   } 
     .negativepost-container{
         background-color: rgb(228, 179, 88);
         border: solid 8px white;

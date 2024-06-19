@@ -32,7 +32,9 @@ app.get('/pmw', async (req,res) => {
     res.sendFile(path.join(__dirname,'public','category','pmw','pmw.html'));
 });
 
-app.get('/philosophy')
+app.get('/philosophy', async (req,res) => {
+    res.sendFile(path.join(__dirname,'public','philosophy-home.html'));
+});
 
 //test rout page taco! Connected to Database.
 app.get('/taco', async (req, res) => {
