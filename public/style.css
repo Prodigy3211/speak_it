@@ -94,10 +94,12 @@ a {
 
 .categoryHomepageChildOne{
     display: grid;
+    border: blue solid 3px
 }
 
 .categoryHomepageChildTwo{
     display: grid;
+    border: yellow solid 3px;
 }
 
 .categoryHomepageImageContainer{
