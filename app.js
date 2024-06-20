@@ -29,11 +29,23 @@ app.get('/',(req, res) => {
 
 //Category Thread Page connection
 app.get('/pmw', async (req,res) => {
-    res.sendFile(path.join(__dirname,'public','category','pmw','pmw.html'));
+    res.sendFile(path.join(__dirname,'public','pmw-home.html'));
 });
 
 app.get('/philosophy', async (req,res) => {
     res.sendFile(path.join(__dirname,'public','philosophy-home.html'));
+});
+
+app.get('/relationships', async (req,res) => {
+    res.sendFile(path.join(__dirname,'public','relationships-home.html'));
+});
+
+app.get('/war', async (req,res) => {
+    res.sendFile(path.join(__dirname,'public','war-home.html'));
+});
+
+app.get('/politics', async (req,res) => {
+    res.sendFile(path.join(__dirname, 'public','politics-home.html'))
 });
 
 //test rout page taco! Connected to Database.
