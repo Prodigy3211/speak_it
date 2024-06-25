@@ -7,6 +7,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { Client } =  require('pg');
 const { traceDeprecation } = require('process');
+const https = require('https');
 
 const client = new Client({
     user: process.env.DB_USER, 
@@ -19,6 +20,12 @@ const client = new Client({
 //Serve static files to public dir
 
 app.use(express.static(path.join(__dirname,'public')));
+
+// error message when a page does not exist
+app.use((req,res) => {
+    res.status (404);
+    res.send(`<h1>ERROR 404 Page is not here!`);
+})
 
 //define routes to send to the server
 
@@ -78,10 +85,24 @@ app.post('/signup', async(req,res) =>{
 
 });
 
-app.get('/my-profile', async(req, res) => {
-    const myProfile = await client.query("SELECT user91 FROM users");
-    res.send (users.rows);
-})
+// app.get('/my-profile', async(req, res) => {
+//     const myProfile = await client.query('SELECT username, firstname, lastname FROM users WHERE id = $4', [username],)
+//        if (err){
+//         console.error(err);
+//         res.status(500).send('Error retrieving user profile');
+//        } else {
+//         const user = result.rows[0];
+//        }
+    
+//     res.send (`
+//         <h1>User Profile</h1>
+//         <p>Userame: ${user.username}</p>
+//         <p>First Name: ${user.firstname}</P>
+//         <p>Last Name: ${user.lastname}</p>
+//         <a href="/comments">Go to Comments</a>
+//             `);
+        
+//     });
 
 // Start the server
 
