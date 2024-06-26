@@ -1,9 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Pmw from './pages/Pmw';
+import Politics from './pages/Politics';
+import Philosophy from './pages/Philosophy';
+import Relationships from './pages/Relationships';
+import War from './pages/War';
+import Entertainment from './pages/Entertainment';
+import GetNavigation from './components/navigation';
 
 function App() {
   return (
-    <div className="App">
+    <div className="fullPage">
       <div className="homepage-container">
         
     <div className="login-container">
@@ -12,6 +19,23 @@ function App() {
             <a href="my-profile.html">My Profile</a>
             </div>
     </div>
+    <div className='getNavigation'>
+    
+      <Routes>
+          <Route path = "/" element = {<GetNavigation />}>
+          <Route exact path = "/pmw" element={<Pmw />} />
+          <Route exact path = "/philosophy" element={<Philosophy />} />
+          <Route exact path = "/relationships" element={<Relationships />} />
+          <Route exact path = "/politics" element={<Politics />} />
+          <Route exact path = "/war" element={<War />} />
+          <Route exact path = "/entertainment" element={<Entertainment />} />
+          </Route>
+      </Routes>
+    
+  
+
+    </div>
+   
         <h1>Speak Now Or Forever Hold Your Peace</h1>
        {/* Flexbox for static links on each page */}
         <div className="linktree"><p>Categories:</p>

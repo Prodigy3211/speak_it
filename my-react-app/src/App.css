@@ -1,8 +1,9 @@
-.App {
+.fullPage {
   display: flex;
   flex-flow: column wrap;
   text-align: center;
   background-color: aqua;
+  border: red solid 2px;
 }
 
 .navigationUniversal{
