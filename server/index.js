@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const connection = require('./db');
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3306;
 
 //middleware
 
@@ -14,7 +14,14 @@ app.use(express.json());
 
 const JWT_SECRET = 'placeholder';
 
-//Sign Up PAge Route
+
+//homepage route
+
+app.post ('/', async (req,res) => {
+    res.send('Welcome to Speakit');
+});
+
+//Sign Up Page Route
 
 app.post('/signup', async (req, res) => {
     const {username, email, password} = req.body;

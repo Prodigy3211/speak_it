@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 function SignUp(){
-    const {username, setUsername} = useState('');
-    const {email, setEmail} = useState('');
-    const {password, setPassword} = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSignUp = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://localhost:5000/signup',{
+            const response = await axios.post('https://localhost:3306/signup',{
                 username,
                 email,
                 password,
