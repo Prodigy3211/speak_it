@@ -1,10 +1,19 @@
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import { Router } from 'express';
 
 function App() {
   return (
-    <div className="App">
-      <h1>I hate yall! With a capital whatever.</h1>
-    </div>
+    <Router>
+      <div>
+        <switch>
+          <Route exact path ="/login" component ={Login} />
+          <Route exact path = "/signup" component = {SignUp} />
+        </switch>
+      </div>
+    </Router>
   );
 }
 
