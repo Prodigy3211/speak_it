@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const connection = require('./db');
 
 const app = express();
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 8000;
 
 //middleware
 
