@@ -40,7 +40,7 @@ function SignUp(){
                 required
             />
             <input
-                type='text'
+                type='Password'
                 placeholder='Password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

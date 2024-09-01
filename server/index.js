@@ -1,4 +1,5 @@
 const  express = require ("express");
+const cors = require ('cors');
 const bcrypt = require ('bcryptjs');
 const jwt = require('jsonwebtoken');
 const connection = require('./db');
@@ -9,15 +10,16 @@ const PORT = process.env.PORT || 8000;
 //middleware
 
 app.use(express.json());
+app.use(cors());
 
 //jwst secret
 
-const JWT_SECRET = 'placeholder';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 //homepage route
 
-app.post ('/', async (req,res) => {
+app.get ('/', async (req,res) => {
     res.send('Welcome to Speakit');
 });
 
@@ -78,5 +80,5 @@ app.post('/login' , (req, res) => {
 
 //start Server
 app.listen(PORT, () => {
-    console.log('Server running on port ${PORT}');
+    console.log(`Server running on port ${PORT}`);
 });
