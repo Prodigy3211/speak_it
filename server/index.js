@@ -80,7 +80,7 @@ app.post('/login' , (req, res) => {
 
 //My Profile Route
 
-app.get('/my-profile' , (res,req) => {
+app.get('/my-profile' , (req,res) => {
     const token = req.headers.authorization.split(' ')[1];
         try {
             const decoded = jwt.verify(token , JWT_SECRET);

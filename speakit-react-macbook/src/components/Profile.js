@@ -8,12 +8,16 @@ function Profile() {
             //Fetch the user data after login
             const fetchUserData = async () => {
                 const token = localStorage.getItem('token');
+                    if (!token) {
+                        console.error('No Token Found. Please Log in again.');
+                    }
                 const config = {
                     headers:
                     {Authorization : `Bearer ${token}`}
                 };
                 try {
-                    const response = await axios.get('http://localhost:8000/my-profile', config);
+                    const response = await axios.get(
+                        'http://localhost:8000/my-profile', config);
                     
                     setUserData(response.data);
                 } catch (error) {
