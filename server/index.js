@@ -78,6 +78,27 @@ app.post('/login' , (req, res) => {
     );
 });
 
+//My Profile Route
+
+app.get('/my-profile' , (res,req) => {
+    const token = req.headers.authorization.split(' ')[1];
+        try {
+            const decoded = jwt.verify(token , JWT_SECRET);
+            const userId = decoded.id;
+        //Fetch userID data from the database
+            connection.query('SELECT username, email FROM users WHERE id = ?',
+            [userId], (err, results) => {
+                if (err) {
+                    return res.status(500).json ({ mesage: 'Error fetching user data'});
+                }
+                    const user = results[0];
+                    res.json(user);
+            });
+        } catch (error) {
+            res.status(401).json({message:'Unauthorized access'});
+        }
+});
+
 //start Server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

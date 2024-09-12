@@ -1,0 +1,45 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+function Profile() {
+    const [userData, setUserData ] = useState(null);
+        
+        useEffect(() => {
+            //Fetch the user data after login
+            const fetchUserData = async () => {
+                const token = localStorage.getItem('token');
+                const config = {
+                    headers:
+                    {Authorization : `Bearer ${token}`}
+                };
+                try {
+                    const response = await axios.get('http://localhost:8000/my-profile', config);
+                    
+                    setUserData(response.data);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            fetchUserData();
+        }, []);
+    
+    return(
+        <div>
+            <h1>My Profile Page</h1>
+            <p> I hate my life</p>
+            {userData ?(
+            <div><p>
+                {userData.username}
+            </p>
+            <p>
+                {userData.email}
+            </p>
+            </div>
+            ) : (
+                <p>Loading...</p>
+            )}
+        </div>
+    );
+}
+
+export default Profile;

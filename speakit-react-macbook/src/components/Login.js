@@ -1,9 +1,14 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
+//Allows a user to enter their username and password
+//If successful, will redirect to "My Profile page"
 
 function Login () {
     const [email , setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
     
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -13,9 +18,14 @@ function Login () {
                 email,
                 password,
             });
-
-            alert(response.data.message);
-            localStorage.setItem('token',response.data.token); //saves data for later
+            if (response.data.message === 'Login Successful!')
+                {
+                    alert(response.data.message);
+                    //saves data for later
+                    localStorage.setItem('token',response.data.token);
+                    //Send to My Profile page.
+                    navigate('/my-profile');
+            }
         } catch (error){
             console.error(error);
             alert('Error Logging In :(');
