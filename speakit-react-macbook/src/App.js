@@ -4,6 +4,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
 import './index.css';
+import ProtectedRoutes from './components/ProtectedRoutes';
 
 function App() {
   return (
@@ -12,7 +13,11 @@ function App() {
           <Route path = "/" element = {<SignUp />} />
           <Route path ="/login" element ={<Login />} />
           <Route path = "/signup" element = {<SignUp />} />
-          <Route path='/my-profile' element = {<Profile />} />
+          <Route path='/my-profile' element = {
+            <ProtectedRoutes>
+            <Profile />
+            </ProtectedRoutes>
+          } />
         </Routes>
       </div>
   );

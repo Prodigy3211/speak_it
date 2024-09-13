@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import LogoutButton from './LogoutButton';
 
 function Profile() {
     const [userData, setUserData ] = useState(null);
@@ -32,16 +33,19 @@ function Profile() {
             <h1>My Profile Page</h1>
             <p> I hate my life</p>
             {userData ?(
-            <div><p>
-                {userData.username}
+            <div>
+                <p>
+               Username: {userData.username}
             </p>
             <p>
-                {userData.email}
+                Email: {userData.email}
             </p>
             </div>
             ) : (
                 <p>Loading...</p>
             )}
+
+            <LogoutButton />
         </div>
     );
 }
