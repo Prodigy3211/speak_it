@@ -1,26 +1,43 @@
 import React, {useState} from 'react';
-import axios from 'axios';
+import supabase from '../server/supabaseClient';
 
 function SignUp(){
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('null');
+    const [success, setSuccess] = useState('false')
 
     const handleSignUp = async (e) => {
         e.preventDefault();
+        setError(null);
+        setSuccess(false);
 
-        try {
-            const response = await axios.post('http://localhost:8000/signup',{
-                username,
-                email,
-                password,
-            });
-            
-            alert(response.data.message);
-        } catch (error){
-            console.error(error);
-            alert('Error Signing Up');
+        const {data, error} = await supabase.auth.signUp({
+            username: username,
+            email: email,
+            password: password,
+        });
+
+        if (error) {
+            setError(error.message);
+        } else{
+            setSuccess(true);
+            console.log('Sign Up Successful', data);
         }
+
+        // try {
+        //     const response = await axios.post('http://localhost:8000/signup',{
+        //         username,
+        //         email,
+        //         password,
+        //     });
+            
+        //     alert(response.data.message);
+        // } catch (error){
+        //     console.error(error);
+        //     alert('Error Signing Up');
+        // }
     };
     
     return (
