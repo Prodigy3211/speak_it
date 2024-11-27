@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../server/supabaseClient';
 
@@ -10,27 +9,30 @@ console.log(supabase);
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(false);
 
-    try {
-      const response = await axios.post('http://localhost:8000/login', {
-        email,
-        password,
-      });
-      if (response.data.message === 'Login Successful!') {
-        alert(response.data.message);
-        //saves data for later
-        localStorage.setItem('token', response.data.token);
-        //Send to My Profile page.
-        navigate('/my-profile');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Error Logging In :(');
-    }
+    //sign in user
+
+    const {data, error} = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error){
+      setError(error.message); //Display error message
+    } else {
+      setSuccess(true); //login successful!
+      console.log('Login Successful');
+    };
+    
   };
 
   return (
@@ -49,6 +51,8 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+      {error && <p className="text-red-600">{error}</p>}
+      {success && <p className="text-green-500">{success}</p>}
       <button type='submit'>Login</button>
     </form>
   );

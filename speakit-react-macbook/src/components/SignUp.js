@@ -6,7 +6,8 @@ function SignUp(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('null');
-    const [success, setSuccess] = useState('false')
+    const [success, setSuccess] = useState('false');
+
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -14,24 +15,24 @@ function SignUp(){
         setSuccess(false);
 
         // email and password uploading to supabase
-        const {data, error} = await supabase.auth.signUp({
-            email: email,
-            password: password,
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
         });
 
 
-        if (authError) {
-            setError(authError.message);
+        if (error) {
+            setError(error.message);
             return;
         } 
         
          //Send Profile Data to profiles table in Supabase
 
-         const {user} = authData;
+         const {user} = data;
          const { error:profileError } = await supabase.from('profiles').insert([
             {
-                id:user.id, //userid from users table
-                email,
+                user_id:user.id, //userid from users table
+                username,
             },
          ]);
 
@@ -41,22 +42,6 @@ function SignUp(){
             setSuccess(true);
             console.log('Sign Up Successful');
         }
-
-       
-
-
-        // try {
-        //     const response = await axios.post('http://localhost:8000/signup',{
-        //         username,
-        //         email,
-        //         password,
-        //     });
-            
-        //     alert(response.data.message);
-        // } catch (error){
-        //     console.error(error);
-        //     alert('Error Signing Up');
-        // }
     };
     
     return (
@@ -82,6 +67,8 @@ function SignUp(){
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
+            {error && <p className="text-red-600">{error}</p>}
+            {success && <p className="text-green-500">{success}</p>}
             <button type='submit'>Create Account</button>
         </form>
     );
