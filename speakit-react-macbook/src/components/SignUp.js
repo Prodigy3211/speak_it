@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import supabase from '../server/supabaseClient';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp(){
     const [username, setUsername] = useState('');
@@ -7,7 +8,7 @@ function SignUp(){
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
-
+    const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -16,13 +17,14 @@ function SignUp(){
 
         // email and password uploading to supabase
         const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
+            email:email,
+            password:password,
         });
 
 
         if (error) {
             setError(error.message);
+            return;
         } 
         
          //Send Profile Data to profiles table in Supabase
@@ -30,7 +32,7 @@ function SignUp(){
          const {user} = data;
          const { profileError } = await supabase.from('profiles').insert([
             {
-                user_id:user.id, //userid from users table
+                user_id:user.user_id, //userid from users table
                 username,
             },
          ]);
@@ -40,13 +42,12 @@ function SignUp(){
         } else{
             setSuccess(true);
             console.log('Sign Up Successful');
+            navigate('./login');
         }
     };
     
     return (
         <form onSubmit={handleSignUp}>
-            {error && <p className= "text-red-600"></p>}
-            {success && <p className="text-green-500"></p>}
             <input 
                 type ='text'
                 placeholder='Username'

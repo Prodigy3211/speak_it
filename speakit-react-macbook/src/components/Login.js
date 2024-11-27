@@ -21,7 +21,7 @@ function Login() {
 
     //sign in user
 
-    const {data, error} = await supabase.auth.signInWithPassword({
+    const {error} = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -31,6 +31,7 @@ function Login() {
     } else {
       setSuccess(true); //login successful!
       console.log('Login Successful');
+      navigate('./my-profile')
     };
     
   };
