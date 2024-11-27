@@ -13,18 +13,37 @@ function SignUp(){
         setError(null);
         setSuccess(false);
 
+        // email and password uploading to supabase
         const {data, error} = await supabase.auth.signUp({
-            username: username,
             email: email,
             password: password,
         });
 
-        if (error) {
-            setError(error.message);
+
+        if (authError) {
+            setError(authError.message);
+            return;
+        } 
+        
+         //Send Profile Data to profiles table in Supabase
+
+         const {user} = authData;
+         const { error:profileError } = await supabase.from('profiles').insert([
+            {
+                id:user.id, //userid from users table
+                email,
+            },
+         ]);
+
+        if (profileError) {
+            setError(profileError.message);
         } else{
             setSuccess(true);
-            console.log('Sign Up Successful', data);
+            console.log('Sign Up Successful');
         }
+
+       
+
 
         // try {
         //     const response = await axios.post('http://localhost:8000/signup',{
