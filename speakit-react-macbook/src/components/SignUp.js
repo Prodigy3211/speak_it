@@ -5,8 +5,8 @@ function SignUp(){
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('null');
-    const [success, setSuccess] = useState('false');
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
 
     const handleSignUp = async (e) => {
@@ -23,13 +23,12 @@ function SignUp(){
 
         if (error) {
             setError(error.message);
-            return;
         } 
         
          //Send Profile Data to profiles table in Supabase
 
          const {user} = data;
-         const { error:profileError } = await supabase.from('profiles').insert([
+         const { profileError } = await supabase.from('profiles').insert([
             {
                 user_id:user.id, //userid from users table
                 username,
@@ -46,6 +45,8 @@ function SignUp(){
     
     return (
         <form onSubmit={handleSignUp}>
+            {error && <p className= "text-red-600"></p>}
+            {success && <p className="text-green-500"></p>}
             <input 
                 type ='text'
                 placeholder='Username'
