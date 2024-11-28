@@ -32,7 +32,7 @@ function SignUp(){
          const {user} = data;
          const { profileError } = await supabase.from('profiles').insert([
             {
-                user_id:user.user_id, //userid from users table
+                user_id:user.id, //userid from users table
                 username,
             },
          ]);

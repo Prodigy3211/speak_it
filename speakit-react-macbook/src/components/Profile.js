@@ -1,35 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import LogoutButton from './LogoutButton';
+import supabase from '../server/supabaseClient';
 
-function Profile() {
-  const [userData, setUserData] = useState(null);
+const Profile = () => {
+  const [userProfile, setUserProfile] = useState(null); //User Profile Data
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [updates, setUpdates] =useState({}); //Form Updates
   const [bio, setBio] = useState('');
 
+ 
+  
   useEffect(() => {
     //Fetch the user data after login
-    const fetchUserData = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        console.error('No Token Found. Please Log in again.');
-      }
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/my-profile',
-          config
-        );
+    const fetchUserProfile = async (userId) => {
+      setLoading(true);
 
-        setUserData(response.data);
-        setBio(response.data.bio);
-      } catch (error) {
-        console.error(error);
+      const {
+        data: {user},
+      } = await supabase.auth.getUser(); //Check currently logged in user
+      if (!user){
+        setError('Not Logged In');
+        setLoading(false);
+        return;
       }
+        const {data, error} = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', userId)
+        .single('');
+        
+      if (error) {
+        setError(error.message);
+      } else {
+        setUserProfile(data);
+      }
+        setLoading(false);
     };
-    fetchUserData();
+      fetchUserProfile ();
   }, []);
+
+  //Profile Updates
+
+
 
   const handleBioChange = (e) => {
     setBio(e.target.value);
@@ -37,39 +50,37 @@ function Profile() {
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
+    setError(null);
 
-    const token = localStorage.getItem('token');
-    console.log(token);
+    const {data : user} = await supabase.auth.getUser();
 
-    try {
-      const response = await axios.put(
-        'http://localhost:8000/my-profile',
-        {
-          bio,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      //Update User Data with new information
-      setUserData({ ...userData, bio });
-      alert(response.data.message);
-    } catch (error) {
-      console.log('error updating profile', error);
-      alert('error updating profile');
+    if(!user){
+      setError('Not Logged in');
+      return;
     }
+
+    const {data , error} = await supabase
+    .from('profiles')
+    .update(updates)
+    .eq('user_id');
+
+    if (error){
+      setError(error.message);
+    } else {
+      setUserProfile(data[0]); //Update Local profile state
+    }
+
   };
+
+   if (loading) return <p>Loading...</p>;
+   if (error) return <p>{error}</p>
 
   return (
     <div>
       <h1>My Profile Page</h1>
       <p> I hate my life</p>
-      {userData ? (
+      {userProfile && (
         <div>
-          <p>Username: {userData.username}</p>
-          <p>Email: {userData.email}</p>
-          <p>Bio {userData.bio}</p>
 
           <h2>Edit Bio</h2>
           <form onSubmit={handleProfileUpdate}>
@@ -83,14 +94,13 @@ function Profile() {
             </div>
             <button type='submit'> Save changes</button>
           </form>
+      
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      )};
 
       <LogoutButton />
     </div>
   );
-}
+  }; 
 
 export default Profile;
