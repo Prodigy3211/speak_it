@@ -21,9 +21,9 @@ function Login() {
 
     //sign in user
 
-    const {error} = await supabase.auth.signInWithPassword({
-      email,
-      password,
+    let {error} = await supabase.auth.signInWithPassword({
+      email:email,
+      password:password,
     });
 
     if (error){

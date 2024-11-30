@@ -5,6 +5,21 @@ import SignUp from './components/SignUp';
 import Profile from './components/Profile';
 import './index.css';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import supabase from './server/supabaseClient';
+
+const fetchData = async () => {
+  const {data , error} = await supabase
+  .from('profiles')
+  .select('*')
+
+  if (error) {
+    console.error ('error fetching data! (-_-)' , error.message);
+  } else {
+    console.log ('fetched data:', data);
+  }
+};
+
+fetchData();
 
 function App() {
   return (

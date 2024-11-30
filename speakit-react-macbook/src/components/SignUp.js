@@ -16,12 +16,14 @@ function SignUp(){
         setSuccess(false);
 
         // email and password uploading to supabase
-        const { data, error } = await supabase.auth.signUp({
+        let { data, error } = await supabase.auth.signUp({
             email:email,
             password:password,
         });
 
-
+        if (data?.user){
+            await supabase.from('profiles').insert({id:data.user.id});
+        }
         if (error) {
             setError(error.message);
             return;
@@ -29,11 +31,13 @@ function SignUp(){
         
          //Send Profile Data to profiles table in Supabase
 
-         const {user} = data;
-         const { profileError } = await supabase.from('profiles').insert([
+         
+         const { profileError } = await supabase
+         .from('profiles')
+         .insert([
             {
-                user_id:user.id, //userid from users table
-                username,
+                // user_id:'user.id', //userid from users table
+                username:'username',
             },
          ]);
 

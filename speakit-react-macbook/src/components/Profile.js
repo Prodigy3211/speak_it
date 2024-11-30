@@ -13,11 +13,11 @@ const Profile = () => {
   
   useEffect(() => {
     //Fetch the user data after login
-    const fetchUserProfile = async (userId) => {
+    const fetchUserProfile = async (user_id) => {
       setLoading(true);
 
       const {
-        data: {user},
+        data: {user}
       } = await supabase.auth.getUser(); //Check currently logged in user
       if (!user){
         setError('Not Logged In');
@@ -27,7 +27,7 @@ const Profile = () => {
         const {data, error} = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', userId)
+        .eq('user_id', user_id)
         .single('');
         
       if (error) {
@@ -52,9 +52,9 @@ const Profile = () => {
     e.preventDefault();
     setError(null);
 
-    const {data : user} = await supabase.auth.getUser();
+    const {data : user_id} = await supabase.auth.getUser();
 
-    if(!user){
+    if(!user_id){
       setError('Not Logged in');
       return;
     }
