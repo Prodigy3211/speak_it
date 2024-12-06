@@ -21,32 +21,46 @@ function SignUp(){
             password:password,
         });
 
-        if (data?.user){
-            await supabase.from('profiles').insert({id:data.user.id});
-        }
+        console.log(email, password, username);
+
         if (error) {
             setError(error.message);
+            console.error('SignUp Failed!')
+            console.log('Sign Up Error', error);
             return;
-        } 
+        }  else {
+            const userId = data?.user.id;
+            console.log('Sign Up Successful!' , data.user);
+            console.log ('Confirmation Email sent' , data.user.email);
+        
         
          //Send Profile Data to profiles table in Supabase
 
          
-         const { profileError } = await supabase
+         const { data: profileData, error: profileError } = await supabase
          .from('profiles')
          .insert([
             {
-                // user_id:'user.id', //userid from users table
-                username:'username',
+                id: userId, //userid from users table
+                username:username,
             },
          ]);
 
+         if (!data?.user?.id){
+            setError('User ID is missing');
+            return;
+         }
+
         if (profileError) {
+            console.error('Profile Insert Error', profileError);
             setError(profileError.message);
         } else{
             setSuccess(true);
             console.log('Sign Up Successful');
-            navigate('./login');
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+        }
         }
     };
     
