@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
-import supabase from '../server/supabaseClient';
+import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import supabase from '../server/supabaseClient';
+
+console.log(supabase);
 
 function SignUp(){
     const [username, setUsername] = useState('');
@@ -8,59 +10,60 @@ function SignUp(){
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+    const [auth, setAuth] = useState(false);
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
         setError(null);
         setSuccess(false);
+        setAuth(false);
 
         // email and password uploading to supabase
-        let { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
             email:email,
             password:password,
         });
-
-        console.log(email, password, username);
-
+        console.log(email, password, username ,auth);
+    
         if (error) {
             setError(error.message);
-            console.error('SignUp Failed!')
+            console.error('SignUp Failed!', data);
             console.log('Sign Up Error', error);
             return;
         }  else {
-            const userId = data?.user.id;
+            // const userId = data?.user.id;
             console.log('Sign Up Successful!' , data.user);
-            console.log ('Confirmation Email sent' , data.user.email);
+            console.log ('Confirmation Email sent to:' , data.user.email);
+            navigate('/login');
         
         
          //Send Profile Data to profiles table in Supabase
 
-         
-         const { data: profileData, error: profileError } = await supabase
-         .from('profiles')
-         .insert([
-            {
-                id: userId, //userid from users table
-                username:username,
-            },
-         ]);
+        //  const { data: profileData, error: profileError } = await supabase
+        //  .from('profiles')
+        //  .insert([
+        //     {
+        //         user_id: userId, //userid from users table
+        //         username:username,
+        //     },
+        //  ]);
 
-         if (!data?.user?.id){
-            setError('User ID is missing');
-            return;
-         }
+        //  if (!data?.user?.id){
+        //     setError('User ID is missing');
+        //     return;
+        //  }
 
-        if (profileError) {
-            console.error('Profile Insert Error', profileError);
-            setError(profileError.message);
-        } else{
-            setSuccess(true);
-            console.log('Sign Up Successful');
-            setTimeout(() => {
-                navigate('/login');
-            }, 2000);
-        }
+    //     if (profileError) {
+    //         console.error('Profile Insert Error', profileError);
+    //         setError(profileError.message);
+    //     } else{
+    //         setSuccess(true);
+    //         console.log('Sign Up Successful',profileData);
+    //         setTimeout(() => {
+    //             navigate('/login');
+    //         }, 2000);
+    // }
         }
     };
     
