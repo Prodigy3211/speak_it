@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import LogoutButton from './LogoutButton';
 import supabase from '../server/supabaseClient';
+import EditProfile from './EditProfile';
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null); //User Profile Data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [updates, setUpdates] =useState({}); //Form Updates
-  const [bio, setBio] = useState('');
+  const [editing, setEditing] =useState(false); //Profile Updates
+  
 
- 
   
   useEffect(() => {
     //Fetch the user data after login
@@ -27,7 +27,8 @@ const Profile = () => {
         setLoading(false);
         return;
       }
-
+  
+// Fetch user data
       const user_Id = user.id;
         const {data, error} = await supabase
         .from('profiles')
@@ -46,64 +47,26 @@ const Profile = () => {
       fetchUserProfile ();
   }, []);
 
-  //Profile Updates
-
-
-
-  const handleBioChange = (e) => {
-    setBio(e.target.value);
-  };
-
-  const handleProfileUpdate = async (e) => {
-    e.preventDefault();
-    setError(null);
-
-    const {data : user_id} = await supabase.auth.getUser();
-
-    if(!user_id){
-      setError('Not Logged in');
-      return;
-    }
-
-    const {data , error} = await supabase
-    .from('profiles')
-    .update(updates)
-    .eq('user_id');
-
-    if (error){
-      setError(error.message);
-    } else {
-      setUserProfile(data[0]); //Update Local profile state
-    }
-
-  };
-
-   if (loading) return <p>Loading...</p>;
-   if (error) return <p>{error}</p>
+  if (error){
+    return <p>{error}</p>
+  }
+  if(loading){
+    return <p>Profile is loading...</p>;
+  }
 
   return (
     <div>
-      <h1>My Profile Page</h1>
-      <p> I hate my life</p>
-      {userProfile && (
-        <div>
-
-          <h2>Edit Bio</h2>
-          <form onSubmit={handleProfileUpdate}>
-            <div>
-              <label>Bio:</label>
-              <textarea
-                value={bio}
-                onChange={handleBioChange}
-                placeholder='Tell us about yourself..'
-              />
-            </div>
-            <button type='submit'> Save changes</button>
-          </form>
-      
-        </div>
+      {editing ? (
+        <EditProfile profile={userProfile} setProfile = {setUserProfile} setEditing={setEditing} />
+      ): (
+        <>
+          <h1>Welcome, {userProfile?.displayname || "User"}!</h1>
+          <p>{userProfile?.bio || "No Bio Available."}</p>
+          <p>Email: {userProfile?.email || "No Email associated with this account"}</p>
+          <button onClick={() => setEditing (true)}>Edit Profile</button>
+        </>
       )}
-
+    
       <LogoutButton />
     </div>
   );
