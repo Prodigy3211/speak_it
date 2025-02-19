@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import LogoutButton from './LogoutButton';
-import supabase from '../server/supabaseClient';
+import LogoutButton from '../../components/LogoutButton';
+import supabase from '../../server/supabaseClient';
 import EditProfile from './EditProfile';
 
 const Profile = () => {

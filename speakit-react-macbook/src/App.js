@@ -1,8 +1,8 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
+import Login from './pages/Login/Login';
 import SignUp from './components/SignUp';
-import Profile from './components/Profile';
+import Profile from './pages/Profile/Profile';
 import './index.css';
 import ProtectedRoutes from './components/ProtectedRoutes';
 // import supabase from './server/supabaseClient';

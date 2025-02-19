@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../server/supabaseClient';
+import supabase from '../../server/supabaseClient';
 
 //Allows a user to enter their username and password
 //If successful, will redirect to "My Profile page"

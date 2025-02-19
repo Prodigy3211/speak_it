@@ -1,5 +1,5 @@
 import { useState } from "react";
-import supabase from "../server/supabaseClient";
+import supabase from "../../server/supabaseClient";
 
 const EditProfile = ({userProfile, setProfile, setEditing}) => {
     const [displayname , setDisplayName] = useState(userProfile?.displayName || " ");
