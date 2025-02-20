@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import SignUp from './components/SignUp';
 import Profile from './pages/Profile/Profile';
+import Dashboard from './pages/Dashboard/Dashboard';
 import './index.css';
 import ProtectedRoutes from './components/ProtectedRoutes';
 // import supabase from './server/supabaseClient';
@@ -28,11 +29,10 @@ function App() {
           <Route path = "/" element = {<SignUp />} />
           <Route path ="/login" element ={<Login />} />
           <Route path = "/signup" element = {<SignUp />} />
-          <Route path='/my-profile' element = {
-            <ProtectedRoutes>
-            <Profile />
-            </ProtectedRoutes>
-          } />
+          <Route element= {<ProtectedRoutes />} >
+          <Route path='/my-profile' element = {<Profile />} />
+          <Route path='/dashboard' element = {<Dashboard />} />
+          </Route>
         </Routes>
       </div>
   );

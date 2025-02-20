@@ -31,7 +31,7 @@ function Login() {
     } else {
       setSuccess(true); //login successful!
       console.log('Login Successful');
-      navigate('/my-profile')
+      navigate('/dashboard')
     };
     
   };
