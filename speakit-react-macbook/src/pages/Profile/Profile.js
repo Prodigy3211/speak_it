@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import LogoutButton from '../../components/LogoutButton';
 import supabase from '../../server/supabaseClient';
 import EditProfile from './EditProfile';
+import TopNavigation from '../../components/TopNavigation';
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null); //User Profile Data
@@ -55,6 +56,7 @@ const Profile = () => {
   }
 
   return (
+    <div><TopNavigation />
     <div>
       {editing ? (
         <EditProfile profile={userProfile} setProfile = {setUserProfile} setEditing={setEditing} />
@@ -69,7 +71,8 @@ const Profile = () => {
     
       <LogoutButton />
     </div>
+    </div>
   );
-  }; 
+}; 
 
 export default Profile;

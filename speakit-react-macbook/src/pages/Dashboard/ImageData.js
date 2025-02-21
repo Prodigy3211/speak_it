@@ -7,8 +7,7 @@ export const categoryImages = [{
     category: 'Philosophy',
     alt: 'Philosophy',
     description: 'Frederick Douglass contemplating',
-    url: 'https://pixabay.com/vectors/frederick-douglass-office-portrait-7313925/'
+    url:'https://cdn.pixabay.com/photo/2022/07/10/23/32/frederick-douglass-7313925_1280.png'
 }
-
 
 ];
