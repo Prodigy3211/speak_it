@@ -6,6 +6,9 @@ import Profile from './pages/Profile/Profile';
 import Dashboard from './pages/Dashboard/Dashboard';
 import './index.css';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import Thread from './components/Thread';
+import ThreadList from './components/ThreadList';
+
 // import supabase from './server/supabaseClient';
 
 // const fetchData = async () => {
@@ -26,12 +29,15 @@ function App() {
   return (
       <div className='navBar'>
         <Routes>
-          <Route path = "/" element = {<SignUp />} />
-          <Route path ="/login" element ={<Login />} />
-          <Route path = "/signup" element = {<SignUp />} />
+          <Route path = '/' element = {<SignUp />} />
+          <Route path ='/login' element ={<Login />} />
+          <Route path = '/signup' element = {<SignUp />} />
           <Route element= {<ProtectedRoutes />} >
           <Route path='/my-profile' element = {<Profile />} />
           <Route path='/dashboard' element = {<Dashboard />} />
+          {/* Dynamic Routes for Categories and threads  */}
+          <Route path='/category/:categoryName' element= {<ThreadList />} />
+          <Route path='/category/:categoryName/thread/:threadId' element= {<Thread />} />
           </Route>
         </Routes>
       </div>

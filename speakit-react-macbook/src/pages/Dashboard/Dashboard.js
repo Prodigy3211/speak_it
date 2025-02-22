@@ -2,14 +2,13 @@
 
 
 import TopNavigation from "../../components/TopNavigation";
-import { categoryImages } from "./ImageData";
+import Categories from "../../components/Categories/Categories";
 
 function Dashboard () {
-    let category = categoryImages
     return(
         <>
         <TopNavigation />
-        <img src={category[1].url} alt={category[1].alt} />
+        <Categories />
         </>
     )
 }
