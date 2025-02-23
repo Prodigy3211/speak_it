@@ -8,6 +8,8 @@ import './index.css';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Thread from './components/Thread';
 import ThreadList from './components/ThreadList';
+import CreateClaim from './components/Forms/CreateClaim';
+import AddComment from './components/Forms/AddComment';
 
 // import supabase from './server/supabaseClient';
 
@@ -35,6 +37,8 @@ function App() {
           <Route element= {<ProtectedRoutes />} >
           <Route path='/my-profile' element = {<Profile />} />
           <Route path='/dashboard' element = {<Dashboard />} />
+          <Route path='/create-claim' element = {<CreateClaim />} />
+          <Route path='/add-comment' element = {<AddComment />} />
           {/* Dynamic Routes for Categories and threads  */}
           <Route path='/category/:categoryName' element= {<ThreadList />} />
           <Route path='/category/:categoryName/thread/:threadId' element= {<Thread />} />

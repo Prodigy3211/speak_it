@@ -1,28 +1,46 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import supabase from "../server/supabaseClient";
 
 
-const ThreadList = () =>{
-    const { categoryName } = useParams(); //get category from the URL
 
-    //example threads Should replace with Supabase API calls
-    const threads = [
-        {id: "123", title: "First Debate"},
-        {id: "456", title:"Another ONE!"}
-    ];
+
+const ThreadList = () => {
+    const { categoryName } = useParams(); //get category from the URL
+    const [claims , setClaims] = useState([]);
+    const navigate = useNavigate();
+
+    //Fetch Data from Supabase
+    useEffect( () => {
+        const fetchClaims = async () => {
+            const {data , error } = await supabase
+                .from("claims")
+                .select("*")
+                .eq("category", categoryName) //Filter by Category
+                .order("created_at", {ascending: false});
+
+            if (error) {
+                console.error("Error Fetching claims: ", error);
+            } else {
+                setClaims(data);
+            }
+        };
+        fetchClaims();
+    }, [categoryName]);
+   
 
     return (
         <div>
             {/* pull in category name */}
-            <h1>Threads in {categoryName}</h1>
+            <h1>{categoryName} and the Claims We've Made</h1>
+            <p><button type="button" onClick={navigate('/create-claim')}></button></p>
             <ul>
-                {/* Map out the threads from the API call sorting by thread.id */}
-                {threads.map(thread => (
-                    <li key={thread.id}>
+                {/* Map out the threads from the API call sorting by claim.id */}
+                {claims.map(claim => (
+                    <li key={claim.id}>
                         {/* Link to the Dynamic Route */}
-                        <Link to = {`/category/${categoryName}/thread/${thread.id}`}> 
-                            {thread.title}
+                        <Link to = {`/category/${categoryName}/thread/${claim.id}`}> 
+                            {claim.title}
                         </Link>
                     </li>
                 ))}
