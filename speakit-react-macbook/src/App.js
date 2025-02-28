@@ -40,8 +40,8 @@ function App() {
           <Route path='/create-claim' element = {<CreateClaim />} />
           <Route path='/add-comment' element = {<AddComment />} />
           {/* Dynamic Routes for Categories and threads  */}
-          <Route path='/category/:categoryName' element= {<ThreadList />} />
-          <Route path='/category/:categoryName/thread/:threadId' element= {<Thread />} />
+          <Route path='/category/:category' element= {<ThreadList />} />
+          <Route path='/category/:category/thread/:claimId' element= {<Thread />} />
           </Route>
         </Routes>
       </div>

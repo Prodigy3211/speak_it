@@ -21,7 +21,7 @@ const AddComment = ({ claimId, onCommentAdded}) => {
         .from("comments")
         .insert([{
             claim_id: claimId, 
-            user_id: user.id, 
+            id: user.id, 
             content: comment
         }]);
         if (error) {
