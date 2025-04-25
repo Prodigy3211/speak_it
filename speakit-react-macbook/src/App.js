@@ -11,21 +11,6 @@ import ThreadList from './components/ThreadList';
 import CreateClaim from './components/Forms/CreateClaim';
 import AddComment from './components/Forms/AddComment';
 
-// import supabase from './server/supabaseClient';
-
-// const fetchData = async () => {
-//   const {data , error} = await supabase
-//   .from('profiles')
-//   .select('*')
-
-//   if (error) {
-//     console.error ('error fetching data! (-_-)' , error.message);
-//   } else {
-//     console.log ('fetched data:', data);
-//   }
-// };
-
-// fetchData();
 
 function App() {
   return (

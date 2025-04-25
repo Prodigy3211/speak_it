@@ -1,4 +1,5 @@
-import { useState, useNavigate } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import supabase from "../../server/supabaseClient";
 
 const AddComment = ({ claimId, onCommentAdded}) => {
@@ -16,17 +17,25 @@ const AddComment = ({ claimId, onCommentAdded}) => {
             return;
         }
 
+        console.log("Inserting comment with claimId:", claimId);
+        
         //Inserts comment into Database
-        const { error } = await supabase
+        const { data, error } = await supabase
         .from("comments")
         .insert([{
             claim_id: claimId, 
-            id: user.id, 
+            user_id: user.id,
             content: comment
         }]);
+        
         if (error) {
+            console.error("Error adding comment:", error);
+        } else {
+            console.log("Comment added successfully:", data);
             setComment(""); //Clears input after a successful comment post
-            onCommentAdded(); //Refresh the comments
+            if (onCommentAdded) {
+                onCommentAdded(); //Refresh the comments
+            }
         }
     };
 
