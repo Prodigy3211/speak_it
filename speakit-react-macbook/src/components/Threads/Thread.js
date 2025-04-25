@@ -1,16 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
-import supabase from '../server/supabaseClient';
-import AddComment from './Forms/AddComment';
+import supabase from '../../server/supabaseClient';
+import AddComment from '../Forms/AddComment';
 
 const Thread = () => {
   // Get the parameter from the URL
   const params = useParams();
-  console.log('All URL parameters:', params);
   
   // This should match the :claimId parameter name in your route
   const { claimId } = params;
-  console.log('ClaimId from URL:', claimId, 'Type:', typeof claimId);
   
   const [claim, setClaim] = useState(null);
   const [comments, setComments] = useState([]);
@@ -29,13 +27,11 @@ const Thread = () => {
       setComments([]); // Ensure comments is always an array even on error
     } else {
       setComments(data || []); // Ensure we set an empty array if data is null/undefined
-      console.log('Fetched comments:', data);
     }
   }, [claimId]);
 
   useEffect(() => {
     const fetchClaim = async () => {
-      console.log('Querying claims table with id =', claimId);
       
       // Try both with and without parsing to number
       const numericId = parseInt(claimId, 10);

@@ -6,8 +6,8 @@ import Profile from './pages/Profile/Profile';
 import Dashboard from './pages/Dashboard/Dashboard';
 import './index.css';
 import ProtectedRoutes from './components/ProtectedRoutes';
-import Thread from './components/Thread';
-import ThreadList from './components/ThreadList';
+import Thread from './components/Threads/Thread';
+import ThreadList from './components/Threads/ThreadList';
 import CreateClaim from './components/Forms/CreateClaim';
 import AddComment from './components/Forms/AddComment';
 
