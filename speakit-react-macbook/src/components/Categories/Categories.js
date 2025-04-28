@@ -7,12 +7,14 @@ const Categories = () => {
     return (
         <div>
             <h1>Categories</h1>
-            <ul>
+            <ul className="flex flex-wrap gap-8 text-center text-lg text-bold">
                 {images.map((image) => (
                     <li key={image.category}>
+                        <div className="bg-gray-100 rounded-lg p-4 border-2 border-gray-300">
                         <Link to={`/category/${image.category}`}>{image.category}
                         <img src={image.url} alt={image.alt} />
                         </Link>
+                        </div>
                     </li>
                         ))}
             </ul>
