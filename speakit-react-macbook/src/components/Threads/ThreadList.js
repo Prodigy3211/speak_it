@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import supabase from '../../server/supabaseClient';
-
+import TopNavigation from '../TopNavigation';
 const ThreadList = () => {
   const { category } = useParams(); //Get's category from URL
   const [claims, setClaims] = useState([]);
@@ -55,6 +55,7 @@ const ThreadList = () => {
 
   return (
     <div>
+      <TopNavigation />
       {/* pull in category name */}
       <h1>{category} and the Claims We've Made</h1>
       <p>

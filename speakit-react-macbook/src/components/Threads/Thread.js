@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 import supabase from '../../server/supabaseClient';
 import AddComment from '../Forms/AddComment';
-
+import TopNavigation from '../TopNavigation';
 const Thread = () => {
   // Get the parameter from the URL
   const params = useParams();
@@ -62,6 +62,7 @@ const Thread = () => {
   
   return (
     <div>
+      <TopNavigation />
       {claim ? (
         <>
           <h1>{claim.title}</h1>
