@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 import supabase from '../../server/supabaseClient';
 import AddComment from '../Forms/AddComment';
-
+import TopNavigation from '../TopNavigation';
 const Thread = () => {
   // Get the parameter from the URL
   const params = useParams();
@@ -62,15 +62,25 @@ const Thread = () => {
   
   return (
     <div>
+      <TopNavigation />
       {claim ? (
         <>
           <h1>{claim.title}</h1>
           <p>{claim.claim}</p>
           <h3>comments: </h3>
-          <ul>
+          <ul className="space-y-4">
             {Array.isArray(comments) && comments.length > 0 ? (
               comments.map((comment) => (
-                <li key={comment.id}>{comment.content || comment.comment}</li>
+                <li 
+                  key={comment.id} 
+                  className={`p-4 rounded-lg ${
+                    comment.affirmative 
+                      ? 'bg-blue-100 text-blue-900' 
+                      : 'bg-orange-100 text-orange-900'
+                  }`}
+                >
+                  {comment.content || comment.comment}
+                </li>
               ))
             ) : (
               <li>No comments yet</li>

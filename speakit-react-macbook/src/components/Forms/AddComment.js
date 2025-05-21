@@ -4,6 +4,7 @@ import supabase from "../../server/supabaseClient";
 
 const AddComment = ({ claimId, onCommentAdded}) => {
     const [comment, setComment] = useState("");
+    const [isAffirmative, setIsAffirmative] = useState(null);
     const navigate = useNavigate();
     
     const handleSubmit = async (e) => {
@@ -17,6 +18,11 @@ const AddComment = ({ claimId, onCommentAdded}) => {
             return;
         }
 
+        if (isAffirmative === null) {
+            alert("Please select whether your comment is positive or negative");
+            return;
+        }
+
         console.log("Inserting comment with claimId:", claimId);
         
         //Inserts comment into Database
@@ -25,7 +31,8 @@ const AddComment = ({ claimId, onCommentAdded}) => {
         .insert([{
             claim_id: claimId, 
             user_id: user.id,
-            content: comment
+            content: comment,
+            affirmative: isAffirmative
         }]);
         
         if (error) {
@@ -33,6 +40,7 @@ const AddComment = ({ claimId, onCommentAdded}) => {
         } else {
             console.log("Comment added successfully:", data);
             setComment(""); //Clears input after a successful comment post
+            setIsAffirmative(null); // Reset sentiment selection
             if (onCommentAdded) {
                 onCommentAdded(); //Refresh the comments
             }
@@ -40,15 +48,45 @@ const AddComment = ({ claimId, onCommentAdded}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Comment on this Claim"
-                required
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+                <input
+                    type="text"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="Comment on this Claim"
+                    required
+                    className="w-full p-2 border rounded"
                 />
-                <button type="submit">Post</button>
+            </div>
+            <div className="flex gap-4">
+                <label className="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="sentiment"
+                        checked={isAffirmative === true}
+                        onChange={() => setIsAffirmative(true)}
+                        className="form-radio"
+                    />
+                    <span>Positive</span>
+                </label>
+                <label className="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="sentiment"
+                        checked={isAffirmative === false}
+                        onChange={() => setIsAffirmative(false)}
+                        className="form-radio"
+                    />
+                    <span>Negative</span>
+                </label>
+            </div>
+            <button 
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+                Post
+            </button>
         </form>
     );
 };
