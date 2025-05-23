@@ -3,6 +3,8 @@ import { useEffect, useState, useCallback } from 'react';
 import supabase from '../../server/supabaseClient';
 import AddComment from '../Forms/AddComment';
 import TopNavigation from '../TopNavigation';
+import CommentItem from '../Comments/CommentItem';
+
 const Thread = () => {
   // Get the parameter from the URL
   const params = useParams();
@@ -79,7 +81,9 @@ const Thread = () => {
                       : 'bg-orange-100 text-orange-900'
                   }`}
                 >
-                  {comment.content || comment.comment}
+                  <div>
+                  <CommentItem comment={comment} />
+                  </div>
                 </li>
               ))
             ) : (
