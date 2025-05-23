@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import{faThumbsUp, faThumbsDown, faTrash} from "@fortawesome/free-solid-svg-icons";
+import{faThumbsUp, faThumbsDown} from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
 
 const CommentItem = ({comment}) => {
@@ -11,47 +11,40 @@ const CommentItem = ({comment}) => {
    
 
     const fetchVotes = useCallback(async () => {
-        //Get Upvotes
-        const {data: upvotes, error: upVoteError} = await supabase
-        .schema('public')
+        const {data: {user}} = await supabase.auth.getUser();
+        // Get all votes for this comment in a single API call
+        const {data: votes, error: votesError} = await supabase
         .from('votes')
         .select('*')
-        .eq('comment_id', comment.id)
-        .eq('vote_type', 'up');
-
-        //Get Downvotes
-        const {data: downvotes, error: downVoteError} = await supabase
-        .from('votes')
-        .select('*')
-        .eq('comment_id', comment.id)
-        .eq('vote_type', 'down');
-    
-        if(!upVoteError && !downVoteError) {
+        .eq('comment_id', comment.id);
+        
+        if(!votesError && votes) {
+            // Count upvotes and downvotes
+            const upvotes = votes.filter(vote => vote.vote_type === 'up');
+            const downvotes = votes.filter(vote => vote.vote_type === 'down');
+            
             setVoteCount({
                 up: upvotes.length,
                 down: downvotes.length
             });
+
+          
+            
+            // Check if user has voted
+            if(user) {
+                const userVote = votes.find(vote => vote.user_id === user.id);
+                setUserVote(userVote ? userVote.vote_type : null);
+                console.log('User vote:', userVote);
+                console.log('User:', user.id);
+            }
+        } else {
+            console.error('Error fetching votes:', votesError);
         }
+    }, [comment.id]);
 
-        //Has user already voted?
-        const {data: {user }} = await supabase.auth.getUser();
-        if(user) {
-            const {data: userVoterData} = await supabase
-            .from ('votes')
-            .select('vote_type')
-            .eq('comment_id', comment.id)
-            .eq('user_id', user.id)
-            .single();
-
-            if(userVoterData) {
-                setUserVote(userVoterData.vote_type);
-        }
-    }
-}, [comment.id]);
-
-    useEffect(() => {
-        fetchVotes();
-    }, [fetchVotes]);
+    // useEffect(() => {
+    //     fetchVotes();
+    // }, [fetchVotes]);
 
     const handleVote = async (voteType) => {
         //Check if user is authenticated
@@ -61,51 +54,70 @@ const CommentItem = ({comment}) => {
             return;
         }
 
-        //Toggle vote
-        if(userVote === voteType) {
-            //remove that vote
-        const {error} = await supabase
-        .from('votes')
-        .delete()
-        .eq('comment_id', comment.id)
-        .eq('user_id', user.id);
-
-        if(error) {
-            setUserVote(null);
-            fetchVotes();
-            console.error('Error removing vote:', error);
-        }
-        } else {
-            //If changed votetype, remove old vote and add new one
-            if(userVote) {
+        const previousVote = userVote;
+        
+        try {
+            if(previousVote === voteType) {
+                // Remove vote
                 const {error} = await supabase
-                .from('votes')
-                .update({vote_type: voteType})
-                .eq('comment_id', comment.id)
-                .eq('user_id', user.id);
-
+                    .from('votes')
+                    .delete()
+                    .match({
+                        comment_id: comment.id,
+                        user_id: user.id
+                    });
+                
                 if(!error) {
-                 setUserVote(voteType);
-                 fetchVotes();   
+                    setUserVote(null);
+                    // Update counts
+                    setVoteCount(prev => ({
+                        ...prev,
+                        [voteType]: prev[voteType] - 1
+                    }));
                 }
             } else {
-                //Add new vote
+                // First remove any existing vote
+                if(previousVote) {
+                    await supabase
+                        .from('votes')
+                        .delete()
+                        .match({
+                            comment_id: comment.id,
+                            user_id: user.id
+                        });
+                }
+                
+                // Then add the new vote
                 const {error} = await supabase
-                .from('votes')
-                .insert([{
-                    comment_id: comment.id,
-                    user_id: user.id,
-                    vote_type: voteType
-                }]);
+                    .from('votes')
+                    .insert([{
+                        comment_id: comment.id,
+                        user_id: user.id,
+                        vote_type: voteType
+                    }]);
 
                 if(!error) {
                     setUserVote(voteType);
-                    fetchVotes();
+                    // Update counts
+                    setVoteCount(prev => {
+                        const newCount = {...prev};
+                        if(previousVote) newCount[previousVote]--;
+                        newCount[voteType]++;
+                        return newCount;
+                    });
                 }
             }
+        } catch(error) {
+            console.error('Error voting:', error);
+            // Revert to previous state on error
+            setUserVote(previousVote);
+            // Refresh counts from server
+            fetchVotes();
         }
-        
     };
+        
+        
+    
 
     return (
         <div className={`p-4 rounded-lg ${
@@ -117,26 +129,29 @@ const CommentItem = ({comment}) => {
             <div className="flex items-center mt-2 space-x-4">
                 <button
                     onClick={() => handleVote('up')}
-                    className={`flex items-center ${userVote === 'up' ? 'text-blue-600' : 'text-gray-500'}`}
+                    className={`flex items-center space-x-1 px-2 py-1 rounded ${
+                        userVote === 'up' 
+                        ? 'bg-blue-200 text-blue-700' 
+                        : 'hover:bg-gray-100 text-gray-500'
+                    }`}
                 >
-                        <FontAwesomeIcon icon={faThumbsUp} />
-                        {voteCount.up}
+                    <FontAwesomeIcon icon={faThumbsUp} />
+                    <span>{voteCount.up}</span>
                 </button>
                 <button
                     onClick={() => handleVote('down')}
-                    className={`flex items-center ${userVote === 'down' ? 'text-orange-600' : 'text-gray-500'}`}
+                    className={`flex items-center space-x-1 px-2 py-1 rounded ${
+                        userVote === 'down' 
+                        ? 'bg-orange-200 text-orange-700' 
+                        : 'hover:bg-gray-100 text-gray-500'
+                    }`}
                 >
                     <FontAwesomeIcon icon={faThumbsDown} />
-                    {voteCount.down}
+                    <span>{voteCount.down}</span>
                 </button>
-                <button
-                    // onClick={() => handleDelete()}
-                    className="text-red-500 hover:text-red-700"
-                >
-                    <FontAwesomeIcon icon={faTrash} />
-                </button>
-                </div>
+                
             </div>
+        </div>
     );
 
 };
