@@ -38,37 +38,39 @@ function SignUp(){
             navigate('/login');
         
         
-         //Send Profile Data to profiles table in Supabase
+        //  Send Profile Data to profiles table in Supabase
 
-        //  const { data: profileData, error: profileError } = await supabase
-        //  .from('profiles')
-        //  .insert([
-        //     {
-        //         user_id: userId, //userid from users table
-        //         username:username,
-        //     },
-        //  ]);
+         const { data: profileData, error: profileError } = await supabase
+         .from('profiles')
+         .insert([
+            {
+                user_id: data.user.id, //userid from users table
+                username:username,
+            },
+         ]);
 
-        //  if (!data?.user?.id){
-        //     setError('User ID is missing');
-        //     return;
-        //  }
+         if (!data?.user?.id){
+            setError('User ID is missing');
+            return;
+         }
 
-    //     if (profileError) {
-    //         console.error('Profile Insert Error', profileError);
-    //         setError(profileError.message);
-    //     } else{
-    //         setSuccess(true);
-    //         console.log('Sign Up Successful',profileData);
-    //         setTimeout(() => {
-    //             navigate('/login');
-    //         }, 2000);
-    // }
+        if (profileError) {
+            console.error('Profile Insert Error', profileError);
+            setError(profileError.message);
+        } else{
+            setSuccess(true);
+            console.log('Sign Up Successful',profileData);
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+    }
         }
     };
     
     return (
-        <form onSubmit={handleSignUp}>
+        <form onSubmit={handleSignUp} className='flex flex-col items-center justify-center bg-gray-200 mx-8 rounded-md p-4'>
+            <div>
+            <label>Username: </label>
             <input 
                 type ='text'
                 placeholder='Username'
@@ -76,6 +78,9 @@ function SignUp(){
                 onChange={(e) => setUsername(e.target.value)}
                 required
             />
+        </div>
+        <div>
+            <label>Email: </label>
             <input
                 type='email'
                 placeholder='Email Address'
@@ -83,6 +88,9 @@ function SignUp(){
                 onChange={(e) => setEmail(e.target.value)}
                 required
             />
+        </div>
+        <div>
+            <label>Password: </label>
             <input
                 type='Password'
                 placeholder='Password'
@@ -90,9 +98,12 @@ function SignUp(){
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
+            </div>
+            <div>
             {error && <p className="text-red-600">{error}</p>}
             {success && <p className="text-green-500">{success}</p>}
-            <button type='submit'>Create Account</button>
+            <button className='bg-blue-500 text-white rounded-md p-2' type='submit'>Create Account</button>
+            </div>
         </form>
     );
 }

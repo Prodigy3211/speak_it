@@ -2,7 +2,7 @@ import { useState } from "react";
 import supabase from "../../server/supabaseClient";
 
 const EditProfile = ({userProfile, setProfile, setEditing}) => {
-    const [displayname , setDisplayName] = useState(userProfile?.displayName || " ");
+    const [username , setUserName] = useState(userProfile?.username || " ");
     const [bio, setBio] = useState(userProfile?.bio || "");
     const [loading, setLoading] = useState(false);
     const [error, setError] =useState(null);
@@ -30,7 +30,8 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
 
         const { data, error } = await supabase
         .from('profiles')
-        .update({displayname: displayname, bio:bio})
+        .update({username:username,
+             bio:bio})
         .eq("user_id", user.id)
         .single();
     if (error) {
@@ -43,22 +44,34 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
     setLoading(false);
     };
         return(
+            <div className='flex flex-col items-center justify-center mx-8 rounded-md p-4 border-2 border-black border-solid'>
             <form onSubmit={handleProfileUpdate}>
+                <div>
                 <label>
-                Display name:
-                <input type="varchar" value={displayname} onChange={(e)=> setDisplayName(e.target.value)}></input>
+                Username:
+                <input type="varchar" value={username} onChange={(e)=> setUserName(e.target.value)} className='border-2 border-black bg-white rounded-md p-2'></input>
                 </label>
+                </div>
+                <div>
                 <label>
                 Bio:
-                <input type="varchar" value={bio} onChange={(e)=> setBio(e.target.value)}></input>
+                <input type="varchar" value={bio} onChange={(e)=> setBio(e.target.value)} className='border-2 border-black bg-white rounded-md p-2'></input>
                 </label>
-                <button type="submit" disabled={loading}>
+                </div>
+                <div>
+                <button type="submit" disabled={loading}
+                className='bg-blue-500 text-white rounded-md p-2 w-full mt-4'
+                >
                 {loading? "Updating..." : "Save"}
                 </button>
+                </div>
+                <div>
                 <button type="button" onClick={() => setEditing(false)}>
                 Cancel
                 </button>
+                </div>
             </form>
+            </div>
 );
 
 };
