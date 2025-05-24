@@ -6,7 +6,7 @@ const Categories = () => {
 
     return (
         <div>
-            <h1>Categories</h1>
+            <h1 className='text-2xl font-bold'>Categories</h1>
             <ul className="flex flex-wrap gap-8 text-center text-lg text-bold">
                 {images.map((image) => (
                     <li key={image.category}>

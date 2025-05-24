@@ -67,9 +67,24 @@ const Thread = () => {
       <TopNavigation />
       {claim ? (
         <>
-          <h1>{claim.title}</h1>
+        <div>
+        <div id='op-claim' className='border-2 border-black rounded-md p-4'>
+          <div className='text-2xl font-bold'>
+          <h1>Claim: {claim.title}</h1>
+          </div>
+          <div>
+            <div className='text-lg font-bold'>
+            <p>Explanation:</p>
+            </div>
           <p>{claim.claim}</p>
-          <h3>comments: </h3>
+          </div>
+          <div className='border-2 border-black rounded-md p-4'>
+          <AddComment 
+         claimId={claimId} 
+         onCommentAdded={fetchComments} />
+         </div>
+          </div>
+          <h3 className='text-2xl font-bold'>Comments: </h3>
           <ul className="space-y-4">
             {Array.isArray(comments) && comments.length > 0 ? (
               comments.map((comment) => (
@@ -90,7 +105,7 @@ const Thread = () => {
               <li>No comments yet</li>
             )}
           </ul>
-          <AddComment claimId={claimId} onCommentAdded={fetchComments} />
+         </div>
         </>
       ) : (
         <p>Loading claim data...</p>

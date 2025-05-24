@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import{faThumbsUp, faThumbsDown} from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
@@ -27,24 +27,21 @@ const CommentItem = ({comment}) => {
                 up: upvotes.length,
                 down: downvotes.length
             });
-
-          
             
             // Check if user has voted
             if(user) {
                 const userVote = votes.find(vote => vote.user_id === user.id);
                 setUserVote(userVote ? userVote.vote_type : null);
-                console.log('User vote:', userVote);
-                console.log('User:', user.id);
             }
         } else {
             console.error('Error fetching votes:', votesError);
         }
     }, [comment.id]);
 
-    // useEffect(() => {
-    //     fetchVotes();
-    // }, [fetchVotes]);
+    // Fetch votes when component mounts
+    useEffect(() => {
+        fetchVotes();
+    }, [fetchVotes]);
 
     const handleVote = async (voteType) => {
         //Check if user is authenticated

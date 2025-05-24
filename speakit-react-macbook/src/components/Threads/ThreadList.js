@@ -12,24 +12,8 @@ const ThreadList = () => {
     
     // fetch filtered claims for the specified category
     const fetchClaims = async () => {
-      console.log('Fetching claims for category:', category);
-      console.log('Category type:', typeof category);
       
-      // First try exact match
-      const { data, error } = await supabase
-        .from('claims')
-        .select('*')
-        .eq('category', category) // Exact match
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error Fetching claims: ', error);
-      } else {
-        console.log('Fetched claims data with exact match:', data);
-        
-        // If no results, try case-insensitive match
-        if (data.length === 0) {
-          console.log('No exact matches, trying case-insensitive...');
+        // case-insensitive match
           const { data: icontains_data } = await supabase
             .from('claims')
             .select('*')
@@ -42,13 +26,7 @@ const ThreadList = () => {
           } else {
             setClaims([]);
           }
-        } else {
-          setClaims(data);
         }
-      }
-    };
-    
-    // fetchAllClaims();
     fetchClaims();
   }, [category]);
 
@@ -57,18 +35,32 @@ const ThreadList = () => {
     <div>
       <TopNavigation />
       {/* pull in category name */}
-      <h1>{category} and the Claims We've Made</h1>
-      <p>
-        <button type='button' onClick={() => navigate('/create-claim')}>
-          Create Claim
+      <div>
+        <div className='my-4 flex flex-col border-2 items-center border-black rounded-md p-4'>
+        <div className='text-2xl font-bold'>
+      <h1>{category} </h1>
+        </div>
+      <div>
+        <button 
+        type='button' 
+        onClick={() => navigate('/create-claim')}
+        className='bg-blue-500 text-white px-4 py-1 mt-4 rounded-md hover:bg-blue-600'
+        >
+          Create New Claim
         </button>
-      </p>
-      
+        </div>
+        </div>
+
+      <div className="border-2 border-black rounded-md p-4">
+        <div className='italic text-lg mb-4'>They said what they said, do you agree?</div>
       <ul>
         {/* Map out the threads from the API call sorting by claim.id */}
         {claims && claims.length > 0 ? (
           claims.map((claim) => (
-            <li key={claim.id}>
+            <li 
+            key={claim.id}
+            className=' my-4 border-2 text-center border-black rounded-md p-4 hover:bg-gray-100'
+            >
               {/* Link to the Dynamic Route - updated to use claimId parameter name */}
               <Link to={`/category/${category}/thread/${claim.id}`}>
                 {claim.title}
@@ -76,9 +68,11 @@ const ThreadList = () => {
             </li>
           ))
         ) : (
-          <li>No claims found in: "{category}" </li>
+          <li>No claims found in "{category}"!</li>
         )}
       </ul>
+      </div>
+        </div>
     </div>
   );
 };

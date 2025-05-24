@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../../server/supabaseClient';
+import TopNavigation from '../TopNavigation';
 
 const CreateClaim = () => {
   // const { categoryName } = useParams();
@@ -47,26 +48,41 @@ const CreateClaim = () => {
   };
 
   return (
+    <div>
+    <div>
+      <TopNavigation />
+    </div>
+    <div className='border-2 border-black rounded-md p-2 flex flex-col'>
     <form onSubmit={handleSubmit}>
-      <h2>Create a new Claim in {category}</h2>
+      <div className=  "font-bold">
+      <h2>What's your Claim?</h2>
+      </div>
+      <div className='bg-white border-2 border-black rounded-md p-4 mr-4'>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder='Claim Title'
+        placeholder='Pizza is a Vegetable...'
         required
-      />
+        />
+        </div>
+      <label className='font-bold'>Support that Claim with all your soul:</label>
+        <div className='bg-white border-2 border-black rounded-md p-4 mr-4'>
       <input
         value={claim}
         onChange={(e) => setClaim(e.target.value)}
-        placeholder='Make Your Claim'
+        placeholder='Back in ancient Ghana...'
         required
-      />
-
+        type="textarea"
+        />
+        </div>
+        
+        <div>
+      <label className='font-bold'>Select a Category: </label>
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
         required
-      >
+        >
         <option value='prove-me-wrong'>Prove-Me-Wrong</option>
         <option value='entertainment'>Entertainment</option>
         <option value='philosphy'>Philosophy</option>
@@ -74,8 +90,13 @@ const CreateClaim = () => {
         <option value='politics'>Politics</option>
         <option value='war'>War</option>
       </select>
+      </div>
+      <div className='bg-blue-500 text-white px-4 py-1 mt-4 mb-4 rounded-md hover:bg-blue-600'>
       <button type='submit'>Create Claim</button>
+      </div>
     </form>
+    </div>
+        </div>
   );
 };
 
