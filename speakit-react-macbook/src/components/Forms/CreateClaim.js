@@ -8,7 +8,7 @@ const CreateClaim = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [claim, setClaim] = useState('');
-  const [category, setCategory] = useState('provemewrong');
+  const [category, setCategory] = useState('Prove Me Wrong');
 
   useEffect(() => {
     const checkAuthorization = async () => {
@@ -85,7 +85,7 @@ const CreateClaim = () => {
         onChange={(e) => setCategory(e.target.value)}
         required
         >
-        <option value='provemewrong'>ProveMeWrong</option>
+        <option value='Prove Me Wrong'>Prove Me Wrong</option>
         <option value='entertainment'>Entertainment</option>
         <option value='philosphy'>Philosophy</option>
         <option value='relationships'>Relationships</option>
