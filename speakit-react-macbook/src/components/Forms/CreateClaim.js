@@ -8,7 +8,7 @@ const CreateClaim = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [claim, setClaim] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('provemewrong');
 
   useEffect(() => {
     const checkAuthorization = async () => {
@@ -42,6 +42,7 @@ const CreateClaim = () => {
     if (error) {
       console.error('Error creating claim: ', error);
     } else {
+      console.log(category);
       //Navigate to the new thread
       navigate(`/category/${category}/thread/${data[0].id}`);
     }
