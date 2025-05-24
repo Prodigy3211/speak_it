@@ -1,5 +1,5 @@
 export const categoryImages = [{
-    category: 'provemewrong',
+    category: 'Prove Me Wrong',
     alt: 'prove Me Wrong',
     description: 'Bart Simpson Daring you to try',
     url: 'https://cdn.pixabay.com/photo/2015/03/01/21/44/bart-655318_1280.png'
