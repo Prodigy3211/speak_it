@@ -55,6 +55,8 @@ const Profile = () => {
     return <p>Profile is loading...</p>;
   }
 
+  console.log(userProfile);
+
   return (
     <div><TopNavigation />
     <div>
@@ -62,13 +64,28 @@ const Profile = () => {
         <EditProfile profile={userProfile} setProfile = {setUserProfile} setEditing={setEditing} />
       ): (
         <>
-          <h1>Welcome, {userProfile?.displayname || "User"}!</h1>
+        <div className='flex flex-col items-centermx-8 rounded-md p-4'>
+          <div className='text-2xl font-bold'>
+            <h1>Welcome, {userProfile?.username || "User"}!</h1>
+          </div>
+          <div>
+            <div className='text-lg font-bold mt-4'>
+            <label>Bio</label>
+            </div>
           <p>{userProfile?.bio || "No Bio Available."}</p>
-          <p>Email: {userProfile?.email || "No Email associated with this account"}</p>
+          </div>
+          <div>
           <button onClick={() => setEditing (true)}>Edit Profile</button>
+          </div>
+          <div>
+          <p className='text-lg font-bold mt-4'>Stats:</p>
+          <p>Votes: {userProfile?.votes || "0"}</p>
+          <p>Claims: {userProfile?.claims || "0"}</p>
+          <p>Comments: {userProfile?.comments || "0"}</p>
+          </div>
+        </div>
         </>
       )}
-    
       <LogoutButton />
     </div>
     </div>

@@ -9,8 +9,11 @@ import { useNavigate } from 'react-router-dom';
 
    return( 
  <>
- <div className="text-center text-lg text-bold">
-    <h1>Speak Now Or Forever Hold Your Peace</h1>
+ <div>
+ <div className="flex flex-row text-center text-md text-bold items-center justify-center gap-4">
+      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-32' onClick={() => navigate('/dashboard')}/>
+    <h1 className='text-2xl'>Speak Now Or Forever Hold Your Peace</h1>
+ </div>
  </div>
  <div className='bg-gray-200 border-1 border-gray-300 rounded-lg flex justify-center gap-8'>
     <FontAwesomeIcon icon={faUser} onClick={() => navigate('/my-profile')} />
