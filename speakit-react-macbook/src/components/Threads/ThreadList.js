@@ -17,7 +17,7 @@ const ThreadList = () => {
           const { data: icontains_data } = await supabase
             .from('claims')
             .select('*')
-            .ilike('category') // Case-insensitive partial match
+            .ilike('category','Prove Me Wrong') // Case-insensitive partial match
             .order('created_at', { ascending: false });
           
           console.log('Results with case-insensitive match:', icontains_data);
