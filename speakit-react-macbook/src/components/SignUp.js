@@ -2,7 +2,6 @@ import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../server/supabaseClient';
 
-console.log(supabase);
 
 function SignUp(){
     const [username, setUsername] = useState('');
@@ -24,7 +23,7 @@ function SignUp(){
             email:email,
             password:password,
         });
-        console.log(email, password, username ,auth);
+       
     
         if (error) {
             setError(error.message);

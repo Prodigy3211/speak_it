@@ -83,7 +83,7 @@ const CreateClaim = () => {
         onChange={(e) => setCategory(e.target.value)}
         required
         >
-        <option value='prove-me-wrong'>Prove-Me-Wrong</option>
+        <option value='provemewrong'>Prove-Me-Wrong</option>
         <option value='entertainment'>Entertainment</option>
         <option value='philosphy'>Philosophy</option>
         <option value='relationships'>Relationships</option>
