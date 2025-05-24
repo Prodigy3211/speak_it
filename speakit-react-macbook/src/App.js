@@ -14,7 +14,7 @@ import AddComment from './components/Forms/AddComment';
 
 function App() {
   return (
-    <div className='navBar'>
+    <div className='p-4'>
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/login' element={<Login />} />
