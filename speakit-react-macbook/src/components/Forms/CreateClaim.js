@@ -38,6 +38,7 @@ const CreateClaim = () => {
       .from('claims')
       .insert([{ title, claim, category: category, op_id: user.id }])
       .select();
+      console.log(category);
 
     if (error) {
       console.error('Error creating claim: ', error);
