@@ -88,7 +88,7 @@ function SignUp(){
             />
         </div>
         <div>
-            <label>Email: </label>
+            <label>Email: *Must validate before logging in</label>
             <input
                 type='email'
                 placeholder='Email Address'

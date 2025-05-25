@@ -85,7 +85,7 @@ const Thread = () => {
          onCommentAdded={fetchComments} />
          </div>
           </div>
-          <h3 className='text-2xl font-bold'>Comments: </h3>
+          <h3 className='text-2xl font-bold my-4 '>Comments: </h3>
           <ul className="space-y-4">
             {Array.isArray(comments) && comments.length > 0 ? (
               comments.map((comment) => (

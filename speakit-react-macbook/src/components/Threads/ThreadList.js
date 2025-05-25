@@ -63,6 +63,7 @@ const ThreadList = () => {
             <li 
             key={claim.id}
             className=' my-4 border-2 text-center border-black rounded-md p-4 hover:bg-gray-100 flex flex-row items-center justify-between'
+            onClick={() => navigate(`/category/${category}/thread/${claim.id}`)}
             >
               {/* Link to the Dynamic Route - updated to use claimId parameter name */}
               <div className='flex flex-row'></div>

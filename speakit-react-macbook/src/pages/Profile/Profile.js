@@ -72,11 +72,12 @@ const Profile = () => {
             </div>
           <p>{userProfile?.bio || "No Bio Available."}</p>
           </div>
-          <div>
-          <button onClick={() => setEditing (true)}>Edit Profile</button>
+          <div className='mt-4'>
+          <button className='bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2' onClick={() => setEditing (true)}>Edit Profile</button>
           </div>
           <div>
-          <p className='text-lg font-bold mt-4'>Stats:</p>
+          <p className='text-lg font-bold mt-4'>Stats: (coming soon)
+          </p>
           <p>Votes: {userProfile?.votes || "0"}</p>
           <p>Claims: {userProfile?.claims || "0"}</p>
           <p>Comments: {userProfile?.comments || "0"}</p>
