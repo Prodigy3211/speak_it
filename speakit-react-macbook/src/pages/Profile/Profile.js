@@ -55,8 +55,6 @@ const Profile = () => {
     return <p>Profile is loading...</p>;
   }
 
-  console.log(userProfile);
-
   return (
     <div><TopNavigation />
     <div>

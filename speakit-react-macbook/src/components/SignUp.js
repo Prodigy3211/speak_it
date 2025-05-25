@@ -9,7 +9,7 @@ function SignUp(){
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
-    const [auth, setAuth] = useState(false);
+    const [ setAuth] = useState(false);
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
@@ -67,15 +67,24 @@ function SignUp(){
     };
     
     return (
-        <form onSubmit={handleSignUp} className='flex flex-col items-center justify-center bg-gray-200 mx-8 rounded-md p-4'>
-            <div>
-            <label>Username: </label>
+        <>
+        <div>
+        <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full px-24' onClick={() => navigate('/login')}/>
+        <form onSubmit={handleSignUp} className=' border-2 border-gray-300 border-solid mt-8 rounded-md p-4'>
+        <div className='flex flex-col items-center'>
+        <div>
+            <p className='text-center text-lg font-bold'>Create an account</p>
+        </div>
+            <div className='flex flex-col justify-center items-center gap-4 px-16'>
+            <div className='mt-4'>
+            <label>Choose A Username: </label>
             <input 
                 type ='text'
                 placeholder='Username'
                 value = {username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                className='border-2 border-black border-solid'
             />
         </div>
         <div>
@@ -85,6 +94,7 @@ function SignUp(){
                 placeholder='Email Address'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className='border-2 border-black border-solid'
                 required
             />
         </div>
@@ -95,15 +105,20 @@ function SignUp(){
                 placeholder='Password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className='border-2 border-black border-solid'
                 required
             />
             </div>
+            </div>
             <div>
             {error && <p className="text-red-600">{error}</p>}
-            {success && <p className="text-green-500">{success}</p>}
-            <button className='bg-blue-500 text-white rounded-md p-2' type='submit'>Create Account</button>
+            {success && <p className="text-green-500">Validate Email Before Logging In{success}</p>}
+            <button className='bg-blue-500 text-white rounded-md p-2 mt-4' type='submit'>Create Account</button>
+            </div>
             </div>
         </form>
+        </div>
+        </>
     );
 }
 

@@ -40,7 +40,7 @@ function Login() {
     <>
     <div>
     <div>
-      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full'/>
+      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full px-16'/>
     </div>
     <div className='flex flex-col items-center justify-center bg-gray-200 mx-8 rounded-md p-4'>
     <form onSubmit={handleLogin}>
@@ -70,15 +70,16 @@ function Login() {
         />
         </div>
         <div className='flex flex-col items-center justify-center'>
-      {error && <p className="text-red-600">{error}</p>}
+      {error && <p className="text-red-600">{error} Did You Validate Your Email?</p>}
       {success && <p className="text-green-500">{success}</p>}
       <button type='submit'
         className='bg-blue-500 text-white rounded-md p-2 w-full mt-4'
       >Login</button>
       <p>Don't have an account?</p>
         <div>
-        <button onClick={() => navigate('/Signup')}
-          className='bg-blue-500 border-2 border-solid text-white p-2 rounded-md w-full'
+        <button 
+        onClick={() => navigate('/Signup')}
+        className='bg-blue-500 border-2 border-solid text-white p-2 rounded-md w-full'
           >Sign up</button>
         </div>
       </div>

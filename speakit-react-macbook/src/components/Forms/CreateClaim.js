@@ -54,7 +54,7 @@ const CreateClaim = () => {
     <div>
       <TopNavigation />
     </div>
-    <div className='border-2 border-black rounded-md p-2 flex flex-col'>
+    <div className='border-2 border-black rounded-md p-2 flex flex-col mt-4'>
     <form onSubmit={handleSubmit}>
       <div className=  "font-bold">
       <h2>What's your Claim?</h2>
@@ -93,7 +93,7 @@ const CreateClaim = () => {
         <option value='war'>War</option>
       </select>
       </div>
-      <div className='bg-blue-500 text-white px-4 py-1 mt-4 mb-4 rounded-md hover:bg-blue-600'>
+      <div className='bg-blue-500 text-white px-8 py-1 mt-4 mb-4 rounded-md hover:bg-blue-600'>
       <button type='submit'>Create Claim</button>
       </div>
     </form>

@@ -65,6 +65,7 @@ const Thread = () => {
   return (
     <div>
       <TopNavigation />
+      <div className='mt-4'>
       {claim ? (
         <>
         <div>
@@ -110,6 +111,7 @@ const Thread = () => {
       ) : (
         <p>Loading claim data...</p>
       )}
+    </div>
     </div>
   );
 };

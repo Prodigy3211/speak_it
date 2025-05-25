@@ -15,10 +15,16 @@ import { useNavigate } from 'react-router-dom';
     <h1 className='text-2xl'>Speak Now Or Forever Hold Your Peace</h1>
  </div>
  </div>
- <div className='bg-gray-200 border-1 border-gray-300 rounded-lg flex justify-center gap-8'>
-    <FontAwesomeIcon icon={faUser} onClick={() => navigate('/my-profile')} />
+ <div className='bg-gray-200 border-1 border-gray-300 rounded-lg flex flex-row justify-evenly p-4'>
+    <div>
+      <FontAwesomeIcon icon={faUser} onClick={() => navigate('/my-profile')} />
+   </div>
+   <div>
     <p onClick={() => navigate('/dashboard')}>Dashboard</p>
+    </div>
+    <div>
     <p onClick={() => navigate('/create-claim')}>Create Claim</p>
+    </div>
  </div>
  {/* <FontAwesomeIcon icon={faHouse} />
  <FontAwesomeIcon icon={faCamera} /> */}

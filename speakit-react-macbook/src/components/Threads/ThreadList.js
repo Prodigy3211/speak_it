@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import supabase from '../../server/supabaseClient';
 import TopNavigation from '../TopNavigation';
+import { faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 const ThreadList = () => {
   const { category } = useParams(); //Get's category from URL
   const [claims, setClaims] = useState([]);
@@ -59,12 +62,16 @@ const ThreadList = () => {
           claims.map((claim) => (
             <li 
             key={claim.id}
-            className=' my-4 border-2 text-center border-black rounded-md p-4 hover:bg-gray-100'
+            className=' my-4 border-2 text-center border-black rounded-md p-4 hover:bg-gray-100 flex flex-row items-center justify-between'
             >
               {/* Link to the Dynamic Route - updated to use claimId parameter name */}
+              <div className='flex flex-row'></div>
               <Link to={`/category/${category}/thread/${claim.id}`}>
                 {claim.title}
-              </Link>
+                </Link>
+              <div>
+              <FontAwesomeIcon icon={faArrowAltCircleRight} />
+              </div>
             </li>
           ))
         ) : (
