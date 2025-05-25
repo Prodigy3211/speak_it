@@ -84,6 +84,7 @@ const CreateClaim = () => {
         value={category}
         onChange={(e) => setCategory(e.target.value)}
         required
+        className='mt-2 border-2 border-black rounded-md p-2'
         >
         <option value='Prove Me Wrong'>Prove Me Wrong</option>
         <option value='entertainment'>Entertainment</option>
@@ -93,8 +94,8 @@ const CreateClaim = () => {
         <option value='war'>War</option>
       </select>
       </div>
-      <div className='bg-blue-500 text-white px-8 py-1 mt-4 mb-4 rounded-md hover:bg-blue-600'>
-      <button type='submit'>Create Claim</button>
+      <div>
+      <button className='bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 mt-2' type='submit'>Create Claim</button>
       </div>
     </form>
     </div>
