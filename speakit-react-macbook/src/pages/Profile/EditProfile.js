@@ -43,19 +43,31 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
     }
     setLoading(false);
     };
+
         return(
-            <div className='flex flex-col items-center justify-center mx-8 rounded-md p-4 border-2 border-black border-solid'>
+            <div className='mx-8 rounded-md p-8 border-2 border-black border-solid'>
             <form onSubmit={handleProfileUpdate}>
+                <div className="p-4">
                 <div>
-                <label>
-                Username:
-                <input type="varchar" value={username} onChange={(e)=> setUserName(e.target.value)} className='border-2 border-black bg-white rounded-md p-2'></input>
+                <label className="flex flex-col">
+                Username
+                <input type="varchar" 
+                value={username} 
+                onChange={(e)=> setUserName(e.target.value)} 
+                className='my-2 border-2 border-black bg-white rounded-md'
+                >
+                </input>
                 </label>
                 </div>
                 <div>
-                <label>
-                Bio:
-                <input type="varchar" value={bio} onChange={(e)=> setBio(e.target.value)} className='border-2 border-black bg-white rounded-md p-2'></input>
+                <label className="flex flex-col">
+                Bio
+                <textarea
+                value={bio} 
+                onChange={(e)=> setBio(e.target.value)} 
+                className='border-2 border-black bg-white rounded-md h-32 w-full resize-none'
+                placeholder={bio}
+                />
                 </label>
                 </div>
                 <div>
@@ -66,9 +78,10 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
                 </button>
                 </div>
                 <div>
-                <button type="button" onClick={() => setEditing(false)}>
+                <button className="bg-gray-500 text-white rounded-md p-2 w-full mt-4" type="button" onClick={() => setEditing(false)}>
                 Cancel
                 </button>
+                </div>
                 </div>
             </form>
             </div>

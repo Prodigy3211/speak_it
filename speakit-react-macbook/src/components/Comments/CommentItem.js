@@ -1,12 +1,44 @@
 import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import{faThumbsUp, faThumbsDown} from "@fortawesome/free-solid-svg-icons";
+import{faThumbsUp, faThumbsDown, faReply} from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
 
 const CommentItem = ({comment}) => {
     const [voteCount, setVoteCount] = useState({up: 0, down: 0});
     const [userVote, setUserVote] = useState(null);
+    const [username, setUsername] = useState('');
+    const[showReplyForm, setShowReplyForm] = useState(false);
+    const[isAffirmative, setIsAffirmative] = useState(null);
+    const[replyContent, setReplyContent] = useState('');
+    const[error] = useState(null);
 
+//Get the username for this comment
+useEffect(() => {
+        const fetchUsername = async () => {
+        try{
+            const {data, error} = await supabase
+                .from('profiles')
+            .select('username')
+            .eq('user_id', comment.user_id)
+            .maybeSingle();
+
+        if(error) {
+            console.error('Error fetching username:', error);
+            setUsername('anon');
+        } else if (data?.username) {
+            setUsername(data.username);
+        } else {
+            setUsername('anon');
+        }
+    } catch (error) {
+        console.error('Error fetching username:', error);
+        setUsername('anon');
+        }
+    };
+    fetchUsername();
+}, [comment.user_id]);
+
+    
 //Get the vote count for this comment
    
 
@@ -112,9 +144,44 @@ const CommentItem = ({comment}) => {
             fetchVotes();
         }
     };
-        
-        
-    
+
+    const handleReply = async (e) => {
+        e.preventDefault();
+
+        //is User Authenticated?
+        const {data: {user}} = await supabase.auth.getUser();
+        if(!user) {
+            alert('Please login to reply');
+            return;
+        }
+
+        if (isAffirmative === null) {
+            error.message = 'Please select for or against before replying';
+            return;
+        }
+
+        try {
+            const {error} = await supabase
+            .from('comments')
+            .insert([{
+            claim_id: comment.claim_id,
+            user_id: user.id,
+            content: replyContent,
+            affirmative: isAffirmative,
+            parent_comment_id: comment.id
+        }]);
+
+        if(error) {
+            console.error('Error adding reply:', error);
+        } else {
+            setReplyContent('');
+            setIsAffirmative(null);
+            setShowReplyForm(false);
+        }
+    } catch(error) {
+        console.error('Error adding reply:', error);
+    }
+};
 
     return (
         <div className={`p-4 rounded-lg ${
@@ -122,7 +189,7 @@ const CommentItem = ({comment}) => {
             ? 'bg-blue-100 text-blue-900'
             : 'bg-orange-100 text-orange-900'
          }`}>
-            <p>{comment.content || comment.comment}</p>
+            <p>{comment.content || comment.comment} - {username || 'anon'}</p>
             <div className="flex items-center mt-2 space-x-4">
                 <button
                     onClick={() => handleVote('up')}
@@ -146,11 +213,75 @@ const CommentItem = ({comment}) => {
                     <FontAwesomeIcon icon={faThumbsDown} />
                     <span>{voteCount.down}</span>
                 </button>
-                
-            </div>
-        </div>
-    );
+                <button
+                    onClick={() => setShowReplyForm(!showReplyForm)}
+                    className="text-blue-500 hover:text-blue-700"
+                >
+                    <FontAwesomeIcon icon={faReply} />
+                    <span>Reply</span>
+                </button>
+                </div>
 
+                {showReplyForm && (
+                    <form onSubmit={handleReply} className="mt-2">
+                        <div>
+                            <input
+                                type="text"
+                                value={replyContent}
+                                onChange={(e) => setReplyContent(e.target.value)}
+                                placeholder="Add a reply..."
+                                required
+                                className="w-full p-2 border rounded-md"
+                                />
+
+                        </div>
+                        <div className="flex gap-4">
+                            <label className="flex items-center gap-2">
+                                <input
+                                    type="radio"
+                                    name="sentiment"
+                                    checked={isAffirmative === true}
+                                    onChange={() => setIsAffirmative(true)}
+                                    className="form-radio h-4 w-4 text-blue-600"
+                                />
+                                <span>For</span>
+                            </label>
+                            <label className="flex items-center gap-2">
+                            <input
+                                    type="radio"
+                                    name="sentiment"
+                                    checked={isAffirmative === false}
+                                    onChange={() => setIsAffirmative(false)}
+                                    className="form-radio h-4 w-4 text-blue-600"
+                                />
+                                <span>Against</span>
+                            </label>
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                            >
+                                Reply
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setShowReplyForm(false)}
+                                className="bg-gray-500 text-white px-4 py-2 rounded-md"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                )}
+
+                {comment.replies && comment.replies.length > 0 && (
+                    <div className="mt-4">
+                        <h3 className="text-lg font-semibold">Replies</h3>
+                    </div>
+                )} 
+            </div>
+    );
 };
 
 export default CommentItem;
