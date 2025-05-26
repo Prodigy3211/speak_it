@@ -17,7 +17,7 @@ useEffect(() => {
         const fetchUsername = async () => {
         try{
             const {data, error} = await supabase
-                .from('profiles')
+            .from('profiles')
             .select('username')
             .eq('user_id', comment.user_id)
             .maybeSingle();

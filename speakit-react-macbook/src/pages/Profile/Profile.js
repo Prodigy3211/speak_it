@@ -85,7 +85,9 @@ const Profile = () => {
         </div>
         </>
       )}
+      <div className='mx-4'>
       <LogoutButton />
+      </div>
     </div>
     </div>
   );
