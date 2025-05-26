@@ -23,21 +23,33 @@ const Thread = () => {
       .from('comments')
       .select('*')
       .eq('claim_id', claimId)
+      .is('parent_comment_id', null) //Top Levels Comments only
       .order('created_at', { ascending: true });
     if (error) {
       console.error('Error fetching comments:', error);
       setComments([]); // Ensure comments is always an array even on error
     } else {
-      setComments(data || []); // Ensure we set an empty array if data is null/undefined
+      const commentsWithReplies = await Promise.all(
+        (data || []).map(async (comment) => {
+          const {data:replies} = await supabase
+          .from('comments')
+          .select('*')
+          .eq('parent_comment_id', comment.id)
+          .order('created_at', { ascending: true });
+
+          return {
+            ...comment,
+            replies: replies || []
+          };
+        })
+      )
+      setComments(commentsWithReplies); // Ensure we set an empty array if data is null/undefined
     }
   }, [claimId]);
 
   useEffect(() => {
     const fetchClaim = async () => {
       
-      // Try both with and without parsing to number
-      const numericId = parseInt(claimId, 10);
-      console.log('Numeric ID:', numericId, 'Type:', typeof numericId);
       
       const { data, error } = await supabase
         .from('claims')
@@ -48,7 +60,7 @@ const Thread = () => {
       if (error) {
         console.error('Error fetching claim:', error);
       } else {
-        console.log('Fetched claim successfully:', data);
+        console.log('Fetched claim successfully:');
         setClaim(data);
       }
     };
@@ -97,10 +109,16 @@ const Thread = () => {
                       : 'bg-orange-100 text-orange-900'
                   }`}
                 >
-                  <div>
+                  
                   <CommentItem comment={comment} />
-                  </div>
-                </li>
+                  {comment.replies && comment.replies.length > 0 && (
+                    <div className="mt-4">
+                      {comment.replies.map((reply) => (
+                        <CommentItem key={reply.id} comment={reply} />
+                      ))}
+                    </div>
+                  )}
+                  </li>
               ))
             ) : (
               <li>No comments yet</li>

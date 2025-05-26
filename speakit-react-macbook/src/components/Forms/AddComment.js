@@ -32,7 +32,8 @@ const AddComment = ({ claimId, onCommentAdded}) => {
             claim_id: claimId, 
             user_id: user.id,
             content: comment,
-            affirmative: isAffirmative
+            affirmative: isAffirmative,
+            parent_comment_id: null
         }]);
         
         if (error) {

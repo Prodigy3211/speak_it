@@ -70,7 +70,7 @@ function Login() {
         />
         </div>
         <div className='flex flex-col items-center justify-center'>
-      {error && <p className="text-red-600">{error} Did You Validate Your Email?</p>}
+      {error && <p className="text-red-600">{error}, Did You Validate Your Email?</p>}
       {success && <p className="text-green-500">{success}</p>}
       <button type='submit'
         className='bg-blue-500 text-white rounded-md p-2 w-full mt-4'
