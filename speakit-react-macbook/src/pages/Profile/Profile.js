@@ -30,8 +30,7 @@ const Profile = () => {
       }
   
 // Fetch user data
-      const user_Id = user.id;
-        const {data, error} = await supabase
+      const {data, error} = await supabase
         .from('profiles')
         .select('*')
         .eq('user_id', user.id)
@@ -39,7 +38,6 @@ const Profile = () => {
         
       if (error) {
         setError(error.message);
-        console.log(user_Id)
       } else {
         setUserProfile(data);
       }

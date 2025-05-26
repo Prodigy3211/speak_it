@@ -23,7 +23,6 @@ const ThreadList = () => {
             .ilike('category', `%${category}%`) // Case-insensitive partial match
             .order('created_at', { ascending: false });
           
-          console.log('Results with case-insensitive match:', icontains_data);
           if (icontains_data && icontains_data.length > 0) {
             setClaims(icontains_data);
           } else {

@@ -25,8 +25,6 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
         }
         
 
-        const user_Id = user.id;
-
 
         const { data, error } = await supabase
         .from('profiles')
@@ -36,7 +34,6 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
         .single();
     if (error) {
         console.error("Error updating profile: ", error.message);
-        console.log(user_Id);
     } else {
         setProfile (data); //update the sate of each field
         setEditing(false);

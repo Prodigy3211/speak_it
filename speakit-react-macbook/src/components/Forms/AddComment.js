@@ -22,11 +22,9 @@ const AddComment = ({ claimId, onCommentAdded}) => {
             alert("Please select whether your comment is positive or negative");
             return;
         }
-
-        console.log("Inserting comment with claimId:", claimId);
         
         //Inserts comment into Database
-        const { data, error } = await supabase
+        const { error } = await supabase
         .from("comments")
         .insert([{
             claim_id: claimId, 
@@ -39,7 +37,6 @@ const AddComment = ({ claimId, onCommentAdded}) => {
         if (error) {
             console.error("Error adding comment:", error);
         } else {
-            console.log("Comment added successfully:", data);
             setComment(""); //Clears input after a successful comment post
             setIsAffirmative(null); // Reset sentiment selection
             if (onCommentAdded) {

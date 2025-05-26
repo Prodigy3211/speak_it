@@ -13,7 +13,7 @@ const ProtectedRoutes = () => {
         const checkUser = async () => {
             const {data, error} = await supabase.auth.getUser();
             if (error || !data.user) {
-                console.log ('Error fetching user', error.message);
+                console.log ('Error fetching user');
                 setUser(false);
             } else {
                 setUser(true);

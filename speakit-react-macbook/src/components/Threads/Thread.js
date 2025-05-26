@@ -60,7 +60,6 @@ const Thread = () => {
       if (error) {
         console.error('Error fetching claim:', error);
       } else {
-        console.log('Fetched claim successfully:');
         setClaim(data);
       }
     };

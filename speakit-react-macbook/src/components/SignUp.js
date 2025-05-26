@@ -27,23 +27,16 @@ function SignUp(){
     
         if (error) {
             setError(error.message);
-            console.error('SignUp Failed!', data);
-            console.log('Sign Up Error', error);
-            return;
         }  else {
-            // const userId = data?.user.id;
-            console.log('Sign Up Successful!' , data.user);
-            console.log ('Confirmation Email sent to:' , data.user.email);
             navigate('/login');
-        
+        }
         
         //  Send Profile Data to profiles table in Supabase
-
-         const { data: profileData, error: profileError } = await supabase
+         const { error: profileError } = await supabase
          .from('profiles')
          .insert([
             {
-                user_id: data.user.id, //userid from users table
+                user_id: data.user.id,
                 username:username,
             },
          ]);
@@ -54,16 +47,13 @@ function SignUp(){
          }
 
         if (profileError) {
-            console.error('Profile Insert Error', profileError);
             setError(profileError.message);
         } else{
             setSuccess(true);
-            console.log('Sign Up Successful',profileData);
             setTimeout(() => {
                 navigate('/login');
             }, 2000);
     }
-        }
     };
     
     return (
