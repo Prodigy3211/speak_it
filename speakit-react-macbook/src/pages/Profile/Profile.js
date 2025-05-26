@@ -9,6 +9,10 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editing, setEditing] =useState(false); //Profile Updates
+  const [userComments, setUserComments] = useState([]);
+  const [userClaims, setUserClaims] = useState([]);
+  const [userVotes, setUserVotes] = useState([]);
+
   
 
   
@@ -35,16 +39,49 @@ const Profile = () => {
         .select('*')
         .eq('user_id', user.id)
         .single();
+
+        if (error) {
+          setError(error.message);
+        } else {
+          setUserProfile(data);
+        }
+
+          //fetch user comments
+      const {data: comments, error: commentsError } = await supabase
+      .from('comments')
+      .select('*')
+      .eq('user_id', user.id);
+
+  if (!commentsError) {
+    setUserComments(comments);
+  }
+
+// fetch user votes
+  const {data: votes, error: votesError } = await supabase
+  .from('votes')
+  .select('*')
+  .eq('user_id', user.id);
+
+  if (!votesError) {
+    setUserVotes(votes);
+  }
+
+  // fetch user claims
+  const {data: claims, error: claimsError } = await supabase
+  .from('claims')
+  .select('*')
+  .eq('op_id', user.id);
+
+  if (!claimsError) {
+    setUserClaims(claims);
+  }
         
-      if (error) {
-        setError(error.message);
-      } else {
-        setUserProfile(data);
-      }
+      
         setLoading(false);
     };
       fetchUserProfile ();
   }, []);
+
 
   if (error){
     return <p>{error}</p>
@@ -76,9 +113,9 @@ const Profile = () => {
           <div>
           <p className='text-lg font-bold mt-4'>Stats: (coming soon)
           </p>
-          <p>Votes: {userProfile?.votes || "0"}</p>
-          <p>Claims: {userProfile?.claims || "0"}</p>
-          <p>Comments: {userProfile?.comments || "0"}</p>
+          <p>Votes: {userVotes.length || "0"}</p>
+          <p>Claims: {userClaims.length || "0"}</p>
+          <p>Comments: {userComments.length || "0"}</p>
           </div>
         </div>
         </>
