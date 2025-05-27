@@ -9,14 +9,14 @@ function SignUp(){
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
-    const [ setAuth] = useState(false);
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
         setError(null);
         setSuccess(false);
-        setAuth(false);
+
+        try{
 
         // email and password uploading to supabase
         const { data, error } = await supabase.auth.signUp({
@@ -27,8 +27,12 @@ function SignUp(){
     
         if (error) {
             setError(error.message);
-        }  else {
-            navigate('/login');
+            return;
+        } 
+
+        if(!data?.user?.id){
+            setError('User ID is missing');
+            return;
         }
         
         //  Send Profile Data to profiles table in Supabase
@@ -41,10 +45,6 @@ function SignUp(){
             },
          ]);
 
-         if (!data?.user?.id){
-            setError('User ID is missing');
-            return;
-         }
 
         if (profileError) {
             setError(profileError.message);
@@ -53,6 +53,9 @@ function SignUp(){
             setTimeout(() => {
                 navigate('/login');
             }, 2000);
+        }
+    } catch (error){
+        setError(error.message);
     }
     };
     
@@ -102,7 +105,7 @@ function SignUp(){
             </div>
             <div>
             {error && <p className="text-red-600">{error}</p>}
-            {success && <p className="text-green-500">Validate Email Before Logging In{success}</p>}
+            {success && <p className="text-green-500">Validate Email Before Logging In</p>}
             <button className='bg-blue-500 text-white rounded-md p-2 mt-4' type='submit'>Create Account</button>
             </div>
             </div>
