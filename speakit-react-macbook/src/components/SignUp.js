@@ -62,7 +62,7 @@ function SignUp(){
         </div>
             <div className='flex flex-col justify-center items-center gap-4 px-16'>
         <div>
-            <label>Email: *Must validate before logging in</label>
+            <label>Email: </label>
             <input
                 type='email'
                 placeholder='Email Address'
