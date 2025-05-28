@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import{faThumbsUp, faThumbsDown, faReply} from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
 
-const CommentItem = ({comment}) => {
+const CommentItem = ({comment, onParentClick}) => {
     const [voteCount, setVoteCount] = useState({up: 0, down: 0});
     const [userVote, setUserVote] = useState(null);
     const [username, setUsername] = useState('');
@@ -183,12 +183,39 @@ useEffect(() => {
     }
 };
 
+const shortenId = (id) => {
+    return id.toString().slice(-6);
+}
+
+const formatDate = (dateString) =>{
+const date = new Date (dateString);
+return date.toLocaleDateString('en-US', {
+    month:'numeric',
+    day:'numeric',
+    hour:'2-digit',
+    minute:'2-digit',
+    year:'numeric',
+    hour12:false
+})
+}
+
     return (
         <div className={`p-4 rounded-lg ${
             comment.affirmative
             ? 'bg-blue-100 text-blue-900'
             : 'bg-orange-100 text-orange-900'
          }`}>
+            {comment.parent_comment_id && (
+                <div className="mb-2">
+                    <button
+                    onClick={onParentClick}
+                    className="text-blue-500 text-sm hover:text-blue-700"
+                    >
+                        In reply to: {shortenId(comment.parent_comment_id)}
+                    </button>
+                </div>
+            )}
+            <p>{formatDate(comment.created_at)} - No.{shortenId(comment.id)}</p>
             <p>{comment.content || comment.comment} - {username || 'anon'}</p>
             <div className="flex items-center mt-2 space-x-4">
                 <button

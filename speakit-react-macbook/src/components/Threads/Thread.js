@@ -1,9 +1,10 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 import supabase from '../../server/supabaseClient';
 import AddComment from '../Forms/AddComment';
 import TopNavigation from '../TopNavigation';
-import CommentItem from '../Comments/CommentItem';
+import CommentThread from '../Comments/CommentThread';
 
 const Thread = () => {
   // Get the parameter from the URL
@@ -23,27 +24,13 @@ const Thread = () => {
       .from('comments')
       .select('*')
       .eq('claim_id', claimId)
-      .is('parent_comment_id', null) //Top Levels Comments only
+      // .is('parent_comment_id', null) //Top Levels Comments only
       .order('created_at', { ascending: true });
     if (error) {
       console.error('Error fetching comments:', error);
       setComments([]); // Ensure comments is always an array even on error
-    } else {
-      const commentsWithReplies = await Promise.all(
-        (data || []).map(async (comment) => {
-          const {data:replies} = await supabase
-          .from('comments')
-          .select('*')
-          .eq('parent_comment_id', comment.id)
-          .order('created_at', { ascending: true });
-
-          return {
-            ...comment,
-            replies: replies || []
-          };
-        })
-      )
-      setComments(commentsWithReplies); // Ensure we set an empty array if data is null/undefined
+    } else{
+      setComments(data || []);
     }
   }, [claimId]);
 
@@ -97,32 +84,14 @@ const Thread = () => {
          </div>
           </div>
           <h3 className='text-2xl font-bold my-4 '>Comments: </h3>
-          <ul className="space-y-4">
+          <div className = "space-y-4">
             {Array.isArray(comments) && comments.length > 0 ? (
-              comments.map((comment) => (
-                <li 
-                  key={comment.id} 
-                  className={`p-4 rounded-lg ${
-                    comment.affirmative 
-                      ? 'bg-blue-100 text-blue-900' 
-                      : 'bg-orange-100 text-orange-900'
-                  }`}
-                >
-                  
-                  <CommentItem comment={comment} />
-                  {comment.replies && comment.replies.length > 0 && (
-                    <div className="mt-4">
-                      {comment.replies.map((reply) => (
-                        <CommentItem key={reply.id} comment={reply} />
-                      ))}
-                    </div>
-                  )}
-                  </li>
-              ))
+              <CommentThread comments={comments} />
+          
             ) : (
               <li>No comments yet</li>
             )}
-          </ul>
+            </div>
          </div>
         </>
       ) : (
