@@ -66,7 +66,7 @@ const AddComment = ({ claimId, onCommentAdded}) => {
                         onChange={() => setIsAffirmative(true)}
                         className="form-radio"
                     />
-                    <span>For</span>
+                    <span className="text-blue-700">For</span>
                 </label>
                 <label className="flex items-center gap-2">
                     <input
@@ -76,7 +76,7 @@ const AddComment = ({ claimId, onCommentAdded}) => {
                         onChange={() => setIsAffirmative(false)}
                         className="form-radio"
                     />
-                    <span>Against</span>
+                    <span className="text-orange-700">Against</span>
                 </label>
             </div>
             <button 
