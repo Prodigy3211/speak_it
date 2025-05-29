@@ -60,8 +60,6 @@ const Thread = () => {
     }
   }
 
-  console.log('Comment:', comment)
-  console.log('Comment Images:', fetchCommentImages)
 
   useEffect(() => {
     const fetchClaim = async () => {
