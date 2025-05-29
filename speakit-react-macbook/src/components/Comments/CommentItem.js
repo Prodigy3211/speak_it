@@ -3,14 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import{faThumbsUp, faThumbsDown, faReply} from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
 
-const CommentItem = ({comment, onParentClick}) => {
+const CommentItem = ({comment, onParentClick, onCommentAdded}) => {
     const [voteCount, setVoteCount] = useState({up: 0, down: 0});
     const [userVote, setUserVote] = useState(null);
     const [username, setUsername] = useState('');
     const[showReplyForm, setShowReplyForm] = useState(false);
     const[isAffirmative, setIsAffirmative] = useState(null);
     const[replyContent, setReplyContent] = useState('');
-    const[error] = useState(null);
+    const[error, setError] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
+
 
 //Get the username for this comment
 useEffect(() => {
@@ -161,7 +164,7 @@ useEffect(() => {
         }
 
         try {
-            const {error} = await supabase
+            const {error: replyError, data: newReply} = await supabase
             .from('comments')
             .insert([{
             claim_id: comment.claim_id,
@@ -169,19 +172,68 @@ useEffect(() => {
             content: replyContent,
             affirmative: isAffirmative,
             parent_comment_id: comment.id
-        }]);
+        }])
+        .select()
+        .single();
 
-        if(error) {
-            console.error('Error adding reply:', error);
-        } else {
-            setReplyContent('');
-            setIsAffirmative(null);
-            setShowReplyForm(false);
+        if (replyError) throw replyError;
+
+        if (imageFile && newReply) {
+            const fileExt = imageFile.name.split('.').pop();
+            const fileName = `${Math.random()}.${fileExt}`;
+
+
+            const {error: uploadError} = await supabase.storage
+            .from('comment-images')
+            .upload(fileName, imageFile);
+
+        if (uploadError) throw uploadError;
+
+        const {data: {publicUrl}} = supabase.storage
+        .from('comment-images')
+        .getPublicUrl(fileName);
+
+        const {error: imageError} = await supabase
+        .from('images')
+        .insert([{
+            comment_id: newReply.id,
+            user_id: user.id,
+            image_url: publicUrl,
+            file_name: fileName,
+            file_size: imageFile.size,
+            content_type: imageFile.type
+        }]);
+        if (imageError) throw imageError;
+        }
+        
+        setImageFile(null);
+        setReplyContent('');
+        setIsAffirmative(null);
+        setShowReplyForm(false);
+
+        if(onCommentAdded) {
+            onCommentAdded();
         }
     } catch(error) {
         console.error('Error adding reply:', error);
+        setError('Failed to add reply. Please try again.');
     }
-};
+    };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImageFile(file);
+            // Create a preview URL for the image
+            const previewUrl = URL.createObjectURL(file);
+            setImagePreview(previewUrl);
+        }
+    };
+
+    const clearImage = () => {
+        setImageFile(null);
+        setImagePreview(null);
+    };
 
 const shortenId = (id) => {
     return id.toString().slice(-6);
@@ -217,6 +269,19 @@ return date.toLocaleDateString('en-US', {
             )}
             <p>{formatDate(comment.created_at)} - No.{shortenId(comment.id)}</p>
             <p>{comment.content || comment.comment} - {username || 'anon'}</p>
+            {/* Display images */}
+            {comment.images && comment.images.length > 0 && (
+                    <div className="mt-2">
+                        {comment.images.map((image) => (
+                            <img
+                            key={image.id}
+                            src={image.image_url}
+                            alt="Comment attachment"
+                            className="w-full h-auto rounded-md"
+                            />
+                        ) )}
+                    </div>
+                )}
             <div className="flex items-center mt-2 space-x-4">
                 <button
                     onClick={() => handleVote('up')}
@@ -248,6 +313,7 @@ return date.toLocaleDateString('en-US', {
                     <span>Reply</span>
                 </button>
                 </div>
+                
 
                 {showReplyForm && (
                     <form onSubmit={handleReply} className="mt-2">
@@ -261,6 +327,38 @@ return date.toLocaleDateString('en-US', {
                                 className="w-full p-2 border rounded-md"
                                 />
 
+                        </div>
+                        <div className="mt-2">
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                className="hidden"
+                                id={`image-upload-${comment.id}`}
+                            />
+                            <label
+                                htmlFor={`image-upload-${comment.id}`}
+                                className="inline-block bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md cursor-pointer"
+                            >
+                                Upload Image
+                            </label>
+                            
+                            {imagePreview && (
+                                <div className="mt-2 relative inline-block">
+                                    <img
+                                        src={imagePreview}
+                                        alt="Preview"
+                                        className="max-w-xs rounded-md"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={clearImage}
+                                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                                    >
+                                        cancel
+                                    </button>
+                                </div>
+                            )}
                         </div>
                         <div className="flex gap-4">
                             <label className="flex items-center gap-2">
@@ -293,7 +391,10 @@ return date.toLocaleDateString('en-US', {
                             </button>
                             <button
                                 type="button"
-                                onClick={() => setShowReplyForm(false)}
+                                onClick={() => {
+                                    setShowReplyForm(false);
+                                    clearImage();
+                                }}
                                 className="bg-gray-500 text-white px-4 py-2 rounded-md"
                             >
                                 Cancel
@@ -307,7 +408,7 @@ return date.toLocaleDateString('en-US', {
                         <h3 className="text-lg font-semibold">Replies</h3>
                     </div>
                 )} 
-            </div>
+                </div>
     );
 };
 
