@@ -6,6 +6,7 @@ import AddComment from '../Forms/AddComment';
 import TopNavigation from '../TopNavigation';
 import CommentThread from '../Comments/CommentThread';
 
+
 const Thread = () => {
   // Get the parameter from the URL
   const params = useParams();
@@ -14,7 +15,7 @@ const Thread = () => {
   const { claimId } = params;
   
   const [claim, setClaim] = useState(null);
-  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState([]);
 
   // Function to fetch comments - memoized with useCallback
   const fetchComments = useCallback(async () => {
@@ -22,17 +23,45 @@ const Thread = () => {
     
     const { data, error } = await supabase
       .from('comments')
-      .select('*')
+      .select(`
+        *,
+        images (
+        id,
+        image_url,
+        file_name,
+        file_size,
+        content_type,
+        created_at
+        )
+        `)
       .eq('claim_id', claimId)
       // .is('parent_comment_id', null) //Top Levels Comments only
       .order('created_at', { ascending: true });
     if (error) {
       console.error('Error fetching comments:', error);
-      setComments([]); // Ensure comments is always an array even on error
+      setComment([]); // Ensure comments is always an array even on error
     } else{
-      setComments(data || []);
+      setComment(data || []);
     }
   }, [claimId]);
+
+  const fetchCommentImages = async (commentId) => {
+    if (!commentId) return;
+    
+  const {data, error} = await supabase
+    .from('images')
+    .select('*')
+    .eq('comment_id', commentId);
+
+    if (error) {
+      console.error('Error fetching comment images:', error);
+    } else {
+      return data;
+    }
+  }
+
+  console.log('Comment:', comment)
+  console.log('Comment Images:', fetchCommentImages)
 
   useEffect(() => {
     const fetchClaim = async () => {
@@ -56,7 +85,7 @@ const Thread = () => {
       fetchComments();
     } else {
       console.error('No claimId found in URL params');
-      setComments([]); // Ensure comments is an array if no claimId
+      setComment([]); // Ensure comments is an array if no claimId
     }
   }, [claimId, fetchComments]);
   
@@ -80,13 +109,14 @@ const Thread = () => {
           <div className='border-2 border-black rounded-md p-4'>
           <AddComment 
          claimId={claimId} 
-         onCommentAdded={fetchComments} />
+         onCommentAdded={fetchComments}
+         fetchCommentImages={fetchCommentImages} />
          </div>
           </div>
           <h3 className='text-2xl font-bold my-4 '>Comments: </h3>
           <div className = "space-y-4">
-            {Array.isArray(comments) && comments.length > 0 ? (
-              <CommentThread comments={comments} />
+            {Array.isArray(comment) && comment.length > 0 ? (
+              <CommentThread comments={comment} />
           
             ) : (
               <li>No comments yet</li>
@@ -101,5 +131,6 @@ const Thread = () => {
     </div>
   );
 };
+
 
 export default Thread;

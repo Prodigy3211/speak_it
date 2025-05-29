@@ -3,14 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import{faThumbsUp, faThumbsDown, faReply} from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
 
-const CommentItem = ({comment, onParentClick}) => {
+const CommentItem = ({comment, onParentClick, onCommentAdded}) => {
     const [voteCount, setVoteCount] = useState({up: 0, down: 0});
     const [userVote, setUserVote] = useState(null);
     const [username, setUsername] = useState('');
     const[showReplyForm, setShowReplyForm] = useState(false);
     const[isAffirmative, setIsAffirmative] = useState(null);
     const[replyContent, setReplyContent] = useState('');
-    const[error] = useState(null);
+    const[error, setError] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
+
 
 //Get the username for this comment
 useEffect(() => {
@@ -161,7 +163,7 @@ useEffect(() => {
         }
 
         try {
-            const {error} = await supabase
+            const {error: replyError, data: newReply} = await supabase
             .from('comments')
             .insert([{
             claim_id: comment.claim_id,
@@ -169,19 +171,55 @@ useEffect(() => {
             content: replyContent,
             affirmative: isAffirmative,
             parent_comment_id: comment.id
-        }]);
+        }])
+        .select()
+        .single();
 
-        if(error) {
-            console.error('Error adding reply:', error);
-        } else {
-            setReplyContent('');
-            setIsAffirmative(null);
-            setShowReplyForm(false);
+        if (replyError) throw replyError;
+
+        if (imageFile && newReply) {
+            const fileExt = imageFile.name.split('.').pop();
+            const fileName = `${Math.random()}.${fileExt}`;
+
+
+            const {error: uploadError} = await supabase.storage
+            .from('comment-images')
+            .upload(fileName, imageFile);
+
+        if (uploadError) throw uploadError;
+
+        const {data: {publicUrl}} = supabase.storage
+        .from('comment-images')
+        .getPublicUrl(fileName);
+
+        const {error: imageError} = await supabase
+        .from('images')
+        .insert([{
+            comment_id: newReply.id,
+            user_id: user.id,
+            image_url: publicUrl,
+            file_name: fileName,
+            file_size: imageFile.size,
+            content_type: imageFile.type
+        }]);
+        if (imageError) throw imageError;
+        }
+        
+        setImageFile(null);
+        setReplyContent('');
+        setIsAffirmative(null);
+        setShowReplyForm(false);
+
+        if(onCommentAdded) {
+            onCommentAdded();
         }
     } catch(error) {
         console.error('Error adding reply:', error);
+        setError('Failed to add reply. Please try again.');
     }
-};
+    };
+
+       
 
 const shortenId = (id) => {
     return id.toString().slice(-6);
@@ -307,7 +345,23 @@ return date.toLocaleDateString('en-US', {
                         <h3 className="text-lg font-semibold">Replies</h3>
                     </div>
                 )} 
-            </div>
+               
+{/* Display images */}
+                {comment.images && comment.images.length > 0 && (
+                    <div className="mt-2">
+                        <h3 className="text-lg font-semibold">Images</h3>
+                        {comment.images.map((image) => (
+                            <img
+                            key={image.id}
+                            src={image.image_url}
+                            alt="Comment attachment"
+                            className="max-w-xs rounded-md"
+                            />
+                        ) )}
+                    </div>
+                )}
+                </div>
+            
     );
 };
 
