@@ -255,6 +255,19 @@ return date.toLocaleDateString('en-US', {
             )}
             <p>{formatDate(comment.created_at)} - No.{shortenId(comment.id)}</p>
             <p>{comment.content || comment.comment} - {username || 'anon'}</p>
+            {/* Display images */}
+            {comment.images && comment.images.length > 0 && (
+                    <div className="mt-2">
+                        {comment.images.map((image) => (
+                            <img
+                            key={image.id}
+                            src={image.image_url}
+                            alt="Comment attachment"
+                            className="max-w-xs rounded-md"
+                            />
+                        ) )}
+                    </div>
+                )}
             <div className="flex items-center mt-2 space-x-4">
                 <button
                     onClick={() => handleVote('up')}
@@ -286,6 +299,7 @@ return date.toLocaleDateString('en-US', {
                     <span>Reply</span>
                 </button>
                 </div>
+                
 
                 {showReplyForm && (
                     <form onSubmit={handleReply} className="mt-2">
@@ -345,23 +359,7 @@ return date.toLocaleDateString('en-US', {
                         <h3 className="text-lg font-semibold">Replies</h3>
                     </div>
                 )} 
-               
-{/* Display images */}
-                {comment.images && comment.images.length > 0 && (
-                    <div className="mt-2">
-                        <h3 className="text-lg font-semibold">Images</h3>
-                        {comment.images.map((image) => (
-                            <img
-                            key={image.id}
-                            src={image.image_url}
-                            alt="Comment attachment"
-                            className="max-w-xs rounded-md"
-                            />
-                        ) )}
-                    </div>
-                )}
                 </div>
-            
     );
 };
 
