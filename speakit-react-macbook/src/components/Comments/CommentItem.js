@@ -277,7 +277,7 @@ return date.toLocaleDateString('en-US', {
                             key={image.id}
                             src={image.image_url}
                             alt="Comment attachment"
-                            className="max-w-xs rounded-md"
+                            className="w-full h-auto rounded-md"
                             />
                         ) )}
                     </div>
