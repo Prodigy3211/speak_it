@@ -114,8 +114,7 @@ const Thread = () => {
           <h3 className='text-2xl font-bold my-4 '>Comments: </h3>
           <div className = "space-y-4">
             {Array.isArray(comment) && comment.length > 0 ? (
-              <CommentThread comments={comment} />
-          
+              <CommentThread comments={comment} onCommentAdded={fetchComments} />
             ) : (
               <li>No comments yet</li>
             )}

@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'react';
 import CommentItem from './CommentItem';
 import React from 'react';
 
-const CommentThread = ({comments}) => {
+const CommentThread = ({comments, onCommentAdded}) => {
     const commentRefs = useRef({});
 
     //create a ref for each comment
@@ -23,7 +23,6 @@ const CommentThread = ({comments}) => {
     };
 
     //Group Comments by the Parent ID in an Array
-
     const commentGroups = comments.reduce((acc, comment) => {
         const parentId = comment.parent_comment_id || 'root';
         if (!acc[parentId]) {
@@ -33,29 +32,29 @@ const CommentThread = ({comments}) => {
         return acc;
     }, {});
 
-// render comments recursively
+    // render comments recursively
+    const renderCommentGroup = (parentId, level = 0) => {
+        const groupComments = commentGroups[parentId] || [];
 
-const renderCommentGroup = (parentId, level = 0) => {
-    const groupComments = commentGroups[parentId] || [];
-
-    return groupComments.map(comment => (
-        <div 
-        key={comment.id}
-        ref = {commentRefs.current[comment.id]}
-        className="mb-2"
-        >
-        <CommentItem
-        comment={comment}
-        onParentClick={() => comment.parent_comment_id && scrollToParentComment(comment.parent_comment_id)}
-        />
-        {commentGroups[comment.id] && (
-            <div className="ml-16">
-            {renderCommentGroup(comment.id, level +1)}
+        return groupComments.map(comment => (
+            <div 
+                key={comment.id}
+                ref={commentRefs.current[comment.id]}
+                className="mb-2"
+            >
+                <CommentItem
+                    comment={comment}
+                    onParentClick={() => comment.parent_comment_id && scrollToParentComment(comment.parent_comment_id)}
+                    onCommentAdded={onCommentAdded}
+                />
+                {commentGroups[comment.id] && (
+                    <div className="ml-16">
+                        {renderCommentGroup(comment.id, level + 1)}
+                    </div>
+                )}
             </div>
-        )}
-        </div>
-    ));
-};
+        ));
+    };
 
     return (
         <div>
