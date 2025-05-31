@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import{faThumbsUp, faThumbsDown, faReply} from "@fortawesome/free-solid-svg-icons";
+import{faThumbsUp, faThumbsDown, faReply, faChevronUp, faChevronDown} from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
 
-const CommentItem = ({comment, onParentClick, onCommentAdded}) => {
+const CommentItem = ({comment, onParentClick, onCommentAdded, replies = []}) => {
     const [voteCount, setVoteCount] = useState({up: 0, down: 0});
     const [userVote, setUserVote] = useState(null);
     const [username, setUsername] = useState('');
@@ -13,6 +13,7 @@ const CommentItem = ({comment, onParentClick, onCommentAdded}) => {
     const[error, setError] = useState(null);
     const [imageFile, setImageFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
+    const [isExpanded, setIsExpanded] = useState(true);
 
 
 //Get the username for this comment
@@ -403,9 +404,30 @@ return date.toLocaleDateString('en-US', {
                     </form>
                 )}
 
-                {comment.replies && comment.replies.length > 0 && (
+                {replies && replies.length > 0 && (
                     <div className="mt-4">
-                        <h3 className="text-lg font-semibold">Replies</h3>
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-lg font-semibold">Replies</h3>
+                            <button
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className="flex items-center gap-1 text-sm text-red-500 hover:text-gray-700 border-2 border-solid border-red-500 rounded-md p-1"
+                            >
+                                <FontAwesomeIcon icon={isExpanded ? faChevronUp : faChevronDown} className="mr-2" />
+                                {isExpanded ? 'Hide' : 'Show'} {replies.length} replies
+                            </button>
+                        </div>
+                        {isExpanded && (
+                            <div className="mt-2 space-y-4">
+                                {replies.map((reply) => (
+                                    <CommentItem
+                                        key={reply.id}
+                                        comment={reply}
+                                        onParentClick={onParentClick}
+                                        onCommentAdded={onCommentAdded}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )} 
                 </div>

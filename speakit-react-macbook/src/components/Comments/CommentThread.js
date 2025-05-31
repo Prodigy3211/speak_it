@@ -1,8 +1,7 @@
 import {useRef, useEffect, useState} from 'react';
 import CommentItem from './CommentItem';
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+
 
 const CommentThread = ({comments, onCommentAdded}) => {
     const commentRefs = useRef({});
@@ -35,19 +34,19 @@ const CommentThread = ({comments, onCommentAdded}) => {
         return acc;
     }, {});
 
-    //Function to toggle the thread expansion
-    const toggleThread = (comment_id) => {
-        setExpandedThreads(prev => ({
-            ...prev,
-            [comment_id]: !prev[comment_id]
-        }));
-    };
+    // //Function to toggle the thread expansion
+    // const toggleThread = (comment_id) => {
+    //     setExpandedThreads(prev => ({
+    //         ...prev,
+    //         [comment_id]: !prev[comment_id]
+    //     }));
+    // };
 
     // render comments recursively
     const renderCommentGroup = (parentId, level = 0) => {
         const groupComments = commentGroups[parentId] || [];
         const isExpanded = expandedThreads[parentId] || false;
-        const shouldCollapse = groupComments.length >= 1 && !isExpanded;
+        const shouldCollapse = groupComments.length >= 2 && !isExpanded;
 
         const visibleComments = shouldCollapse ? groupComments.slice(0, 3) : groupComments;
 
@@ -68,6 +67,7 @@ const CommentThread = ({comments, onCommentAdded}) => {
                     comment={comment}
                     onParentClick={() => comment.parent_comment_id && scrollToParentComment(comment.parent_comment_id)}
                     onCommentAdded={onCommentAdded}
+                    replies={commentGroups[comment.id] || []}
                 />
                 {commentGroups[comment.id] && (
                     <div className="ml-16">
@@ -76,15 +76,6 @@ const CommentThread = ({comments, onCommentAdded}) => {
                 )}
             </div>
         ))}
-        {shouldCollapse && (
-            <button
-                onClick={() => toggleThread(parentId)}
-                className="flex items-center gap-1 text-sm text-red-500 hover:text-gray-700 border-2 border-solid border-red-500 rounded-md p-1"
-            >
-                <FontAwesomeIcon icon={isExpanded ? faChevronUp : faChevronDown} className="mr-2" />
-                {isExpanded ? 'Hide' : 'Show'} {groupComments.length - 1} replies
-            </button>
-        )}
         </>
     );
 };
