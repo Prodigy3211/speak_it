@@ -48,7 +48,7 @@ const CommentThread = ({comments, onCommentAdded}) => {
                     onCommentAdded={onCommentAdded}
                 />
                 {commentGroups[comment.id] && (
-                    <div className="ml-16">
+                    <div className="ml-8">
                         {renderCommentGroup(comment.id, level + 1)}
                     </div>
                 )}
