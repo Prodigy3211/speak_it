@@ -3,6 +3,7 @@ import LogoutButton from '../../components/LogoutButton';
 import supabase from '../../server/supabaseClient';
 import EditProfile from './EditProfile';
 import TopNavigation from '../../components/TopNavigation';
+import Statistics from '../../components/Statistics/Statistics';
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null); //User Profile Data
@@ -11,7 +12,7 @@ const Profile = () => {
   const [editing, setEditing] =useState(false); //Profile Updates
   const [userComments, setUserComments] = useState([]);
   const [userClaims, setUserClaims] = useState([]);
-  const [userVotes, setUserVotes] = useState([]);
+  
 
   
 
@@ -56,15 +57,6 @@ const Profile = () => {
     setUserComments(comments);
   }
 
-// fetch user votes
-  const {data: votes, error: votesError } = await supabase
-  .from('votes')
-  .select('*')
-  .eq('user_id', user.id);
-
-  if (!votesError) {
-    setUserVotes(votes);
-  }
 
   // fetch user claims
   const {data: claims, error: claimsError } = await supabase
@@ -113,9 +105,13 @@ const Profile = () => {
           <div>
           <p className='text-lg font-bold mt-4'>Stats: (coming soon)
           </p>
-          <p>Votes: {userVotes.length || "0"}</p>
+          <p>Votes:</p>
+          <p>Upvotes: {} </p>
+          <p>Downvotes: </p>
           <p>Claims: {userClaims.length || "0"}</p>
           <p>Comments: {userComments.length || "0"}</p>
+
+          <Statistics userId={userProfile?.id}/>
           </div>
         </div>
         </>
