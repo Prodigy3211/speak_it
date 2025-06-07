@@ -3,6 +3,8 @@ import LogoutButton from '../../components/LogoutButton';
 import supabase from '../../server/supabaseClient';
 import EditProfile from './EditProfile';
 import TopNavigation from '../../components/TopNavigation';
+import Statistics from '../../components/Statistics/Statistics';
+import BottomNavigation from '../../components/BottomNavigation';
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null); //User Profile Data
@@ -11,7 +13,8 @@ const Profile = () => {
   const [editing, setEditing] =useState(false); //Profile Updates
   const [userComments, setUserComments] = useState([]);
   const [userClaims, setUserClaims] = useState([]);
-  const [userVotes, setUserVotes] = useState([]);
+  const [user, setUser] = useState(null);
+  
 
   
 
@@ -24,8 +27,7 @@ const Profile = () => {
       const {
         data: {user}
       } = await supabase.auth.getUser(); //Check currently logged in user
-      
-      
+      setUser(user);
 
       if (!user){
         setError('Not Logged In');
@@ -56,15 +58,6 @@ const Profile = () => {
     setUserComments(comments);
   }
 
-// fetch user votes
-  const {data: votes, error: votesError } = await supabase
-  .from('votes')
-  .select('*')
-  .eq('user_id', user.id);
-
-  if (!votesError) {
-    setUserVotes(votes);
-  }
 
   // fetch user claims
   const {data: claims, error: claimsError } = await supabase
@@ -91,39 +84,61 @@ const Profile = () => {
   }
 
   return (
-    <div><TopNavigation />
-    <div>
+    <div className='p-4 pb-20'>
+      <TopNavigation />
+    <div className='mt-4'>
       {editing ? (
         <EditProfile profile={userProfile} setProfile = {setUserProfile} setEditing={setEditing} />
       ): (
         <>
-        <div className='flex flex-col items-centermx-8 rounded-md p-4'>
-          <div className='text-2xl font-bold'>
+        <div className='flex flex-col items-center mx-8 rounded-md p-4'>
+          <div className='text-lg font-bold mb-2'>
             <h1>Welcome, {userProfile?.username || "User"}!</h1>
           </div>
-          <div>
+          {/* <div>
             <div className='text-lg font-bold mt-4'>
             <label>Bio</label>
             </div>
           <p>{userProfile?.bio || "No Bio Available."}</p>
+          </div> */}
+          
+          <div>
+          <div className="mt-2">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="border border-gray-300 p-2 text-left">Your Activity</th>
+                  <th className="border border-gray-300 p-2 text-left">Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-300 p-2">Claims Made</td>
+                  <td className="border border-gray-300 p-2">{userClaims.length || "0"}</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 p-2">Comments Left</td>
+                  <td className="border border-gray-300 p-2">{userComments.length || "0"}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-4">
+            <Statistics userId={user.id} />
+          </div>
           </div>
           <div className='mt-4'>
-          <button className='bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2' onClick={() => setEditing (true)}>Edit Profile</button>
+          <button className='bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm' onClick={() => setEditing (true)}>Change Username</button>
           </div>
-          <div>
-          <p className='text-lg font-bold mt-4'>Stats: (coming soon)
-          </p>
-          <p>Votes: {userVotes.length || "0"}</p>
-          <p>Claims: {userClaims.length || "0"}</p>
-          <p>Comments: {userComments.length || "0"}</p>
-          </div>
-        </div>
-        </>
-      )}
-      <div className='mx-4'>
+          <div className='mx-4 items-center mt-4'>
       <LogoutButton />
       </div>
+        </div>
+        
+        </>
+      )}
     </div>
+    <BottomNavigation />
     </div>
   );
 }; 

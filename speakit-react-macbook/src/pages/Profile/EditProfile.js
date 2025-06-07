@@ -3,7 +3,7 @@ import supabase from "../../server/supabaseClient";
 
 const EditProfile = ({userProfile, setProfile, setEditing}) => {
     const [username , setUserName] = useState(userProfile?.username || " ");
-    const [bio, setBio] = useState(userProfile?.bio || "");
+    // const [bio, setBio] = useState(userProfile?.bio || "");
     const [loading, setLoading] = useState(false);
     const [error, setError] =useState(null);
     if (error){
@@ -28,8 +28,8 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
 
         const { data, error } = await supabase
         .from('profiles')
-        .update({username:username,
-             bio:bio})
+        .update({username:username,})
+            // bio:bio})
         .eq("user_id", user.id)
         .single();
     if (error) {
@@ -47,16 +47,20 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
                 <div className="p-4">
                 <div>
                 <label className="flex flex-col">
-                Username
+                Change your username:
                 <input type="varchar" 
                 value={username} 
                 onChange={(e)=> setUserName(e.target.value)} 
                 className='my-2 border-2 border-black bg-white rounded-md'
+                placeholder="Enter your new username"
                 >
                 </input>
+                <p className="text-sm text-gray-500">
+                (Note: This username will replace "Anonymous" in your previous comments.)
+                </p>
                 </label>
                 </div>
-                <div>
+                {/* <div>
                 <label className="flex flex-col">
                 Bio
                 <textarea
@@ -66,7 +70,7 @@ const EditProfile = ({userProfile, setProfile, setEditing}) => {
                 placeholder={bio}
                 />
                 </label>
-                </div>
+                </div> */}
                 <div>
                 <button type="submit" disabled={loading}
                 className='bg-blue-500 text-white rounded-md p-2 w-full mt-4'
