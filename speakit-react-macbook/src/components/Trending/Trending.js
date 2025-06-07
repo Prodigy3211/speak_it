@@ -27,16 +27,30 @@ const Trending = () => {
                 return;
             }
 
-            // Count comments per claim
+            // Count comments per claim and separate by affirmative/negative
             const claimCommentCounts = comments.reduce((acc, comment) => {
-                acc[comment.claim_id] = (acc[comment.claim_id] || 0) + 1;
+                if (!acc[comment.claim_id]) {
+                    acc[comment.claim_id] = {
+                        total: 0,
+                        affirmative: 0,
+                        negative: 0
+                    };
+                }
+                acc[comment.claim_id].total += 1;
+                if (comment.affirmative) {
+                    acc[comment.claim_id].affirmative += 1;
+                } else {
+                    acc[comment.claim_id].negative += 1;
+                }
                 return acc;
             }, {});
 
             // Combine claims with their comment counts and sort
             const claimsWithCommentCounts = claims.map(claim => ({
                 ...claim,
-                commentCount: claimCommentCounts[claim.id] || 0
+                commentCount: claimCommentCounts[claim.id]?.total || 0,
+                affirmativeCount: claimCommentCounts[claim.id]?.affirmative || 0,
+                negativeCount: claimCommentCounts[claim.id]?.negative || 0
             }));
 
             // Sort by comment count and take top 3
@@ -52,16 +66,23 @@ const Trending = () => {
 
     return (
         <div className="border-2 border-gray-300 rounded-lg p-4 mt-4">
-            <h1 className="text-2xl font-bold mb-4">The Hottest Takes</h1>
+            <h1 className="text-2xl font-bold mb-4">The Hottest Takes🔥🔥🔥</h1>
             <div className="space-y-4">
                 {trendingClaims.map((claim) => (
                     <div key={claim.id} className="border-2 border-gray-300 rounded-lg p-4 hover:bg-gray-50">
                         <Link to={`/category/${claim.category}/thread/${claim.id}`}>
-                            <h2 className="text-xl font-semibold mb-2">{claim.title}</h2>
-                            {/* <p className="text-gray-600 mb-2">{claim.claim}</p> */}
-                            <div className="flex items-center text-sm text-gray-500">
-                                <span className="mr-2">Comments: {claim.commentCount}</span>
-                                <span>Category: {claim.category}</span>
+                            <h2 className="text-xl font-semibold">{claim.title}</h2>
+                            <div className="flex my-2">
+                            <span>Category: {claim.category}</span>
+                            </div>
+                            <div className="flex items-center text-md text-gray-500">
+                                <div className="flex flex-col border-2 border-gray-500 rounded-lg p-2 justify-between w-full">
+                                <div><span> Total Comments: {claim.commentCount}</span></div>
+                                    <div className="flex flex-row justify-around mt-2">
+                                        <div><span>🙌 For: {claim.affirmativeCount}</span></div>
+                                        <div><span>🫠 Against: {claim.negativeCount}</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </Link>
                     </div>

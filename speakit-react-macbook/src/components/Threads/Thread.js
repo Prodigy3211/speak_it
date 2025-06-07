@@ -94,17 +94,15 @@ const Thread = () => {
       {claim ? (
         <>
         <div>
-        <div id='op-claim' className='border-2 border-black rounded-md p-4'>
-          <div className='text-2xl font-bold'>
-          <h1>Claim: {claim.title}</h1>
+        <div id='op-claim' className='bg-white shadow-lg rounded-md p-4 border border-gray-300'>
+          <div className='text-2xl font-bold mb-2'>
+          <h1>{claim.title}</h1>
           </div>
           <div>
-            <div className='text-lg font-bold'>
-            <p>Explanation:</p>
-            </div>
+           
           <p>{claim.claim}</p>
           </div>
-          <div className='border-2 border-black rounded-md'>
+          <div className='bg-white shadow-lg rounded-md mt-4 p-4 border border-gray-300'>
           <AddComment 
          claimId={claimId} 
          onCommentAdded={fetchComments}
