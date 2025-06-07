@@ -51,10 +51,29 @@ export default function Statistics({ userId }) {
 
     return (
         <div>
-            <h1>Statistics</h1>
-            <p>Upvotes Recieved: {votes.upvotesRecieved}</p>
-            <p>Downvotes Recieved: {votes.downvotesRecieved}</p>
-            <p>Total Votes Recieved: {votes.totalVotesRecieved}</p>
+
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="border border-gray-300 p-2 text-left">Votes You've Recieved</th>
+                  <th className="border border-gray-300 p-2 text-left">Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-300 p-2">🙌  Up Votes</td>
+                  <td className="border border-gray-300 p-2">{votes.upvotesRecieved || "0"}</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 p-2">🫠  Down Votes</td>
+                  <td className="border border-gray-300 p-2">{votes.downvotesRecieved || "0"}</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 p-2">✅  Total Votes</td>
+                  <td className="border border-gray-300 p-2">{votes.totalVotesRecieved || "0"}</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
     )
 }
