@@ -4,6 +4,7 @@ import supabase from '../../server/supabaseClient';
 import TopNavigation from '../TopNavigation';
 import { faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import BottomNavigation from '../BottomNavigation';
 
 const ThreadList = () => {
   const { category } = useParams(); //Get's category from URL
@@ -34,7 +35,7 @@ const ThreadList = () => {
 
 
   return (
-    <div>
+    <div className='p-4 pb-20'>
       <TopNavigation />
       {/* pull in category name */}
       <div>
@@ -80,6 +81,7 @@ const ThreadList = () => {
       </ul>
       </div>
         </div>
+        <BottomNavigation />
     </div>
   );
 };

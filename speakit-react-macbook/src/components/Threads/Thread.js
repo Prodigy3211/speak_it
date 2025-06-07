@@ -5,7 +5,7 @@ import supabase from '../../server/supabaseClient';
 import AddComment from '../Forms/AddComment';
 import TopNavigation from '../TopNavigation';
 import CommentThread from '../Comments/CommentThread';
-
+import BottomNavigation from '../BottomNavigation';
 
 const Thread = () => {
   // Get the parameter from the URL
@@ -88,7 +88,7 @@ const Thread = () => {
   }, [claimId, fetchComments]);
   
   return (
-    <div>
+    <div className='p-4 pb-20'>
       <TopNavigation />
       <div className='mt-4'>
       {claim ? (
@@ -104,7 +104,7 @@ const Thread = () => {
             </div>
           <p>{claim.claim}</p>
           </div>
-          <div className='border-2 border-black rounded-md p-4'>
+          <div className='border-2 border-black rounded-md'>
           <AddComment 
          claimId={claimId} 
          onCommentAdded={fetchComments}
@@ -125,6 +125,7 @@ const Thread = () => {
         <p>Loading claim data...</p>
       )}
     </div>
+    <BottomNavigation />
     </div>
   );
 };

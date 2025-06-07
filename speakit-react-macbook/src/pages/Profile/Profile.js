@@ -4,6 +4,7 @@ import supabase from '../../server/supabaseClient';
 import EditProfile from './EditProfile';
 import TopNavigation from '../../components/TopNavigation';
 import Statistics from '../../components/Statistics/Statistics';
+import BottomNavigation from '../../components/BottomNavigation';
 
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null); //User Profile Data
@@ -83,8 +84,9 @@ const Profile = () => {
   }
 
   return (
-    <div><TopNavigation />
-    <div>
+    <div className='p-4 pb-20'>
+      <TopNavigation />
+    <div className='mt-4'>
       {editing ? (
         <EditProfile profile={userProfile} setProfile = {setUserProfile} setEditing={setEditing} />
       ): (
@@ -117,6 +119,7 @@ const Profile = () => {
       <LogoutButton />
       </div>
     </div>
+    <BottomNavigation />
     </div>
   );
 }; 
