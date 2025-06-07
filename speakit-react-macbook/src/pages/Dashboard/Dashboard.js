@@ -3,7 +3,7 @@
 
 import TopNavigation from "../../components/TopNavigation";
 import Categories from "../../components/Categories/Categories";
-
+import Trending from "../../components/Trending/Trending";
 
 
 function Dashboard () {
@@ -13,6 +13,8 @@ function Dashboard () {
     return(
         <>
         <TopNavigation />
+        <p className="text-center text-md mt-2">Lurk in the trends or create your own Hot Take.</p>
+        <Trending />
         <Categories />
         </>
     )

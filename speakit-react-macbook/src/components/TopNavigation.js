@@ -20,10 +20,16 @@ import { useNavigate } from 'react-router-dom';
       <FontAwesomeIcon icon={faUser} onClick={() => navigate('/my-profile')} />
    </div>
    <div>
-    <p onClick={() => navigate('/dashboard')}>Dashboard</p>
+    <button 
+    className='bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2' 
+    onClick={() => navigate('/dashboard')}>Dashboard
+    </button>
     </div>
     <div>
-    <p onClick={() => navigate('/create-claim')}>Create Claim</p>
+    <button
+    className='bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2' 
+     onClick={() => navigate('/create-claim')}>Create Claim
+     </button>
     </div>
  </div>
  {/* <FontAwesomeIcon icon={faHouse} />
