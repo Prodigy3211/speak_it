@@ -12,6 +12,7 @@ const Profile = () => {
   const [editing, setEditing] =useState(false); //Profile Updates
   const [userComments, setUserComments] = useState([]);
   const [userClaims, setUserClaims] = useState([]);
+  const [user, setUser] = useState(null);
   
 
   
@@ -25,8 +26,7 @@ const Profile = () => {
       const {
         data: {user}
       } = await supabase.auth.getUser(); //Check currently logged in user
-      
-      
+      setUser(user);
 
       if (!user){
         setError('Not Logged In');
@@ -105,13 +105,10 @@ const Profile = () => {
           <div>
           <p className='text-lg font-bold mt-4'>Stats: (coming soon)
           </p>
-          <p>Votes:</p>
-          <p>Upvotes: {} </p>
-          <p>Downvotes: </p>
-          <p>Claims: {userClaims.length || "0"}</p>
-          <p>Comments: {userComments.length || "0"}</p>
+          <p>Claims Made: {userClaims.length || "0"}</p>
+          <p>Comments Made: {userComments.length || "0"}</p>
 
-          <Statistics userId={userProfile?.id}/>
+          <Statistics userId ={user.id} />
           </div>
         </div>
         </>
