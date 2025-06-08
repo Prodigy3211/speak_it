@@ -79,9 +79,9 @@ const ShareButton = ({ claimId }) => {
             <meta property = "og:type" content="website" />
 
             {/* Twitter Card tags for Sharing*/}
-            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:card" content="summary_large_image" />
             <meta name = "twitter:title" content = {claim ? `${claim.title} - Do you agree or disagree?` : 'Check out this Hot Take!'} />
-            <meta name = "twitter.description" content = {claim?.content || 'Join the discussion!'} />
+            <meta name = "twitter:description" content = {claim?.content || 'Join the discussion!'} />
 
             {/* Defaul Image */}
             <meta property="og:image" content= "https://qdpammoeepwgapqyfrrh.supabase.co/storage/v1/object/public/speak-it-brand-assets//speak-itHeader.png"/>
