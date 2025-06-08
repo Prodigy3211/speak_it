@@ -84,7 +84,7 @@ const ShareButton = ({ claimId }) => {
             <meta name = "twitter:description" content = {claim?.content || 'Join the discussion!'} />
 
             {/* Defaul Image */}
-            <meta property="og:image" content= "https://qdpammoeepwgapqyfrrh.supabase.co/storage/v1/object/public/speak-it-brand-assets//IMG_5281.png"/>
+            <meta property="og:image" content= "https://qdpammoeepwgapqyfrrh.supabase.co/storage/v1/object/public/speak-it-brand-assets//PodiumLogo.png"/>
             <meta name="twitter:image" content= "https://qdpammoeepwgapqyfrrh.supabase.co/storage/v1/object/public/speak-it-brand-assets//speak-itHeader.png"/>
 
         </Helmet>
