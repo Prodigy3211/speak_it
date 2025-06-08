@@ -2,7 +2,7 @@ export const categoryImages = [{
     category: 'Prove Me Wrong',
     alt: 'prove Me Wrong',
     description: 'Bart Simpson Daring you to try',
-    url: 'https://cdn.pixabay.com/photo/2015/03/01/21/44/bart-655318_1280.png'
+    url: 'https://qdpammoeepwgapqyfrrh.supabase.co/storage/v1/object/public/speak-it-brand-assets//ProveMeWrong.png'
 } , {
     category: 'Entertainment',
     alt: 'Entertainment',
