@@ -35,20 +35,44 @@ const Profile = () => {
         return;
       }
   
-// Fetch user data
-      const {data, error} = await supabase
+      // Fetch user data
+      const {data: profiles, error: profileError} = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', user.id)
-        .single();
+        .eq('user_id', user.id);
 
-        if (error) {
-          setError(error.message);
-        } else {
-          setUserProfile(data);
+      if (profileError) {
+        setError(profileError.message);
+        setLoading(false);
+        return;
+      }
+
+      // If no profile exists, create one
+      if (!profiles || profiles.length === 0) {
+        const {data: newProfile, error: createError} = await supabase
+          .from('profiles')
+          .insert([
+            {
+              user_id: user.id,
+              username: 'Anonymous' || 'User',
+              created_at: new Date().toISOString()
+            }
+          ])
+          .select()
+          .single();
+
+        if (createError) {
+          setError(createError.message);
+          setLoading(false);
+          return;
         }
+        setUserProfile(newProfile);
+      } else {
+        // If multiple profiles exist, use the first one
+        setUserProfile(profiles[0]);
+      }
 
-          //fetch user comments
+      //fetch user comments
       const {data: comments, error: commentsError } = await supabase
       .from('comments')
       .select('*')
