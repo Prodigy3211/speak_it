@@ -9,9 +9,9 @@ function BottomNavigation () {
     return (
         <div className='fixed bottom-0 left-0 right-0 bg-white border-2 border-gray-300 w-screen p-4'>
             <div className='flex justify-evenly p-2'>
-                <FontAwesomeIcon icon={faHome} onClick={() => navigate('/dashboard')} />
-                <FontAwesomeIcon icon={faPlus} onClick={() => navigate('/create-claim')} />
-                <FontAwesomeIcon icon={faUser} onClick={() => navigate('/my-profile')} />
+                <FontAwesomeIcon icon={faHome} alt="Home" onClick={() => navigate('/dashboard')} />
+                <FontAwesomeIcon icon={faPlus} alt="Create Claim" onClick={() => navigate('/create-claim')} />
+                <FontAwesomeIcon icon={faUser} alt="My Profile" onClick={() => navigate('/my-profile')} />
             </div>
         </div>
     )

@@ -25,6 +25,7 @@ const Thread = () => {
       .from('comments')
       .select(`
         *,
+        parent_comment_id,
         images (
         id,
         image_url,
