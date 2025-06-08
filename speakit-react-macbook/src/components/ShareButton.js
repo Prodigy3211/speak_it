@@ -14,7 +14,7 @@ const ShareButton = ({ claimId }) => {
             
             const { data, error } = await supabase
                 .from('claims')
-                .select('title, content')
+                .select('title', 'content')
                 .eq('id', claimId)
                 .single();
             
