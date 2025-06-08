@@ -128,13 +128,17 @@ const AddComment = ({ claimId, onCommentAdded, parentCommentId = null}) => {
     };
 
     return (
+        <>
         <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+           <div>
+            <h1 className="text-lg font-bold">What's your Repsone?</h1>
+           </div>
+           <div>
                 <input
                     type="text"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Comment on this Claim"
+                    placeholder="Your thoughts go here..."
                     required
                     className="w-full p-2 border rounded"
                 />
@@ -210,6 +214,7 @@ const AddComment = ({ claimId, onCommentAdded, parentCommentId = null}) => {
                 {isUploading ? 'Posting...' : 'Post'}
             </button>
         </form>
+        </>
     );
 };
 

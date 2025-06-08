@@ -6,6 +6,7 @@ import AddComment from '../Forms/AddComment';
 import TopNavigation from '../TopNavigation';
 import CommentThread from '../Comments/CommentThread';
 import BottomNavigation from '../BottomNavigation';
+import ShareButton from '../ShareButton';
 
 const Thread = () => {
   // Get the parameter from the URL
@@ -103,6 +104,11 @@ const Thread = () => {
            
           <p>{claim.claim}</p>
           </div>
+          <div className="flex justify-between items-center mt-2">
+            <div>
+                <ShareButton claimId={claimId} />
+            </div>
+        </div>
           <div className='bg-white shadow-lg rounded-md mt-4 p-4 border border-gray-300'>
           <AddComment 
          claimId={claimId} 
