@@ -39,10 +39,10 @@ function Login() {
   return (
     <>
     <div>
-    <div>
-      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full px-16'/>
+    <div className="max-w-2xl mx-auto">
+      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full max-w-md mx-auto px-4'/>
     </div>
-    <div className='flex flex-col items-center justify-center bg-gray-200 mx-8 rounded-md p-4'>
+    <div className='flex flex-col items-center justify-center bg-gray-200 mx-8 rounded-md p-4 mt-4'>
     <form onSubmit={handleLogin}>
       <div>
       <label>Email: </label>

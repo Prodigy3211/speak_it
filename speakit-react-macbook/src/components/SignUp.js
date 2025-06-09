@@ -52,9 +52,11 @@ function SignUp(){
     return (
         <>
         <div>
-        <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full px-24' onClick={() => navigate('/login')}/>
+            <div classname="max-w-2xl mx-auto">
+        <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full max-w-md mx-auto px-8 rounded-md' onClick={() => navigate('/login')}/>
+        </div>
         { success && 
-        <div className="text-center p-4">
+        <div className="text-center p-2">
             <p className="text-lg font-bold text-green-600">
                 Thank you for signing up!
             </p>
@@ -63,33 +65,35 @@ function SignUp(){
             </p>
         </div>
         }
-        
-        <form onSubmit={handleSignUp} className='border-2 border-gray-300 border-solid mt-8 rounded-md p-4 mx-4'>
+        <div className="flex flex-col items-center justify-center mx-8 rounded-md p-2">
+        <form onSubmit={handleSignUp} className='w-full max-w-md border-2 border-gray-300 border-solid mt-8 rounded-md p-4 mx-4'>
             <div className='flex flex-col items-center'>
                 <div>
                     <p className='text-center text-lg font-bold'>Sign Up</p>
                 </div>
                 <div className='flex flex-col justify-center items-center gap-4 px-16'>
-                    <div>
+                    <div className='flex flex-col items-center mt-2'>
+                        <div className='mb-2'>
                         <label>What's your Email? </label>
+                        </div>
                         <input
                             type='email'
                             placeholder='Email Address'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className='border-2 border-black border-solid'
+                            className='border-2 border-gray-500 border-solid rounded-md p-2'
                             required
                         />
                     </div>
-                    <div>
+                    <div className='flex flex-col items-center'>
                         <label>Create a Password: </label>
-                        <p className='text-xs text-gray-500'>At least 6 characters, a number, and a special character</p>
+                        <p className='text-xs text-gray-500 p-1 mx-8'>At least 6 characters, a number, and a special character</p>
                         <input
                             type='Password'
                             placeholder='Password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className='border-2 border-black border-solid'
+                            className='border-2 border-gray-500 border-solid rounded-md p-2'
                             required
                         />
                     </div>
@@ -107,6 +111,7 @@ function SignUp(){
                 </div>
             </div>
         </form>
+        </div>  
         </div>
         </>
     );
