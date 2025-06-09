@@ -64,14 +64,14 @@ function SignUp(){
         </div>
         }
         
-        <form onSubmit={handleSignUp} className='border-2 border-gray-300 border-solid mt-8 rounded-md p-4'>
+        <form onSubmit={handleSignUp} className='border-2 border-gray-300 border-solid mt-8 rounded-md p-4 mx-4'>
             <div className='flex flex-col items-center'>
                 <div>
-                    <p className='text-center text-lg font-bold'>Create an account</p>
+                    <p className='text-center text-lg font-bold'>Sign Up</p>
                 </div>
                 <div className='flex flex-col justify-center items-center gap-4 px-16'>
                     <div>
-                        <label>Email: </label>
+                        <label>What's your Email? </label>
                         <input
                             type='email'
                             placeholder='Email Address'
@@ -82,7 +82,8 @@ function SignUp(){
                         />
                     </div>
                     <div>
-                        <label>Password: </label>
+                        <label>Create a Password: </label>
+                        <p className='text-xs text-gray-500'>At least 6 characters, a number, and a special character</p>
                         <input
                             type='Password'
                             placeholder='Password'
