@@ -254,8 +254,8 @@ return date.toLocaleDateString('en-US', {
     return (
         <div className={`p-4 rounded-lg ${
             comment.affirmative
-            ? 'bg-blue-100 text-blue-900'
-            : 'bg-orange-100 text-orange-900'
+            ? 'bg-blue-900 text-blue-100'
+            : 'bg-orange-900 text-orange-100'
          }`}>
             {comment.parent_comment_id && (
                 <div className="mb-2">
@@ -288,7 +288,7 @@ return date.toLocaleDateString('en-US', {
                     className={`flex items-center space-x-1 px-2 py-1 rounded ${
                         userVote === 'up' 
                         ? 'bg-blue-200 text-blue-700' 
-                        : 'hover:bg-gray-100 text-gray-500'
+                        : 'hover:bg-gray-100 text-gray-300'
                     }`}
                 >
                     <FontAwesomeIcon icon={faThumbsUp} />
@@ -299,7 +299,7 @@ return date.toLocaleDateString('en-US', {
                     className={`flex items-center space-x-1 px-2 py-1 rounded ${
                         userVote === 'down' 
                         ? 'bg-orange-200 text-orange-700' 
-                        : 'hover:bg-gray-100 text-gray-500'
+                        : 'hover:bg-gray-100 text-gray-300'
                     }`}
                 >
                     <FontAwesomeIcon icon={faThumbsDown} />
@@ -307,7 +307,7 @@ return date.toLocaleDateString('en-US', {
                 </button>
                 <button
                     onClick={() => setShowReplyForm(!showReplyForm)}
-                    className="text-blue-500 hover:text-blue-700"
+                    className="text-blue-300 hover:text-blue-700"
                 >
                     <FontAwesomeIcon icon={faReply} />
                     <span>Reply</span>
