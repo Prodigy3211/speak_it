@@ -108,7 +108,7 @@ const Profile = () => {
   }
 
   return (
-    <div className='p-4 pb-20 bg-gray-900'>
+    <div className='p-4 pb-20 bg-gray-900 min-h-screen'>
       <TopNavigation />
     <div className='mt-4'>
       {editing ? (

@@ -51,7 +51,7 @@ function SignUp(){
     
     return (
         <>
-        <div>
+        <div className='bg-gray-900 min-h-screen text-white'>
             <div classname="max-w-2xl mx-auto">
         <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full max-w-md mx-auto px-8 rounded-md' onClick={() => navigate('/login')}/>
         </div>
@@ -86,8 +86,7 @@ function SignUp(){
                         />
                     </div>
                     <div className='flex flex-col items-center'>
-                        <label>Create a Password: </label>
-                        <p className='text-xs text-gray-500 p-1 mx-8'>At least 6 characters, a number, and a special character</p>
+                        <label>Create a Password </label>
                         <input
                             type='Password'
                             placeholder='Password'
@@ -96,6 +95,7 @@ function SignUp(){
                             className='border-2 border-gray-500 border-solid rounded-md p-2'
                             required
                         />
+                        <p className='text-xs text-gray-300 p-1'>At least 6 characters, a number, and a special character</p>
                     </div>
                 </div>
                 <div>
