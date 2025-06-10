@@ -108,7 +108,7 @@ const Profile = () => {
   }
 
   return (
-    <div className='p-4 pb-20'>
+    <div className='p-4 pb-20 bg-gray-900 min-h-screen'>
       <TopNavigation />
     <div className='mt-4'>
       {editing ? (
@@ -116,7 +116,7 @@ const Profile = () => {
       ): (
         <>
         <div className='flex flex-col items-center mx-8 rounded-md p-4'>
-          <div className='text-lg font-bold mb-2'>
+          <div className='text-lg font-bold mb-2 text-white'>
             <h1>Welcome, {userProfile?.username || "User"}!</h1>
           </div>
           {/* <div>
@@ -137,12 +137,12 @@ const Profile = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-2">Claims Made</td>
-                  <td className="border border-gray-300 p-2">{userClaims.length || "0"}</td>
+                  <td className="border border-gray-300 p-2 text-white">Claims Made</td>
+                  <td className="border border-gray-300 p-2 text-white">{userClaims.length || "0"}</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2">Comments Left</td>
-                  <td className="border border-gray-300 p-2">{userComments.length || "0"}</td>
+                  <td className="border border-gray-300 p-2 text-white">Comments Left</td>
+                  <td className="border border-gray-300 p-2 text-white">{userComments.length || "0"}</td>
                 </tr>
               </tbody>
             </table>

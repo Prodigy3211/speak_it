@@ -66,16 +66,16 @@ const Trending = () => {
 
     return (
         <div className="border-2 border-gray-300 rounded-lg p-4 mt-4">
-            <h1 className="text-2xl font-bold mb-4">The Hottest Takes🔥🔥🔥</h1>
+            <h1 className="text-2xl font-bold mb-4 text-white">The Hottest Takes🔥🔥</h1>
             <div className="space-y-4">
                 {trendingClaims.map((claim) => (
-                    <div key={claim.id} className="border-2 border-gray-300 rounded-lg p-4 hover:bg-gray-50">
+                    <div key={claim.id} className="border-2 border-gray-300 rounded-lg p-4 hover:bg-gray-600 text-white">
                         <Link to={`/category/${claim.category}/thread/${claim.id}`}>
                             <h2 className="text-xl font-semibold">{claim.title}</h2>
                             <div className="flex my-2">
                             <span>Category: {claim.category}</span>
                             </div>
-                            <div className="flex items-center text-md text-gray-500">
+                            <div className="flex items-center text-md text-white">
                                 <div className="flex flex-col border-2 border-gray-500 rounded-lg p-2 justify-between w-full">
                                 <div><span> Total Comments: {claim.commentCount}</span></div>
                                     <div className="flex flex-row justify-around mt-2">

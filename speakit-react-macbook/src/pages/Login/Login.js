@@ -38,11 +38,11 @@ function Login() {
 
   return (
     <>
-    <div>
+    <div className='bg-gray-900 min-h-screen'>
     <div className="max-w-2xl mx-auto">
-      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full max-w-md mx-auto px-4'/>
+      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full max-w-md mx-auto p-4'/>
     </div>
-    <div className='flex flex-col items-center justify-center bg-gray-200 mx-8 rounded-md p-4 mt-4'>
+    <div className='text-white border-2 border-gray-300 flex flex-col items-center justify-center mx-8 rounded-md p-4 mt-4'>
     <form onSubmit={handleLogin}>
       <div>
       <label>Email: </label>
@@ -53,7 +53,7 @@ function Login() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className='border-2 border-white bg-white rounded-md p-2'
+        className='border-2 border-white rounded-md p-2'
         />
         </div>
         <div>

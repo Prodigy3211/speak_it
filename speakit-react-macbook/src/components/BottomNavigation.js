@@ -7,11 +7,17 @@ function BottomNavigation () {
     const navigate = useNavigate();
 
     return (
-        <div className='fixed bottom-0 left-0 right-0 bg-white border-2 border-gray-300 w-screen p-4'>
-            <div className='flex justify-evenly p-2'>
-                <FontAwesomeIcon icon={faHome} alt="Home" onClick={() => navigate('/dashboard')} />
-                <FontAwesomeIcon icon={faPlus} alt="Create Claim" onClick={() => navigate('/create-claim')} />
-                <FontAwesomeIcon icon={faUser} alt="My Profile" onClick={() => navigate('/my-profile')} />
+        <div className='fixed bottom-0 left-0 right-0 w-screen border-2 bg-gray-900/90'>
+            <div className='flex justify-around p-4'>
+                <FontAwesomeIcon icon={faHome} alt="Home"
+                className='text-white'
+                onClick={() => navigate('/dashboard')} />
+                <FontAwesomeIcon icon={faPlus} alt="Create Claim"
+                className='text-white'
+                onClick={() => navigate('/create-claim')} />
+                <FontAwesomeIcon icon={faUser} alt="My Profile"
+                className='text-white'
+                onClick={() => navigate('/my-profile')} />
             </div>
         </div>
     )

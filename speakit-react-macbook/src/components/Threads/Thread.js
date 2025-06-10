@@ -90,17 +90,17 @@ const Thread = () => {
   }, [claimId, fetchComments]);
   
   return (
-    <div className='p-4 pb-20'>
+    <div className='p-4 pb-20 bg-gray-900'>
       <TopNavigation />
       <div className='mt-4'>
       {claim ? (
         <>
         <div>
-        <div id='op-claim' className='bg-white shadow-lg rounded-md p-4 border border-gray-300'>
-          <div className='text-2xl font-bold mb-2'>
+        <div id='op-claim' className='shadow-lg rounded-md p-4 border border-gray-300'>
+          <div className='text-2xl font-bold mb-2 text-white'>
           <h1>{claim.title}</h1>
           </div>
-          <div>
+          <div className='text-white'>
            
           <p>{claim.claim}</p>
           </div>
@@ -109,14 +109,14 @@ const Thread = () => {
                 <ShareButton claimId={claimId} />
             </div>
         </div>
-          <div className='bg-white shadow-lg rounded-md mt-4 p-4 border border-gray-300'>
+          <div className='bg-gray-900 shadow-lg rounded-md mt-4 p-4 border border-gray-300'>
           <AddComment 
          claimId={claimId} 
          onCommentAdded={fetchComments}
          fetchCommentImages={fetchCommentImages} />
          </div>
           </div>
-          <h3 className='text-2xl font-bold my-4 '>Comments: </h3>
+          <h3 className='text-2xl font-bold my-4 text-white '>Comments: </h3>
           <div className = "space-y-4">
             {Array.isArray(comment) && comment.length > 0 ? (
               <CommentThread comments={comment} onCommentAdded={fetchComments} />
