@@ -69,10 +69,10 @@ function SignUp(){
         <form onSubmit={handleSignUp} className='w-full max-w-md border-2 border-gray-300 border-solid mt-8 rounded-md p-4 mx-4'>
             <div className='flex flex-col items-center'>
                 <div>
-                    <p className='text-center text-lg font-bold'>Sign Up</p>
+                    <p className='text-center text-lg font-bold mb-4'>Sign Up</p>
                 </div>
-                <div className='flex flex-col justify-center items-center gap-4 px-16'>
-                    <div className='flex flex-col items-center mt-2'>
+                <div className='flex flex-col justify-center gap-4 px-16'>
+                    <div className='flex flex-col mt-4'>
                         <div className='mb-2'>
                         <label>What's your Email? </label>
                         </div>
@@ -81,18 +81,18 @@ function SignUp(){
                             placeholder='Email Address'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className='border-2 border-gray-500 border-solid rounded-md p-2'
+                            className='border-2 bg-gray-800 border-gray-500 border-solid rounded-md p-2'
                             required
                         />
                     </div>
-                    <div className='flex flex-col items-center'>
+                    <div className='flex flex-col'>
                         <label>Create a Password </label>
                         <input
                             type='Password'
                             placeholder='Password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className='border-2 border-gray-500 border-solid rounded-md p-2'
+                            className='border-2 bg-gray-800 border-gray-500 border-solid rounded-md p-2'
                             required
                         />
                         <p className='text-xs text-gray-300 p-1'>At least 6 characters, a number, and a special character</p>
