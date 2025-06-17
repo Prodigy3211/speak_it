@@ -307,10 +307,10 @@ return date.toLocaleDateString('en-US', {
                 </button>
                 <button
                     onClick={() => setShowReplyForm(!showReplyForm)}
-                    className="text-blue-300 hover:text-blue-700"
+                    className="text-blue-400 hover:text-blue-700"
                 >
                     <FontAwesomeIcon icon={faReply} />
-                    <span>Reply</span>
+                    <span> Reply</span>
                 </button>
                 </div>
                 
@@ -324,7 +324,7 @@ return date.toLocaleDateString('en-US', {
                                 onChange={(e) => setReplyContent(e.target.value)}
                                 placeholder="Add a reply..."
                                 required
-                                className="w-full p-2 border rounded-md"
+                                className="w-full p-2 border rounded-md text-white bg-gray-800"
                                 />
 
                         </div>
