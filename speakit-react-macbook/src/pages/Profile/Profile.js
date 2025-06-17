@@ -6,6 +6,45 @@ import TopNavigation from '../../components/TopNavigation';
 import Statistics from '../../components/Statistics/Statistics';
 import BottomNavigation from '../../components/BottomNavigation';
 
+// Fallback UI component for when profile creation fails
+const ProfileErrorFallback = ({ error, onRetry, user }) => {
+  return (
+    <div className='p-4 pb-20 bg-gray-900 min-h-screen'>
+      <TopNavigation />
+      <div className='mt-4 flex flex-col items-center justify-center min-h-[60vh]'>
+        <div className='bg-red-900/20 border border-red-500 rounded-lg p-6 max-w-md w-full text-center'>
+          <div className='text-red-400 text-2xl mb-4'>⚠️</div>
+          <h2 className='text-white text-xl font-bold mb-2'>Profile Setup Failed</h2>
+          <p className='text-gray-300 mb-4'>
+            We couldn't set up your profile. This might be due to a temporary issue.
+          </p>
+          <div className='bg-gray-800 rounded p-3 mb-4 text-left'>
+            <p className='text-gray-400 text-sm'>Error: {error}</p>
+          </div>
+          <div className='space-y-3'>
+            <button 
+              onClick={onRetry}
+              className='w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md p-3 font-medium transition-colors'
+            >
+              Try Again
+            </button>
+            <button 
+              onClick={() => window.location.reload()}
+              className='w-full bg-gray-600 hover:bg-gray-700 text-white rounded-md p-3 font-medium transition-colors'
+            >
+              Refresh Page
+            </button>
+          </div>
+        </div>
+        <div className='mt-6'>
+          <LogoutButton />
+        </div>
+      </div>
+      <BottomNavigation />
+    </div>
+  );
+};
+
 const Profile = () => {
   const [userProfile, setUserProfile] = useState(null); //User Profile Data
   const [loading, setLoading] = useState(true);
@@ -14,16 +53,13 @@ const Profile = () => {
   const [userComments, setUserComments] = useState([]);
   const [userClaims, setUserClaims] = useState([]);
   const [user, setUser] = useState(null);
-  
+  const [retryCount, setRetryCount] = useState(0);
 
-  
+  const fetchUserProfile = async () => {
+    setLoading(true);
+    setError(null);
 
-  
-  useEffect(() => {
-    //Fetch the user data after login
-    const fetchUserProfile = async () => {
-      setLoading(true);
-
+    try {
       const {
         data: {user}
       } = await supabase.auth.getUser(); //Check currently logged in user
@@ -42,9 +78,7 @@ const Profile = () => {
         .eq('user_id', user.id);
 
       if (profileError) {
-        setError(profileError.message);
-        setLoading(false);
-        return;
+        throw new Error(`Failed to fetch profile: ${profileError.message}`);
       }
 
       // If no profile exists, create one
@@ -54,7 +88,7 @@ const Profile = () => {
           .insert([
             {
               user_id: user.id,
-              username: 'Anonymous' || 'User',
+              username: 'Anonymous',
               created_at: new Date().toISOString()
             }
           ])
@@ -62,9 +96,7 @@ const Profile = () => {
           .single();
 
         if (createError) {
-          setError(createError.message);
-          setLoading(false);
-          return;
+          throw new Error(`Failed to create profile: ${createError.message}`);
         }
         setUserProfile(newProfile);
       } else {
@@ -78,33 +110,77 @@ const Profile = () => {
       .select('*')
       .eq('user_id', user.id);
 
-  if (!commentsError) {
-    setUserComments(comments);
-  }
+      if (!commentsError) {
+        setUserComments(comments);
+      }
 
+      // fetch user claims
+      const {data: claims, error: claimsError } = await supabase
+      .from('claims')
+      .select('*')
+      .eq('op_id', user.id);
 
-  // fetch user claims
-  const {data: claims, error: claimsError } = await supabase
-  .from('claims')
-  .select('*')
-  .eq('op_id', user.id);
-
-  if (!claimsError) {
-    setUserClaims(claims);
-  }
+      if (!claimsError) {
+        setUserClaims(claims);
+      }
         
-      
-        setLoading(false);
-    };
-      fetchUserProfile ();
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  const handleRetry = () => {
+    setRetryCount(prev => prev + 1);
+    fetchUserProfile();
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
   }, []);
 
-
-  if (error){
-    return <p>{error}</p>
+  // Show fallback UI if there's an error and we've tried a few times
+  if (error && retryCount >= 2) {
+    return <ProfileErrorFallback error={error} onRetry={handleRetry} user={user} />;
   }
+
+  if (error && retryCount < 2) {
+    return (
+      <div className='p-4 pb-20 bg-gray-900 min-h-screen'>
+        <TopNavigation />
+        <div className='mt-4 flex flex-col items-center justify-center min-h-[60vh]'>
+          <div className='bg-yellow-900/20 border border-yellow-500 rounded-lg p-6 max-w-md w-full text-center'>
+            <div className='text-yellow-400 text-2xl mb-4'>🔄</div>
+            <h2 className='text-white text-xl font-bold mb-2'>Loading Profile...</h2>
+            <p className='text-gray-300 mb-4'>
+              Attempt {retryCount + 1} of 3
+            </p>
+            <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-400 mx-auto'></div>
+          </div>
+        </div>
+        <BottomNavigation />
+      </div>
+    );
+  }
+
   if(loading){
-    return <p>Profile is loading...</p>;
+    return (
+      <div className='p-4 pb-20 bg-gray-900 min-h-screen'>
+        <TopNavigation />
+        <div className='mt-4 flex flex-col items-center justify-center min-h-[60vh]'>
+          <div className='bg-blue-900/20 border border-blue-500 rounded-lg p-6 max-w-md w-full text-center'>
+            <div className='text-blue-400 text-2xl mb-4'>📱</div>
+            <h2 className='text-white text-xl font-bold mb-2'>Loading Profile...</h2>
+            <p className='text-gray-300 mb-4'>
+              Setting up your profile
+            </p>
+            <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400 mx-auto'></div>
+          </div>
+        </div>
+        <BottomNavigation />
+      </div>
+    );
   }
 
   return (
