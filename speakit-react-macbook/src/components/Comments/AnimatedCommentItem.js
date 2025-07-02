@@ -1,9 +1,17 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import{faThumbsUp, faThumbsDown, faReply} from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faThumbsDown, faReply, faGavel } from "@fortawesome/free-solid-svg-icons";
 import supabase from "../../server/supabaseClient";
 
-const CommentItem = ({comment, onParentClick, onCommentAdded}) => {
+const AnimatedCommentItem = ({
+    comment,
+    onParentClick,
+    onCommentAdded,
+    isHighlighted = false,
+    isAnimating = false,
+    animationDelay = 0,
+    onAnimationComplete,
+}) => {
     const [voteCount, setVoteCount] = useState({up: 0, down: 0});
     const [userVote, setUserVote] = useState(null);
     const [username, setUsername] = useState('');
@@ -14,28 +22,80 @@ const CommentItem = ({comment, onParentClick, onCommentAdded}) => {
     const [imageFile, setImageFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
 
+    const commentRef = useRef(null);
 
-//Get the username for this comment
-useEffect(() => {
+    //Animation State
+    const [isVisible, setIsVisible] = useState(false);
+    const[isSpeaking,setIsSpeaking] = useState(false);
+
+    //court case Styles based on For or Against
+    const getCourtStyle = () => {
+        if(comment.affirmative) {
+            return{
+                background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+                border: '2px solid #60a5fa',
+                boxShadow: isHighlighted ? '0 0 20px rgba(59, 130, 246, 0.5)' : 'none',
+            };
+        } else {
+            return{
+                background: 'linear-gradient(135deg, #9a3412 0%, #ea580c 100%)',
+                border: '2px solid #fb923c',
+                boxShadow: isHighlighted ? '0 0 20px rgba(234, 88, 12, 0.5)' : 'none',
+            };
+        }
+    };
+
+    //Animation effects
+    useEffect(() => {
+        if(isAnimating) {
+            const timer = setTimeout(() => {
+                setIsVisible(true);
+                setIsSpeaking(true);
+
+                //Simulate speaking duration
+                const speakingTimer = setTimeout(() => {
+                    setIsSpeaking(false);
+                    if(onAnimationComplete) {
+                        onAnimationComplete();
+                    }
+                }, 3000);
+                return () => clearTimeout(speakingTimer);
+            }, animationDelay);
+            return () => clearTimeout(timer);
+            }
+    }, [isAnimating, animationDelay, onAnimationComplete]);
+
+    //auto scroll when highlighted
+    useEffect(() => {
+        if (isHighlighted && commentRef.current) {
+            commentRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+    }, [isHighlighted]);
+
+    //Get the username for this comment
+    useEffect(() => {
         const fetchUsername = async () => {
-        try{
-            const {data, error} = await supabase
-            .from('profiles')
-            .select('username')
-            .eq('user_id', comment.user_id)
-            .maybeSingle();
+            try{
+                const {data, error} = await supabase
+                .from('profiles')
+                .select('username')
+                .eq('user_id', comment.user_id)
+                .maybeSingle();
 
-        if(error) {
+            if(error) {
+                console.error('Error fetching username:', error);
+                setUsername('anon');
+            } else if (data?.username) {
+                setUsername(data.username);
+            } else {
+                setUsername('anon');
+            }
+        } catch (error) {
             console.error('Error fetching username:', error);
             setUsername('anon');
-        } else if (data?.username) {
-            setUsername(data.username);
-        } else {
-            setUsername('anon');
-        }
-    } catch (error) {
-        console.error('Error fetching username:', error);
-        setUsername('anon');
         }
     };
     fetchUsername();
@@ -252,6 +312,115 @@ return date.toLocaleDateString('en-US', {
 }
 
     return (
+        <>
+        <div 
+        ref={commentRef}
+        className={`relative p-4 rounded-lg mb-4 transition-all duration-500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        } ${isHighlighted ? 'scale-105' : 'scale-100'}`}
+        style={getCourtStyle()}
+        >
+        {/* court case header */}
+        <div className='flex items-center justify-between mb-3'>
+            <div className="flex items-center space-x-2">
+                <FontAwesomeIcon
+                icon={faGavel}
+                className = {`text-2xl ${comment.affirmative ? 'text-blue-300' : 'text-orange-300'}`}
+                />
+                <div>
+                    <span className='text-sm font-semibold'>
+                        {comment.affirmative ? 'Defense' : 'Prosecution'}
+                    </span>
+                    <div className="text-xs opacity-75">
+                        {username} • {formatDate(comment.created_at)}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {isSpeaking && (
+            <div className =" flex space-x-1">
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+            </div>
+        )}
+        </div>
+
+        {/* comment content with typing effect*/}
+        <div className="text-white mb-3">
+            <p className='leading-relaxed'>
+                {comment.content}
+            </p>
+
+            {/* display images */}
+            {comment.images && comment.images.length > 0 && (
+                <div className="mt-3">
+                    {comment.images.map((image) => (
+                        <img
+                        key={image.id}
+                        src={image.image_url}
+                        alt="evidence"
+                        className="w-full h-auto rounded-md border-2 border-white/20"
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+{/* Reply indicator */}
+{comment.parent_comment_id && (
+    <div className="mb-2">
+        <button
+            onClick={onParentClick}
+            className="text-blue-300 text-sm hover:text-blue-100 underline"
+        >
+            ↳ In response to: {shortenId(comment.parent_comment_id)}
+        </button>
+    </div>
+)}
+
+{/* Action buttons */}
+<div className="flex items-center justify-between">
+<div className="flex items-center space-x-4">
+    <button
+        onClick={() => handleVote('up')}
+        className={`flex items-center space-x-1 px-3 py-1 rounded transition-colors ${
+            userVote === 'up' 
+            ? 'bg-blue-200 text-blue-800' 
+            : 'hover:bg-white/20 text-white'
+        }`}
+    >
+        <FontAwesomeIcon icon={faThumbsUp} />
+        <span>{voteCount.up}</span>
+    </button>
+    
+    <button
+        onClick={() => handleVote('down')}
+        className={`flex items-center space-x-1 px-3 py-1 rounded transition-colors ${
+            userVote === 'down' 
+            ? 'bg-orange-200 text-orange-800' 
+            : 'hover:bg-white/20 text-white'
+        }`}
+    >
+        <FontAwesomeIcon icon={faThumbsDown} />
+        <span>{voteCount.down}</span>
+    </button>
+    
+    <button
+        onClick={() => setShowReplyForm(!showReplyForm)}
+        className="text-blue-300 hover:text-blue-100 transition-colors"
+    >
+        <FontAwesomeIcon icon={faReply} />
+        <span className="ml-1">Reply</span>
+    </button>
+</div>
+
+<div className="text-xs opacity-75">
+    Case #{shortenId(comment.id)}
+</div>
+</div>
+
         <div className={`p-4 rounded-lg ${
             comment.affirmative
             ? 'bg-blue-900 text-blue-100'
@@ -409,7 +578,8 @@ return date.toLocaleDateString('en-US', {
                     </div>
                 )} 
                 </div>
+                </>
     );
 };
 
-export default CommentItem;
+export default AnimatedCommentItem;
