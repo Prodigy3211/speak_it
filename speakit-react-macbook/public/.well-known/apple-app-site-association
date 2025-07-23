@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "5P823U99DL",
+        "paths": [
+          "/claim/*",
+          "/category/*",
+          "/reset-password*",
+          "/auth/confirm*",
+          "/"
+        ]
+      }
+    ]
+  }
+} 
