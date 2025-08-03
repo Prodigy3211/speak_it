@@ -10,7 +10,7 @@ import Thread from './components/Threads/Thread';
 import ThreadList from './components/Threads/ThreadList';
 import CreateClaim from './components/Forms/CreateClaim';
 import AddComment from './components/Forms/AddComment';
-
+import ResetPassword from './pages/Login/ResetPassword';
 
 function App() {
   return (
@@ -19,6 +19,8 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
+
         <Route element={<ProtectedRoutes />}>
           <Route path='/my-profile' element={<Profile />} />
           <Route path='/dashboard' element={<Dashboard />} />

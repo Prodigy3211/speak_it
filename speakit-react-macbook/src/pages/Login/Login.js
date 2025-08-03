@@ -5,12 +5,13 @@ import supabase from '../../server/supabaseClient';
 //Allows a user to enter their username and password
 //If successful, will redirect to "My Profile page"
 
-
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
+  const [resetEmailSent, setResetEmailSent] = useState(false);
+  const [resetError, setResetError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -34,6 +35,32 @@ function Login() {
       navigate('/dashboard')
     };
     
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email.trim()) {
+      setResetError('Please enter your email address first');
+      return;
+    }
+
+    setResetError(null);
+    setResetEmailSent(false);
+
+    try {
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (error) {
+        setResetError(error.message);
+      } else {
+        setResetEmailSent(true);
+        setResetError(null);
+      }
+    } catch (error) {
+      console.error('Password reset error:', error);
+      setResetError('An error occurred while sending the reset email. Please try again.');
+    }
   };
 
   return (
@@ -76,7 +103,21 @@ function Login() {
       <button type='submit'
         className='bg-blue-500 text-white rounded-md p-2 w-full mt-4'
       >Login</button>
-      <p>Don't have an account?</p>
+      
+      {/* Forgot Password Section */}
+      <div className='mt-4 text-center'>
+        <button 
+          type='button'
+          onClick={handleForgotPassword}
+          className='text-blue-400 hover:text-blue-300 text-sm underline'
+        >
+          Forgot Password?
+        </button>
+        {resetError && <p className="text-red-600 text-sm mt-2">{resetError}</p>}
+        {resetEmailSent && <p className="text-green-500 text-sm mt-2">Password reset email sent! Please check your inbox.</p>}
+      </div>
+      
+      <p className='mt-4'>Don't have an account?</p>
         <div>
         <button 
         onClick={() => navigate('/Signup')}

@@ -21,6 +21,12 @@ export default function LoginPopUp() {
                     navigate('/signup');
                 }}
                 >Sign Up</button>
+                <button 
+                className="text-blue-500 text-sm underline mt-2"
+                onClick={() => {
+                    navigate('/login');
+                }}
+                >Forgot Password?</button>
                 </div>
             </div>
         </div>
