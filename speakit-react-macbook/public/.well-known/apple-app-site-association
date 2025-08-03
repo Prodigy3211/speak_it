@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "5P823U99DL",
+        "appID": "5P823U99DL.com.speakitmobile.app",
         "paths": [
           "/claim/*",
           "/category/*",
@@ -14,4 +14,4 @@
       }
     ]
   }
-} 
+}
