@@ -53,10 +53,10 @@ const Trending = () => {
                 negativeCount: claimCommentCounts[claim.id]?.negative || 0
             }));
 
-            // Sort by comment count and take top 3
+            // Sort by comment count and take top 5
             const topClaims = claimsWithCommentCounts
                 .sort((a, b) => b.commentCount - a.commentCount)
-                .slice(0, 3);
+                .slice(0, 5);
 
             setTrendingClaims(topClaims);
         };
@@ -66,18 +66,18 @@ const Trending = () => {
 
     return (
         <div className="border-2 border-gray-300 rounded-lg p-4 mt-4">
-            <h1 className="text-2xl font-bold mb-4 text-white">The Hottest Takes🔥🔥</h1>
-            <div className="flex justify-center mb-2 text-white"> Click on a claim below or select a category to Join the Conversation:</div>
+            <h1 className="text-2xl text-center font-bold mb-4">The Hottest Takes🔥🔥</h1>
+            <div className="flex justify-center text-lg mb-2"> Click on a claim below or select a category to Join the Conversation:</div>
             <div className="space-y-4">
                 {trendingClaims.map((claim) => (
-                    <div key={claim.id} className="border-2 border-gray-300 rounded-lg p-4 hover:bg-gray-600 text-white">
+                    <div key={claim.id} className="border-2 border-gray-400 bg-gray-300 rounded-lg p-4 hover:bg-gray-600">
                         <Link to={`/category/${claim.category}/thread/${claim.id}`}>
                             <h2 className="text-xl font-semibold">{claim.title}</h2>
                             <div className="flex my-2">
                             <span>Category: {claim.category}</span>
                             </div>
-                            <div className="flex justify-end mb-2"> ➡️ </div>
-                            <div className="flex items-center text-md text-white">
+                            {/* <div className="flex justify-end mb-2"> ➡️ </div> */}
+                            <div className="flex items-center text-md">
                                 <div className="flex flex-col border-2 border-gray-500 rounded-lg p-2 justify-between w-full">
                                 <div><span> Total Comments: {claim.commentCount}</span></div>
                                     <div className="flex flex-row justify-around mt-2">
