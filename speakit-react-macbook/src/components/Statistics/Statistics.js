@@ -61,16 +61,16 @@ export default function Statistics({ userId }) {
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 p-2 text-white">🙌  Up Votes</td>
-                  <td className="border border-gray-300 p-2 text-white">{votes.upvotesRecieved || "0"}</td>
+                  <td className="border border-gray-300 p-2">🙌  Up Votes</td>
+                  <td className="border border-gray-300 p-2">{votes.upvotesRecieved || "0"}</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2 text-white">🫠  Down Votes</td>
-                  <td className="border border-gray-300 p-2 text-white">{votes.downvotesRecieved || "0"}</td>
+                  <td className="border border-gray-300 p-2">🫠  Down Votes</td>
+                  <td className="border border-gray-300 p-2">{votes.downvotesRecieved || "0"}</td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 p-2 text-white">✅  Total Votes</td>
-                  <td className="border border-gray-300 p-2 text-white">{votes.totalVotesRecieved || "0"}</td>
+                  <td className="border border-gray-300 p-2">✅  Total Votes</td>
+                  <td className="border border-gray-300 p-2">{votes.totalVotesRecieved || "0"}</td>
                 </tr>
               </tbody>
             </table>
