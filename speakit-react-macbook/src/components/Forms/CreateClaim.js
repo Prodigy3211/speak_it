@@ -50,13 +50,13 @@ const CreateClaim = () => {
 
   return (
     <div>
-      <div className="p-4 pb-20 bg-gray-900">
+      <div className="p-4 pb-20">
         <TopNavigation />
-        <div className='text-white shadow-md rounded-md p-2 flex flex-col mt-8'>
+        <div className='shadow-md rounded-md p-2 flex flex-col mt-8'>
           <p className="text-xl font-bold mb-4">Creating a Claim</p>
-          <div className=" rounded-lg p-4 mb-4 border border-gray-400 text-white">
-            <h3 className="text-lg font-semibold text-white mb-2">Can you turn your claim into a Hot Take?</h3>
-            <ol className="list-decimal list-inside space-y-2 text-gray-200 text-lg">
+          <div className=" rounded-lg p-4 mb-4 border bg-gray-200 border-gray-400">
+            <h3 className="text-lg font-semibold mb-2">Can you turn your claim into a Hot Take?</h3>
+            <ol className="list-decimal list-inside space-y-2 text-lg">
               <li>First make a "claim" - this can be a statement or a question.</li>
               <li>Write a short paragraph supporting that claim. Make it as convincing as possible.</li>
               <li>Select a category that best fits your claim.</li>
@@ -73,7 +73,6 @@ const CreateClaim = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder='Pizza is a Vegetable...'
                 required
-                className='text-white bg-gray-900'
               />
             </div>
             <div className='my-2'>
@@ -86,7 +85,6 @@ const CreateClaim = () => {
                 placeholder='Back in ancient Ghana...'
                 required
                 type="textarea"
-                className='text-white bg-gray-900'
               />
             </div>
             
@@ -96,7 +94,7 @@ const CreateClaim = () => {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
-                className='mt-2 border-2 border-black rounded-md p-2 bg-gray-900'
+                className='mt-2 border-2 border-black rounded-md p-2'
               >
                 <option value='Prove Me Wrong'>Prove Me Wrong</option>
                 <option value='entertainment'>Entertainment</option>
