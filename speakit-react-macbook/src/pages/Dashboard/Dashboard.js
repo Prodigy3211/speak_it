@@ -2,7 +2,6 @@
 
 
 import TopNavigation from "../../components/TopNavigation";
-import Categories from "../../components/Categories/Categories";
 import Trending from "../../components/Trending/Trending";
 import BottomNavigation from "../../components/BottomNavigation";
 
@@ -14,7 +13,6 @@ function Dashboard () {
             <p className="text-center text-white text-md my-2 bg-blue-900 rounded-md p-2 text-lg">"I went straight to the comment section and didn't regret it" - Ancient American Proverb</p>
             <div className="flex flex-col h-full overflow-y-auto">
             <Trending />
-            <Categories />
             </div>
         </div>
         <BottomNavigation />
