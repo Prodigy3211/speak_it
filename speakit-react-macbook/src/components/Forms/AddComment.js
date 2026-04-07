@@ -129,8 +129,8 @@ const AddComment = ({ claimId, onCommentAdded, parentCommentId = null}) => {
 
     return (
         <>
-        <div className=" bg-gray-900">
-        <form onSubmit={handleSubmit} className="space-y-4 text-white">
+        <div className=" bg-gray-200">
+        <form onSubmit={handleSubmit} className="space-y-4">
            <div>
             <h1 className="text-lg font-bold">What's your Repsone?</h1>
            </div>
@@ -141,7 +141,7 @@ const AddComment = ({ claimId, onCommentAdded, parentCommentId = null}) => {
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Your thoughts go here..."
                     required
-                    className="w-full p-2 border rounded bg-gray-900"
+                className="w-full p-2 border rounded"
                 />
             </div>
             {/* image upload */}

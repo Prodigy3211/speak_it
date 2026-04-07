@@ -50,38 +50,43 @@ function SignUp(){
     };
     
     return (
-        <>
-        <div className='bg-gray-900 min-h-screen text-white'>
-            <div classname="max-w-2xl mx-auto">
-        <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full max-w-md mx-auto px-8 rounded-md' onClick={() => navigate('/login')}/>
-        </div>
-        { success && 
-        <div className="text-center p-2">
-            <p className="text-lg font-bold text-green-600">
-                Thank you for signing up!
-            </p>
-            <p className='text-gray-700'>
-                Please check your email for a verification link. You will be redirected to login in 15 seconds.
-            </p>
-        </div>
-        }
-        <div className="flex flex-col items-center justify-center mx-8 rounded-md p-2">
-        <form onSubmit={handleSignUp} className='w-full max-w-md border-2 border-gray-300 border-solid mt-8 rounded-md p-4 mx-4'>
-            <div className='flex flex-col items-center'>
-                <div>
-                    <p className='text-center text-lg font-bold mb-4'>Sign Up</p>
+    <>
+        <div className='min-h-screen md:flex items-center justify-center'>
+            <div classname="max-w-2xl mx-auto min-h-screen md:flex">
+                {/* Logo Is here */}
+                <div className='mx-auto md:flex items-center'>
+                <div> 
+                    <img src='https://qdpammoeepwgapqyfrrh.supabase.co/storage/v1/object/public/speak-it-brand-assets/speak_itLogo.png' alt='Speak It Logo' className='w-full max-w-md mx-auto px-8 rounded-md' onClick={() => navigate('/login')}/>
                 </div>
-                <div className='flex flex-col justify-center gap-4 px-16'>
-                    <div className='flex flex-col mt-4'>
-                        <div className='mb-2'>
-                        <label>What's your Email? </label>
-                        </div>
+                {/* Confirmation message replaces the form */}
+                { success && 
+                    <div className="text-center p-2">
+                        <p className="text-lg font-bold text-green-600">
+                        Thank you for signing up!
+                        </p>
+                        <p className='text-gray-900'>
+                        Please check your email for a verification link. You will be redirected to login in 15 seconds.
+                        </p>
+                    </div>
+                }
+            <div>
+                <div className="flex flex-col items-center justify-center mx-8 rounded-md p-2">
+                    <form onSubmit={handleSignUp} className='w-full max-w-md border-2 border-gray-300 border-solid mt-8 rounded-md p-4 mx-4'>
+                    <div className='flex flex-col items-center'>
+                    <div>
+                        <p className='text-center text-lg font-bold mb-4'>Sign Up</p>
+                    </div>
+                    <div className='flex flex-col justify-center gap-4 px-16'>
+                        <div className='flex flex-col mt-4'>
+                            <div className='mb-2'>
+                                <label>What's your Email? </label>
+                            </div>
                         <input
                             type='email'
                             placeholder='Email Address'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className='border-2 bg-gray-800 border-gray-500 border-solid rounded-md p-2'
+                            className='border-2 bg-gray-200 border-gray-500 border-solid rounded-md p-2'
                             required
                         />
                     </div>
@@ -92,12 +97,12 @@ function SignUp(){
                             placeholder='Password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className='border-2 bg-gray-800 border-gray-500 border-solid rounded-md p-2'
+                            className='border-2 bg-gray-200 border-gray-500 border-solid rounded-md p-2'
                             required
                         />
-                        <p className='text-xs text-gray-300 p-1'>At least 6 characters, a number, and a special character</p>
+                        <p className='text-xs text-gray-700 p-1'>At least 6 characters, a number, and a special character</p>
                     </div>
-                </div>
+                    </div>
                 <div>
                     {error && <p className="text-red-600">{error}</p>}
                     {success && <p className="text-green-500">Validation Email Sent</p>}
@@ -109,11 +114,14 @@ function SignUp(){
                         {verificationSent ? 'Verification Email Sent' : 'Create Account'}
                     </button>
                 </div>
+                </div>
+                </form>
+                </div>
             </div>
-        </form>
-        </div>  
+            </div>
+            </div>  
         </div>
-        </>
+    </>
     );
 }
 

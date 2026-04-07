@@ -254,8 +254,8 @@ return date.toLocaleDateString('en-US', {
     return (
         <div className={`p-4 rounded-lg ${
             comment.affirmative
-            ? 'bg-blue-900 text-blue-100'
-            : 'bg-orange-900 text-orange-100'
+            ? 'bg-blue-300 text-blue-900'
+            : 'bg-orange-300 text-orange-900'
          }`}>
             {comment.parent_comment_id && (
                 <div className="mb-2">
@@ -287,8 +287,8 @@ return date.toLocaleDateString('en-US', {
                     onClick={() => handleVote('up')}
                     className={`flex items-center space-x-1 px-2 py-1 rounded ${
                         userVote === 'up' 
-                        ? 'bg-blue-200 text-blue-700' 
-                        : 'hover:bg-gray-100 text-gray-300'
+                        ? 'text-blue-900' 
+                        : 'hover:bg-gray-100 text-blue-700'
                     }`}
                 >
                     <FontAwesomeIcon icon={faThumbsUp} />
@@ -298,8 +298,8 @@ return date.toLocaleDateString('en-US', {
                     onClick={() => handleVote('down')}
                     className={`flex items-center space-x-1 px-2 py-1 rounded ${
                         userVote === 'down' 
-                        ? 'bg-orange-200 text-orange-700' 
-                        : 'hover:bg-gray-100 text-gray-300'
+                        ? 'text-orange-900' 
+                        : 'hover:bg-gray-100 text-orange-700'
                     }`}
                 >
                     <FontAwesomeIcon icon={faThumbsDown} />
@@ -307,7 +307,7 @@ return date.toLocaleDateString('en-US', {
                 </button>
                 <button
                     onClick={() => setShowReplyForm(!showReplyForm)}
-                    className="text-blue-400 hover:text-blue-700"
+                    className="text-blue-500 hover:text-blue-600"
                 >
                     <FontAwesomeIcon icon={faReply} />
                     <span> Reply</span>

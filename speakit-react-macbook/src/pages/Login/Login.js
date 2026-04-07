@@ -65,36 +65,47 @@ function Login() {
 
   return (
     <>
-    <div className='bg-gray-900 min-h-screen'>
-    <div className="max-w-2xl mx-auto">
-      <img src='/speak-itHeader.png' alt='Speak It Logo' className='w-full max-w-md mx-auto p-1'/>
-    </div>
-    <div className='text-white flex flex-col items-center justify-center p-4 mt-2'>
-    <form onSubmit={handleLogin}
-    className='border-2 border-gray-300 flex flex-col items-center justify-center mx-8 rounded-md p-8 mb-8'>
-      <div>
-      <label>Email: </label>
-      </div>
-      <div><input
+    <div className="bg-gray-100 min-h">
+      <div className='bg-gray-200 min-h-screen md:flex'>
+        <div className="max-w-2xl mx-auto md:flex m-0 items-center">
+          <div>
+          <img src='https://qdpammoeepwgapqyfrrh.supabase.co/storage/v1/object/public/speak-it-brand-assets/speak_itLogo.png' 
+              alt='Speak It Logo' 
+              className='w-full max-w-md mx-auto p-1'/>
+        <div>
+           <p className='text-4xl font-medium text-heading mb-4 text-center'>Speak-It!</p>
+          <p
+           className='text-lg text-center italic mx-4'
+          >"Speak Now Or Forever hold Your Peace"</p>
+        </div>
+        </div>
+      <div className='flex flex-col items-center justify-center p-4 mt-2 z-10'>
+      <form onSubmit={handleLogin}
+            className='flex flex-col bg-gray-300 justify-center mx-8 rounded-md p-8 mb-8'>
+        <div>
+        <label>Email: </label>
+        </div>
+        <div>
+        <input
         type='email'
         placeholder='Email'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className='border-2 bg-gray-800 border-gray-500 border-solid rounded-md p-2'
+        className='border-2 border-gray-500 border-solid rounded-md p-2'
         />
         </div>
         <div>
           <div>
           <label>Password: </label>
           </div>
-      <input
+        <input
         type='password'
         placeholder='Password'
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-        className='border-2 bg-gray-800 border-gray-500 border-solid rounded-md p-2'
+        className='border-2 border-gray-500 border-solid rounded-md p-2'
         />
         </div>
         <div className='flex flex-col items-center justify-center'>
@@ -128,6 +139,8 @@ function Login() {
     </form>
     </div>
     </div>
+  </div>
+</div>
         </>
   );
 }

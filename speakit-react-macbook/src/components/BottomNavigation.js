@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser} from '@fortawesome/free-regular-svg-icons';
-import { faHome, faPlus} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPlus, faList} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -15,7 +15,9 @@ function BottomNavigation () {
             setSelectedButton('home');
         } else if (path.includes('/create-claim')) {
             setSelectedButton('create-claim');
-        } else if (path.includes('/my-profile')) {
+        } else if(path.includes('/categories')){
+            setSelectedButton('categories')
+        }else if (path.includes('/my-profile')) {
             setSelectedButton('my-profile');
         }
     }, [location]);
@@ -57,7 +59,17 @@ function BottomNavigation () {
                 <span className={buttonTextClass('create-claim')}>Create Claim</span>
                 </button>
                 </div>
-                
+                <div className='hover:cursor-pointer'>
+                <button
+                className={`${buttonClass('categories')} flex flex-col items-center`}
+                onClick={() => {
+                    navigate('/categories');
+                    handleButtonSelect('categories');
+                }}>
+                    <FontAwesomeIcon icon={faList} alt="categories"/>
+                <span className={buttonTextClass('categories')}>Categories</span>
+                </button>
+                </div>
                 <div className='hover:cursor-pointer'>
                 <button
                 className={`${buttonClass('my-profile')} flex flex-col items-center`}
