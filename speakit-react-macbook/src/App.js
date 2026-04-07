@@ -11,6 +11,7 @@ import ThreadList from './components/Threads/ThreadList';
 import CreateClaim from './components/Forms/CreateClaim';
 import AddComment from './components/Forms/AddComment';
 import ResetPassword from './pages/Login/ResetPassword';
+import Categories from './components/Categories/Categories';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/create-claim' element={<CreateClaim />} />
           <Route path='/add-comment' element={<AddComment />} />
+          <Route path='/categories' element={<Categories />} />
           {/* Dynamic Routes for Categories and threads  */}
           <Route path='/category/:category' element={<ThreadList />} />
           <Route
