@@ -1,0 +1,9 @@
+speakit-react-macbook/node_modules
+speakit-react-macbook/build
+node_modules
+build
+.git
+.gitignore
+.env
+.env.*
+README.md
