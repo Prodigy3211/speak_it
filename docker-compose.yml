@@ -1,0 +1,7 @@
+services:
+  speakIt:
+    image: prodigy3211/speakit-react-macbook:latest
+    container_name: speakit
+    ports:
+      - "80:80"
+    restart: unless-stopped
