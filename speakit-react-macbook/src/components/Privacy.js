@@ -95,6 +95,53 @@ export default function Privacy (){
             We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page.
           </p>
         </section>
+          <hr style={styles.divider} />
+
+        {/* ========================================== */}
+        {/* SECTION B: CHILD SAFETY POLICY             */}
+        {/* ========================================== */}
+        <h2 style={styles.title}>Child Safety Standards & Zero-Tolerance Policy</h2>
+        <p style={styles.subtitle}>Mandatory Safety Declaration Framework for Google Play Compliance</p>
+
+        <section style={styles.section}>
+          <h3 style={styles.sectionTitle}>1. Overview and Age Restrictions</h3>
+          <p style={styles.text}>
+            Speak-It is strictly an adult-only (18+) community platform. Minors under the age of 18 are completely prohibited from creating accounts, accessing content, or interacting with the service. Despite this strict age restriction, Speak-It maintains an absolute zero-tolerance policy regarding the endangerment, exploitation, or abuse of children.
+          </p>
+        </section>
+
+        <section style={styles.section}>
+          <h3 style={styles.sectionTitle}>2. Prohibition of CSAE and CSAM</h3>
+          <p style={styles.text}>
+            We completely prohibit any content, behavior, or imagery related to Child Sexual Abuse Material (CSAM) or Child Sexual Abuse and Exploitation (CSAE). This includes, but is not limited to, the generation, distribution, facilitation, or discussion of materials that exploit or harm minors. Any user attempting to upload, share, or link to such content will be subject to an immediate, permanent, and non-appealable account ban.
+          </p>
+        </section>
+
+        <section style={styles.section}>
+          <h3 style={styles.sectionTitle}>3. Reporting to Authorities (NCMEC)</h3>
+          <p style={styles.text}>
+            Speak-It operates in strict compliance with applicable child safety laws and international regulations. In accordance with federal law, any confirmed instance of CSAM or CSAE discovered on our platform will be immediately reported to the National Center for Missing & Exploited Children (NCMEC) and relevant law enforcement authorities, along with all associated user data, IP addresses, and diagnostic tracking logs.
+          </p>
+        </section>
+
+        <section style={styles.section}>
+          <h3 style={styles.sectionTitle}>4. In-App Feedback and Reporting Mechanisms</h3>
+          <p style={styles.text}>
+            We provide a dedicated, easily accessible in-app reporting mechanism for user feedback and content moderation. Users can flag any profile, post, or comment directly within the app interface. All safety flags and exploitation reports are routed to our administrative moderation queue with the highest priority and are reviewed within 24 hours.
+          </p>
+        </section>
+
+        <section style={styles.section}>
+          <h3 style={styles.sectionTitle}>5. Designated Child Safety Point of Contact</h3>
+          <p style={styles.text}>
+            For legal inquiries, regulatory notifications, or automated safety communications from the Google Play Store or global safety coalitions regarding CSAE enforcement, our designated representative can be reached at:
+          </p>
+          <div style={styles.contactCard}>
+            <p style={styles.cardText}><strong>Safety Compliance Officer</strong></p>
+            <p style={styles.cardText}>Email: amirmaliknasser@gmail.com</p>
+          </div>
+        </section>
+
 
         <hr style={styles.divider} />
 
