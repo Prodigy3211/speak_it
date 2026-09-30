@@ -12,6 +12,7 @@ import CreateClaim from './components/Forms/CreateClaim';
 import AddComment from './components/Forms/AddComment';
 import ResetPassword from './pages/Login/ResetPassword';
 import Categories from './components/Categories/Categories';
+import Privacy from './components/Privacy';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/privacy-policy' element = {<Privacy />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path='/my-profile' element={<Profile />} />

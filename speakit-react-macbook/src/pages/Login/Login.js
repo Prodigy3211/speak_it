@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import supabase from '../../server/supabaseClient';
 
 //Allows a user to enter their username and password
@@ -137,6 +137,16 @@ function Login() {
         </div>
       </div>
     </form>
+    <div>
+     <Link 
+      to="/privacy-policy" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="text-blue-500 hover:text-blue-300"
+    >
+      Privacy Policy
+    </Link>
+    </div>
     </div>
     </div>
   </div>
